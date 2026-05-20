@@ -1,0 +1,43 @@
+# ============================================================
+# DA3-Giant with GT-prior injection — evaluation config
+# ============================================================
+
+# ---- Model ----
+model: da3
+checkpoint: depth-anything/DA3-GIANT-1.1
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: medium+nrgbd
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+depth_alignment: median
+
+# ---- DA3 inference parameters ----
+ref_view_strategy: first        # reference frame selection strategy
+
+# ---- GT Prior injection ----
+# DA3 only supports all-or-nothing prior (partial=False); GT depth is not supported.
+use_gt_camera: false            # inject GT camera (pose + intrinsic) — all frames
+use_gt_depth: false
+gt_camera_ratio: 1.0            # DA3 does not support partial injection
+gt_depth_ratio: 0.0
+gt_seed: 42
+
+# ---- Output ----
+output_dir: results/prior/da3_giant_prior
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

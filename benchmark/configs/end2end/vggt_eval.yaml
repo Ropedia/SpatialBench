@@ -1,0 +1,35 @@
+# ============================================================
+# VGGT evaluation config
+# ============================================================
+
+# ---- Model ----
+model: vggt
+checkpoint: checkpoints/facebook__VGGT-1B/model.pt                # null = automatically download from facebook/VGGT-1B
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: medium                      # e.g.: "sparse+indoor", "ropedia", "wrist|egoview"
+max_scenes: null                # limit number of scenes, null=all
+
+# ---- Evaluation parameters ----
+eval_metrics:                   # evaluation metric categories (null = all)
+  - depth                       #   depth: abs_rel, rmse, delta, inlier, etc.
+  - pose                        #   pose: racc, tacc, auc (pairwise)
+  - trajectory                  #   trajectory: ATE, RPE_t, RPE_r (evo Sim(3) alignment)
+  - pointcloud                  #   pointcloud: chamfer, f-score, etc.
+resolution: null                # [W, H]
+
+
+depth_alignment: median         # median | lstsq (only used by relative depth models)
+
+# ---- Output ----
+output_dir: results/end2end/vggt
+output: null                    # specify output path (overrides automatic naming)
+
+# ---- Visualization ----
+visualize: False                # whether to save GT/predicted GLB pointclouds
+vis_conf_percent: 10.0          # filter out the lowest N% confidence points (0=no filter)

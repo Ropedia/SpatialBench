@@ -1,0 +1,65 @@
+# ============================================================
+# LingBot-Map Streaming evaluation config (demo.py --mode streaming)
+# ============================================================
+# Differences from lingbot_map_window_eval.yaml:
+#   - uses inference_streaming (gct_stream.GCTStream) instead of windowed
+#   - per-frame inference with KV cache + keyframe mechanism
+#   - for very long sequences (>320 frames) auto-selects
+#     keyframe_interval = ceil(N / 320) to avoid KV-cache OOM
+#     (matches demo.py default behavior)
+# ============================================================
+
+# ---- Model ----
+model: lingbot_map_stream
+checkpoint: checkpoints/lingbot-map/lingbot-map/lingbot-map.pt                # null = auto-download from HF robbyant/lingbot-map.
+                                # Set to a local .pt (e.g. lingbot-map.pt) to use a custom checkpoint.
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Resolution override ----
+# LingBot-Map patch_size = 14, image_size = 518; H/W must be a multiple of 14.
+resolution_override:
+  width: 518
+  align: 14
+
+# ---- Scene filtering ----
+tags: medium
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+resolution: null
+
+depth_alignment: median         # LingBot-Map emits relative scale
+
+# ---- LingBot-Map Streaming inference parameters ----
+# mode is hard-coded to "streaming" inside the adapter — no switching here.
+num_scale_frames: 8             # initial scale-estimation frames (bidirectional attention)
+keyframe_interval: null         # null = auto: N<=320 -> 1; otherwise ceil(N/320)
+                                # 1 = every frame is a keyframe (full KV cache, most accurate, most VRAM)
+                                # >1 = keyframe every N frames (non-keyframes skip KV write, saves VRAM)
+use_sdpa: false                 # false = FlashInfer (default, matches demo.py; needs `pip install flashinfer-python`)
+enable_3d_rope: true
+max_frame_num: 1024
+kv_cache_sliding_window: 64     # KV cache sliding window size
+kv_cache_scale_frames: 8
+camera_num_iterations: 4
+image_size: 518
+patch_size: 14
+enable_point: false             # official ckpt has no point_head — disable to avoid uninitialized branch
+offload_to_cpu: false           # true = offload per-frame outputs to CPU (saves VRAM; required for very long sequences)
+
+# ---- Output ----
+output_dir: results/online/lingbot_map_stream
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

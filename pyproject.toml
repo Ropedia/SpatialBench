@@ -1,0 +1,185 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spatialbench"
+version = "0.1.0"
+description = "SpatialBench: a deterministic, density-aware benchmark for spatial foundation models."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC-BY-4.0" }
+authors = [
+    { name = "SpatialBench Authors" },
+]
+
+# Core dependencies — required by `python benchmark/evaluation/run_benchmark.py`
+# regardless of which model is being evaluated.
+#
+# Note: `torch` / `torchvision` are intentionally NOT listed here; install them
+# first with the CUDA build that matches your driver (see README), then
+# `pip install -e .` to add the rest.
+dependencies = [
+    "numpy",
+    "safetensors",
+    "opencv-python==4.11.0.86",
+    "Pillow",
+    "PyYAML",
+    "huggingface_hub",
+    "tqdm",
+    "scipy",
+    "evo",
+    "trimesh",
+    "open3d",
+    "fastapi",
+    "uvicorn",
+]
+
+# ---- Per-model extras ----
+# Each extra installs the third-party packages required by the corresponding
+# model adapter under `benchmark/evaluation/model_adapters/`.
+#
+# Usage:
+#   pip install -e ".[vggt]"        # vggt_adapter + most VGGT-family adapters
+#   pip install -e ".[mapanything]" # MAPAnything adapter
+#   pip install -e ".[lingbot-map]" # LingbotMap window/stream adapters
+#   pip install -e ".[da3]"         # DA3 / DA3Nested / DA3-Streaming adapters
+#   pip install -e ".[scal3r]"      # Scal3R TTT adapter
+#   pip install -e ".[zipmap]"      # ZipMap TTT adapter
+#   pip install -e ".[streaming]"   # StreamVGGT / InfiniteVGGT (needs transformers)
+#   pip install -e ".[amb3r]"       # AMB3R benchmark adapter
+#   pip install -e ".[optimization]" # DUSt3R / MASt3R optimization adapters
+#   pip install -e ".[all]"         # everything above at once
+#
+# Adapter → extra mapping (see benchmark/README.md for the full table):
+#   [vggt]       vggt_omega, fastvggt, omnivggt, pi3, pi3x, worldmirror,
+#                stream3r (stream/window), page4d, vggt_long, pi_long,
+#                loger, loger_star
+#   [mapanything] mapanything
+#   [lingbot-map] lingbot_map_window, lingbot_map_stream
+#   [da3]        da3_{small,base,large,giant}, da3nested, da3_streaming
+#   [scal3r]     scal3r
+#   [zipmap]     zipmap
+#   [streaming]  streamvggt, infinitevggt
+#   [amb3r]      amb3r
+#   [optimization] dust3r, mast3r
+[project.optional-dependencies]
+# ---- VGGT (facebook/VGGT-1B) and most VGGT-family adapters ----
+# Used by benchmark/models/{vggt,vggt_omega,fastvggt,omnivggt,pi3,
+# worldmirror_root,stream3r,page4d,loger}/* and their adapters under
+# benchmark/evaluation/model_adapters/. MAPAnything, LingbotMap, and Scal3R
+# reuse these base dependencies through their own extras below.
+vggt = [
+    "einops",
+    "matplotlib",
+]
+
+# ---- Optimization-based: DUSt3R / MASt3R ----
+# 使用 benchmark/models/{dust3r_root,mast3r_root}/ 中的 vendored 源码。
+# CroCo 的 CUDA RoPE 扩展可选；未编译时会自动使用 PyTorch fallback。
+optimization = [
+    "spatialbench[vggt]",
+    "roma",
+    "packaging",
+    "pillow-heif",
+    "scikit-learn",
+]
+
+# ---- MAPAnything ----
+# Uses the VGGT-family base dependencies plus Hydra config composition and
+# UniCeption utilities.
+mapanything = [
+    "spatialbench[vggt]",
+    "hydra-core",
+    "uniception",
+]
+
+# ---- LingbotMap ----
+# Uses the VGGT-family base dependencies plus FlashInfer attention/KV-cache
+# kernels when `use_sdpa: false` in the LingbotMap configs.
+lingbot-map = [
+    "spatialbench[vggt]",
+    "flashinfer-python",
+]
+
+# ---- Depth Anything 3 (depth-anything/DA3-*) ----
+# Used by benchmark/models/depth_anything_3/* and the
+# da3 / da3nested / da3_streaming adapters.
+#
+# Heavy / optional 3DGS dependencies (gsplat, e3nn, xformers, moviepy) are
+# *not* required for the standard depth/pose/trajectory benchmark
+# (`infer_gs=False` in the adapter); they are guarded by try/except inside the
+# vendored DA3 code. Install them manually if you need 3DGS export.
+da3 = [
+    "einops",
+    "matplotlib",
+    "omegaconf",
+    "addict",
+    "plyfile",
+    "imageio",
+    "pycolmap",
+]
+
+# ---- Scal3R ----
+# Mirrors Scal3R/requirements.txt while reusing the benchmark core deps and
+# the VGGT-family einops/matplotlib deps.
+scal3r = [
+    "spatialbench[vggt]",
+    "numba",
+    "pykitti",
+    "pypose",
+    "rich",
+]
+
+# ---- ZipMap ----
+# Uses vendored source under benchmark/models/zipmap/ and shares the VGGT-family
+# runtime dependencies (DINOv2/VGGT-style patch embedding, einops, matplotlib).
+# Install PyTorch/torchvision separately as described in README.md.
+zipmap = [
+    "spatialbench[vggt]",
+]
+
+# ---- StreamVGGT / InfiniteVGGT ----
+# Both adapters wrap benchmark/models/streamvggt/, whose heads use
+# HuggingFace transformers for the causal aggregator.
+streaming = [
+    "spatialbench[vggt]",
+    "transformers",
+]
+
+# ---- AMB3R ----
+# benchmark/models/amb3r_root/thirdparty/ vendors its own snapshots of VGGT,
+# DA3, croco, dust3r, moge, ptv3, segformer, and robustmvd. The adapter
+# isolates sys.path via `_amb3r_context()`, but the vendored modules still
+# import AMB3R's runtime wheels. These entries mirror the AMB3R README and the
+# imports reached by:
+#   python benchmark/evaluation/run_benchmark.py --config benchmark/configs/end2end/amb3r_eval.yaml
+#
+# Install torch/torchvision first. For this repo's default torch==2.7.0+cu128
+# stack, torch-scatter should be installed from the PyG torch-2.7.0+cu128 wheel
+# index, xformers from the PyTorch cu128 wheel index, and flash-attn / pytorch3d
+# with --no-build-isolation as shown in README.md.
+amb3r = [
+    "spatialbench[vggt]",
+    "spatialbench[da3]",
+    "torch-scatter==2.1.2",
+    "pytorch3d @ git+https://github.com/facebookresearch/pytorch3d.git@V0.7.8",
+    "flash-attn==2.7.3",
+    "xformers==0.0.30",
+    "spconv-cu126==2.3.8",
+    "timm==0.6.7",
+    "pytoml==0.1.21",
+    "scikit-image==0.24.0",
+    "dill==0.3.8",
+    "easydict==1.13",
+    "utils3d @ git+https://github.com/EasternJournalist/utils3d.git@c5daf6f6c244d251f252102d09e9b7bcef791a38",
+]
+
+# Convenience: install everything supported above.
+all = [
+    "spatialbench[vggt,mapanything,lingbot-map,da3,scal3r,zipmap,streaming,amb3r,optimization]",
+]
+
+[tool.setuptools.packages.find]
+include = ["benchmark*"]
+exclude = ["DA-Next*", "SpatialBenchmark*", "SpatialBenchGLBs*", "results*", "checkpoints*", "assets*"]

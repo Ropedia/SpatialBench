@@ -1,0 +1,48 @@
+# ============================================================
+# LoGeR* (LoGeR_star) evaluation config
+# Long-Context Geometric Reconstruction with Hybrid Memory
+# ============================================================
+
+# ---- Model ----
+model: loger
+checkpoint: checkpoints/loger/LoGeR_star        # null = auto-download from HF Junyi42/LoGeR (contains LoGeR_star subdir)
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Resolution override ----
+# LoGeR uses DINOv2 ViT-L/14 — H/W must be a multiple of 14.
+resolution_override:
+  width: 518                    # 518 = 37 * 14
+  align: 14
+
+# ---- Scene filtering ----
+tags: medium
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  - pointcloud
+depth_alignment: median
+
+# ---- LoGeR inference parameters ----
+window_size: 32                 # -1 = full sequence; >0 = chunk window size
+overlap_size: 3                 # frames overlapped between chunks
+se3: true                       # SE(3) cross-chunk alignment (recommended for LoGeR_star)
+sim3: false                     # Sim(3) cross-chunk alignment
+reset_every: 1                  # reset TTT state every N windows (0 = never; suggest 5 for >1k-frame sequences)
+variant: LoGeR_star             # "LoGeR" or "LoGeR_star"
+config_path: null               # null = auto-discover original_config.yaml
+
+# ---- Output ----
+output_dir: results/ttt/loger_star
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

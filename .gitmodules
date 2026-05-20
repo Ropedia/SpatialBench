@@ -1,0 +1,4 @@
+[submodule "DA-Next"]
+	path = DA-Next
+	url = https://github.com/Livioni/Depth-Anything-3.git
+	branch = main

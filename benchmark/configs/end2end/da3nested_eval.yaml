@@ -1,0 +1,37 @@
+# ============================================================
+# DA3Nested (Depth Anything 3 — Nested Giant-Large) evaluation config
+# ============================================================
+
+# ---- Model ----
+model: da3nested
+checkpoint: "depth-anything/DA3NESTED-GIANT-LARGE-1.1"   # HuggingFace Hub name or local path
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+resolution: null
+
+depth_alignment: median
+
+# ---- DA3Nested inference parameters ----
+ref_view_strategy: first        # reference frame selection (first | saddle_balanced)
+
+# ---- Output ----
+output_dir: results/end2end/da3nested
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 20.0

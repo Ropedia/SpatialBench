@@ -1,0 +1,802 @@
+[
+  {
+    "scene_id": "lingbot_RobbyReal_00009_06_outdoor_environments_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_06_outdoor_environments",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_07_overpass_passage_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_07_overpass_passage",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_08_stockroom_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_08_stockroom",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_09_corridor_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_09_corridor",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_12_meeting_room_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_12_meeting_room",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_16_underground_garage_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_16_underground_garage",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_19_underground_garage_f0000060_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_19_underground_garage_f0000060",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_19_underground_garage_f0000239_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_19_underground_garage_f0000239",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_23_stairwell_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_23_stairwell",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_24_outdoor_environments_f0000206_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_24_outdoor_environments_f0000206",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_25_outdoor_environments_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_25_outdoor_environments",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_27_outdoor_environments_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_27_outdoor_environments",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_27_outdoor_environments_f0000217_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_27_outdoor_environments_f0000217",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_28_outdoor_environments_f0000290_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_28_outdoor_environments_f0000290",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00009_29_outdoor_environments_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00009_29_outdoor_environments",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_01_stockroom_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_01_stockroom",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_02_elevator_lobby_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_02_elevator_lobby",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_04_outdoor_environments_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_04_outdoor_environments",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_04_outdoor_environments_f0000883_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_04_outdoor_environments_f0000883",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_04_outdoor_environments_f0002212_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_04_outdoor_environments_f0002212",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_08_meeting_room_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_08_meeting_room",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_09_meeting_room_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_09_meeting_room",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_13_outdoor_environments_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_13_outdoor_environments",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_14_meeting_room_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_14_meeting_room",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_17_office_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_17_office",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyReal_00010_19_office_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyReal_00010_19_office",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_1e5e5bda_10_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_1e5e5bda_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_36327ccc_15_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_36327ccc_15",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_3994e629_01_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_3994e629_01",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_3e787c55_10_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_3e787c55_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_3f23105_12_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_3f23105_12",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_448b54b3_17_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_448b54b3_17",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_510540a5_14_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_510540a5_14",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_6904658d_18_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_6904658d_18",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_6e22fe59_01_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_6e22fe59_01",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbySimVal_9770b96_02_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbySimVal_9770b96_02",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0002309_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0002309",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0004062_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0004062",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0004326_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0004326",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0004361_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0004361",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0007045_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0007045",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0008856_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0008856",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0009223_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0009223",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_franka_0009603_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_franka_0009603",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_ur7e_0000097_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_ur7e_0000097",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_ur7e_0000921_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_ur7e_0000921",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_ur7e_0002080_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_ur7e_0002080",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_ur7e_0002206_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_ur7e_0002206",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_ur7e_0002425_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_ur7e_0002425",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  },
+  {
+    "scene_id": "lingbot_RobbyVla_ur7e_0002807_single",
+    "source_dataset": "lingbot",
+    "scene_path": "RobbyVla_ur7e_0002807",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "wrist",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 1
+  }
+]

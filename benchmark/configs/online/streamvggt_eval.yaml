@@ -1,0 +1,33 @@
+# ============================================================
+# StreamVGGT evaluation config
+# ============================================================
+
+# ---- Model ----
+model: streamvggt
+checkpoint: null                # HF lch01/StreamVGGT or local path
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+
+depth_alignment: median
+
+# ---- Output ----
+output_dir: results/online/streamvggt
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 20.0

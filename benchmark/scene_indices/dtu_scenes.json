@@ -1,0 +1,1018 @@
+[
+  {
+    "scene_id": "dtu_rgbd_dtu_scan1_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan1/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      1,
+      2,
+      8,
+      9,
+      10
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan1_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan1/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      4,
+      6,
+      8,
+      10,
+      13,
+      14,
+      15,
+      16,
+      17,
+      20,
+      21,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      32,
+      33,
+      34,
+      35,
+      41,
+      42,
+      43,
+      44
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan1_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan1/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      6
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan10_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan10/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      15,
+      16,
+      21,
+      22,
+      35
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan10_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan10/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      23,
+      24,
+      25,
+      31,
+      33,
+      34,
+      42,
+      45
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan10_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan10/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      43
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan110_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan110/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      0,
+      2,
+      3,
+      4,
+      6
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan110_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan110/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      1,
+      2,
+      3,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      23,
+      24,
+      25,
+      26,
+      28,
+      29,
+      30,
+      33,
+      35,
+      36,
+      38,
+      45,
+      46,
+      47,
+      48
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan110_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan110/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      3
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan114_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan114/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      2,
+      3,
+      5,
+      9,
+      15
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan114_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan114/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      6,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      18,
+      19,
+      21,
+      23,
+      24,
+      25,
+      26,
+      27,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      37,
+      39,
+      41,
+      42,
+      44,
+      45
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan114_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan114/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      33
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan12_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan12/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      12,
+      13,
+      14,
+      15,
+      25
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan12_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan12/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      21,
+      22,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      31,
+      32,
+      36,
+      43,
+      44,
+      47
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan12_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan12/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      11
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan15_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan15/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      3,
+      16,
+      17,
+      18,
+      20
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan15_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan15/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      30,
+      31,
+      32,
+      43
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan15_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan15/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      4
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan23_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan23/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      1,
+      10,
+      25,
+      27,
+      28
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan23_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan23/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      30,
+      32,
+      33,
+      35,
+      40
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan23_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan23/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      5
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan32_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan32/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      6,
+      16,
+      17,
+      18,
+      21
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan32_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan32/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      21,
+      22,
+      23,
+      24,
+      25,
+      33,
+      35,
+      41,
+      42
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan32_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan32/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      32
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan33_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan33/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      2,
+      6,
+      7,
+      8,
+      22
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan33_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan33/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      25,
+      29,
+      33,
+      34,
+      35
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan33_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan33/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      30
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan4_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan4/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      8,
+      9,
+      12,
+      13,
+      14
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan4_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan4/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      18,
+      25,
+      26,
+      27,
+      29,
+      31,
+      32,
+      33,
+      35,
+      37,
+      39,
+      40,
+      41,
+      43
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan4_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan4/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      25
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan48_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan48/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      7,
+      12,
+      13,
+      14,
+      15
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan48_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan48/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24,
+      25,
+      28,
+      31,
+      40,
+      45
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan48_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan48/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      45
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan49_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan49/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      6,
+      8,
+      13,
+      17,
+      18
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan49_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan49/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      19,
+      21,
+      22,
+      23,
+      25,
+      27,
+      29,
+      32,
+      33,
+      34,
+      35
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan49_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan49/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      16
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan75_0_sparse",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan75/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      6,
+      8,
+      17,
+      18,
+      20
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan75_0_medium",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan75/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      22,
+      24,
+      25,
+      26,
+      30,
+      31,
+      33,
+      36,
+      39,
+      43,
+      46
+    ],
+    "num_frames_total": 49
+  },
+  {
+    "scene_id": "dtu_rgbd_dtu_scan75_0_single",
+    "source_dataset": "dtu",
+    "scene_path": "rgbd_dtu_scan75/0",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      9
+    ],
+    "num_frames_total": 49
+  }
+]

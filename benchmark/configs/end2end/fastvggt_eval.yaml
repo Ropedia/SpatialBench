@@ -1,0 +1,41 @@
+# ============================================================
+# FastVGGT evaluation config
+# VGGT + token merging acceleration
+# ============================================================
+
+# ---- Model ----
+model: fastvggt
+checkpoint: null                # null = auto-download facebook/VGGT-1B (then apply token merging).
+                                # Set to a local .pt to use FastVGGT-fine-tuned weights instead.
+device: cuda
+
+# ---- FastVGGT inference parameters (injected via adapter.configure()) ----
+merging: 0          # 0 = no merging; 4 / 11 / 17 / 23 = start token merging from block N
+merge_ratio: 0.9    # token merge ratio (0.9 = merge 90% redundant tokens)
+enable_point: false # whether to emit world_points (True significantly increases VRAM)
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: single                    # e.g. "sparse+indoor", "ropedia", "wrist|egoview"
+max_scenes: null                # limit number of scenes, null = all
+
+# ---- Evaluation parameters ----
+eval_metrics:                   # null = all
+  - depth                       #   depth: abs_rel, rmse, delta, inlier, ...
+  # - pose                        #   pose: racc, tacc, auc (pairwise)
+  # - trajectory                  #   trajectory: ATE, RPE_t, RPE_r (evo Sim(3))
+  # - pointcloud                  #   pointcloud: chamfer, f-score, ...
+resolution: null                # [W, H]
+
+depth_alignment: median         # median | lstsq (relative-depth models only)
+
+# ---- Output ----
+output_dir: results/end2end/fastvggt
+output: null                    # explicit output path (overrides auto naming)
+
+# ---- Visualization ----
+visualize: False                # save GT / predicted GLB point clouds
+vis_conf_percent: 20.0          # drop lowest N% confidence points (0 = no filter)

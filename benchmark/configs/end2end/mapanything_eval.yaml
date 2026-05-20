@@ -1,0 +1,39 @@
+# ============================================================
+# MAPAnything evaluation config
+# ============================================================
+
+# ---- Model ----
+model: mapanything
+checkpoint: null                # null = auto-download from facebook/map-anything
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: medium           # e.g. "sparse+indoor", "ropedia", "tum+sparse"
+max_scenes: null                # null = all
+
+# ---- Evaluation parameters ----
+eval_metrics:                   # MAPAnything emits depth + pose
+  - depth
+  - pose
+  - trajectory
+  - pointcloud
+
+depth_alignment: none           # none | median | lstsq (MAPAnything emits metric depth)
+
+# ---- MAPAnything inference parameters ----
+memory_efficient_inference: true  # memory-efficient inference mode
+use_amp: true                     # automatic mixed precision
+apply_mask: false                 # whether to apply mask
+mask_edges: false                 # whether to mask edges
+
+# ---- Output ----
+output_dir: results/end2end/mapanything
+output: null                    # explicit output path (overrides auto naming)
+
+# ---- Visualization ----
+visualize: False                # save GT / predicted GLB point clouds
+vis_conf_percent: 10.0          # drop lowest N% confidence points (0 = no filter)

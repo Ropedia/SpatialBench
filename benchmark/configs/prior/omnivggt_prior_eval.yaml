@@ -1,0 +1,41 @@
+# ============================================================
+# OmniVGGT with GT-prior injection — evaluation config
+# ============================================================
+
+# ---- Model ----
+model: omnivggt
+checkpoint: null
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse+nrgbd
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+depth_alignment: median
+
+# ---- GT Prior injection ----
+# OmniVGGT supports per-frame injection (partial=True).
+# camera_gt_index controls pose and intrinsic together (coupled).
+use_gt_camera: false            # inject GT camera (pose + intrinsic)
+use_gt_depth: false             # inject GT depth
+gt_camera_ratio: 1.0            # camera GT frame ratio (independent)
+gt_depth_ratio: 1.0             # depth GT frame ratio (independent)
+gt_seed: 42
+
+# ---- Output ----
+output_dir: results/prior/omnivggt_prior
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

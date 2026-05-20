@@ -1,0 +1,42 @@
+# ============================================================
+# InfiniteVGGT (StreamVGGT) evaluation config
+# Real-time causal streaming 3D reconstruction
+# ============================================================
+
+# ---- Model ----
+model: infinitevggt
+checkpoint: lch01/StreamVGGT    # HF repo_id or local path; null = auto-download from HF
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Resolution override ----
+# StreamVGGT patch_size = 14, so H/W must be a multiple of 14.
+resolution_override:
+  width: 518                    # 518 = 37 * 14
+  align: 14
+
+# ---- Scene filtering ----
+tags: nrgbd+medium
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+depth_alignment: median
+
+# ---- InfiniteVGGT inference parameters ----
+total_budget: 1200000           # KV-cache token budget (reduce to lower VRAM usage)
+
+# ---- Output ----
+output_dir: results/online/infinitevggt
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 20.0

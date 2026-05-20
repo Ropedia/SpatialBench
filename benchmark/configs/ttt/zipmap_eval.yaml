@@ -1,0 +1,48 @@
+# ============================================================
+# ZipMap evaluation config
+# Linear-time stateful 3D reconstruction via test-time training
+# ============================================================
+
+# ---- Model ----
+model: zipmap
+checkpoint: checkpoints/zipmap/checkpoint_aff_inv.pt
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null
+
+# ---- Resolution override ----
+# ZipMap uses DINOv2 ViT-L/14 style patch embedding; H/W must be divisible by 14.
+resolution_override:
+  width: 518
+  align: 14
+
+# ---- Scene filtering ----
+tags: medium
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - camera
+  - trajectory
+  - pointcloud
+resolution: null
+depth_alignment: median
+
+# ---- ZipMap inference parameters ----
+variant: main             # main | streaming
+affine_invariant: true    # true for checkpoint_aff_inv.pt
+align_first_view: true    # align predicted cameras to the first view
+use_ema: false            # use checkpoint["ema"] when available
+disable_compile: false    # set true to monkeypatch torch.compile during ZipMap import
+window_size: null         # streaming variant only; null = checkpoint default
+
+# ---- Output ----
+output_dir: results/ttt/zipmap
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

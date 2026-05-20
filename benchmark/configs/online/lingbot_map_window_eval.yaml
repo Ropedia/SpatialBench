@@ -1,0 +1,58 @@
+# ============================================================
+# LingBot-Map (windowed) evaluation config
+# ============================================================
+
+# ---- Model ----
+model: lingbot_map
+checkpoint: null                # null = auto-download from HF robbyant/lingbot-map.
+                                # Set to a local .pt (e.g. lingbot-map-long.pt) to use a custom checkpoint.
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Resolution override ----
+# LingBot-Map patch_size = 14, image_size = 518; H/W must be a multiple of 14.
+resolution_override:
+  width: 518
+  align: 14
+
+# ---- Scene filtering ----
+tags: single
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+resolution: null
+
+depth_alignment: median         # LingBot-Map emits relative scale
+
+# ---- LingBot-Map inference parameters ----
+mode: windowed                  # streaming | windowed
+num_scale_frames: 8             # number of frames used for initial scale estimation
+keyframe_interval: 1            # streaming: keyframe every N frames (1 = every frame)
+window_size: 64                 # windowed: frames per window
+overlap_size: 16                # windowed: overlap between windows
+use_sdpa: false                 # false = FlashInfer (default, matches demo.py; needs `pip install flashinfer-python`)
+enable_3d_rope: true
+max_frame_num: 1024
+camera_num_iterations: 4
+kv_cache_sliding_window: 64
+kv_cache_scale_frames: 8
+image_size: 518
+patch_size: 14
+enable_point: false             # official ckpt has no point_head — disable to avoid uninitialized branch
+offload_to_cpu: false           # true = offload per-frame outputs to CPU (saves VRAM; required for very long sequences)
+
+# ---- Output ----
+output_dir: results/online/lingbot_map_window
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 20.0

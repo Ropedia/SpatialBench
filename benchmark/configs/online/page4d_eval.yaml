@@ -1,0 +1,34 @@
+# ============================================================
+# PAGE4D evaluation config
+# ============================================================
+
+# ---- Model ----
+model: page4d
+checkpoint: null                # null = auto-download from HF zhouk777/PAGE4D.
+                                # Set to a local .pt to use a custom checkpoint.
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse+nrgbd
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+
+depth_alignment: median
+
+# ---- Output ----
+output_dir: results/online/page4d
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 20.0

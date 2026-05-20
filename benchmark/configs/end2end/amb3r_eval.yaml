@@ -1,0 +1,40 @@
+# ============================================================
+# AMB3R evaluation config
+# AMB3R = Accurate feed-forward Metric-scale 3D Reconstruction with Backend.
+# VGGT encoder/decoder + Point Transformer V3 multi-view reconstruction backend.
+# ============================================================
+
+# ---- Model ----
+model: amb3r
+checkpoint: checkpoints/amb3r/amb3r.pt                # null = auto-download from HF hywang01/AMB3R.
+                                # Set to a local .pt path to use your own weights.
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: medium
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  - pointcloud
+resolution: null
+
+depth_alignment: none           # AMB3R emits metric depth — no alignment needed
+
+# ---- AMB3R inference parameters ----
+data_type: bf16                 # bf16 | fp16 | fp32
+
+# ---- Output ----
+output_dir: results/end2end/amb3r
+output: null
+
+# ---- Visualization ----
+visualize: false
+vis_conf_percent: 20.0

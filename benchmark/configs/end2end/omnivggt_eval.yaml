@@ -1,0 +1,32 @@
+# ============================================================
+# OmniVGGT evaluation config
+# ============================================================
+
+# ---- Model ----
+model: omnivggt
+checkpoint: null                # null = auto-download from Livioni/OmniVGGT
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse+nrgbd              # e.g. "sparse+indoor", "ropedia", "tum+sparse"
+max_scenes: null                # null = all
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+depth_alignment: median         # none | median | lstsq
+
+# ---- Output ----
+output_dir: results/end2end/omnivggt
+output: null                    # explicit output path (overrides auto naming)
+
+# ---- Visualization ----
+visualize: False                # save GT / predicted GLB point clouds
+vis_conf_percent: 10.0          # drop lowest N% confidence points (0 = no filter)

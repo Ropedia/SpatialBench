@@ -1,0 +1,37 @@
+# ============================================================
+# DA3 (Depth Anything 3) evaluation config
+# ============================================================
+
+# ---- Model ----
+model: da3
+checkpoint: "depth-anything/DA3-GIANT-1.1"   # HuggingFace Hub name or local path
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+resolution: null
+
+depth_alignment: median
+
+# ---- DA3 inference parameters ----
+ref_view_strategy: first       # reference frame selection strategy (first | saddle_balanced)
+
+# ---- Output ----
+output_dir: results/end2end/da3/da3_giant
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

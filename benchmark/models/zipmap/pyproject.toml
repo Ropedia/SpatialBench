@@ -1,0 +1,42 @@
+[project]
+authors = [{name = "Haian Jin", email = "haianjin0415@gmail.com"}]
+dependencies = [
+    "torch==2.6.0",
+    "torchvision==0.21.0",
+    "numpy>=1.26.4",
+    "Pillow",
+    "opencv-python-headless",
+    "hydra-core",
+    "omegaconf",
+    "huggingface_hub",
+    "einops",
+    "safetensors",
+    "gradio>=5,<6",
+    "trimesh",
+    "matplotlib",
+    "scipy",
+    "requests",
+    "einx",
+    "iopath",
+    "onnxruntime-gpu",
+    "wcmatch",
+    "pydantic==2.10.6",
+    "viser==0.2.23",
+    "wandb",
+    "easydict",
+    "lpips",
+    "fvcore",
+]
+name = "zipmap"
+requires-python = ">= 3.11"
+version = "0.0.1"
+
+# Using setuptools as the build backend
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+# setuptools configuration
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["zipmap*"]

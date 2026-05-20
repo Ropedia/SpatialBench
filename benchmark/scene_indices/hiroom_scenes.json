@@ -1,0 +1,362 @@
+[
+  {
+    "scene_id": "hiroom_828738_cam_sampled_08_sparse",
+    "source_dataset": "hiroom",
+    "scene_path": "828738/cam_sampled_08",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      3,
+      7,
+      8,
+      10
+    ],
+    "num_frames_total": 23
+  },
+  {
+    "scene_id": "hiroom_828738_cam_sampled_08_medium",
+    "source_dataset": "hiroom",
+    "scene_path": "828738/cam_sampled_08",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      9,
+      12,
+      13,
+      14
+    ],
+    "num_frames_total": 23
+  },
+  {
+    "scene_id": "hiroom_828738_cam_sampled_08_single",
+    "source_dataset": "hiroom",
+    "scene_path": "828738/cam_sampled_08",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      4
+    ],
+    "num_frames_total": 23
+  },
+  {
+    "scene_id": "hiroom_828750_cam_sampled_08_sparse",
+    "source_dataset": "hiroom",
+    "scene_path": "828750/cam_sampled_08",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      1,
+      4,
+      8,
+      9
+    ],
+    "num_frames_total": 10
+  },
+  {
+    "scene_id": "hiroom_828750_cam_sampled_08_medium",
+    "source_dataset": "hiroom",
+    "scene_path": "828750/cam_sampled_08",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "num_frames_total": 10
+  },
+  {
+    "scene_id": "hiroom_828750_cam_sampled_08_single",
+    "source_dataset": "hiroom",
+    "scene_path": "828750/cam_sampled_08",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      6
+    ],
+    "num_frames_total": 10
+  },
+  {
+    "scene_id": "hiroom_828769_cam_sampled_11_sparse",
+    "source_dataset": "hiroom",
+    "scene_path": "828769/cam_sampled_11",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      1,
+      5,
+      12,
+      13
+    ],
+    "num_frames_total": 18
+  },
+  {
+    "scene_id": "hiroom_828769_cam_sampled_11_medium",
+    "source_dataset": "hiroom",
+    "scene_path": "828769/cam_sampled_11",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      1,
+      4,
+      5,
+      6,
+      7,
+      9,
+      10,
+      12,
+      14,
+      16
+    ],
+    "num_frames_total": 18
+  },
+  {
+    "scene_id": "hiroom_828769_cam_sampled_11_single",
+    "source_dataset": "hiroom",
+    "scene_path": "828769/cam_sampled_11",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      2
+    ],
+    "num_frames_total": 18
+  },
+  {
+    "scene_id": "hiroom_828786_cam_sampled_10_sparse",
+    "source_dataset": "hiroom",
+    "scene_path": "828786/cam_sampled_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      1,
+      4,
+      7,
+      9
+    ],
+    "num_frames_total": 10
+  },
+  {
+    "scene_id": "hiroom_828786_cam_sampled_10_medium",
+    "source_dataset": "hiroom",
+    "scene_path": "828786/cam_sampled_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "num_frames_total": 10
+  },
+  {
+    "scene_id": "hiroom_828786_cam_sampled_10_single",
+    "source_dataset": "hiroom",
+    "scene_path": "828786/cam_sampled_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      7
+    ],
+    "num_frames_total": 10
+  },
+  {
+    "scene_id": "hiroom_828794_cam_sampled_10_sparse",
+    "source_dataset": "hiroom",
+    "scene_path": "828794/cam_sampled_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      2,
+      3,
+      8,
+      11
+    ],
+    "num_frames_total": 13
+  },
+  {
+    "scene_id": "hiroom_828794_cam_sampled_10_medium",
+    "source_dataset": "hiroom",
+    "scene_path": "828794/cam_sampled_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12
+    ],
+    "num_frames_total": 13
+  },
+  {
+    "scene_id": "hiroom_828794_cam_sampled_10_single",
+    "source_dataset": "hiroom",
+    "scene_path": "828794/cam_sampled_10",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      12
+    ],
+    "num_frames_total": 13
+  },
+  {
+    "scene_id": "hiroom_828825_cam_sampled_07_sparse",
+    "source_dataset": "hiroom",
+    "scene_path": "828825/cam_sampled_07",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      4,
+      5,
+      8,
+      11
+    ],
+    "num_frames_total": 13
+  },
+  {
+    "scene_id": "hiroom_828825_cam_sampled_07_medium",
+    "source_dataset": "hiroom",
+    "scene_path": "828825/cam_sampled_07",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      11,
+      12
+    ],
+    "num_frames_total": 13
+  },
+  {
+    "scene_id": "hiroom_828825_cam_sampled_07_single",
+    "source_dataset": "hiroom",
+    "scene_path": "828825/cam_sampled_07",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "simulation",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      12
+    ],
+    "num_frames_total": 13
+  }
+]

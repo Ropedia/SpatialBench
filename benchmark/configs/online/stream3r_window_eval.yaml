@@ -1,0 +1,41 @@
+# ============================================================
+# STream3R Sliding-Window evaluation config
+# ============================================================
+# Differences from stream3r_stream_eval.yaml:
+#   - mode = "window" (sliding-window attention, window_size=5;
+#     see STream3R/stream3r/models/components/aggregator/streamaggregator.py)
+#   - corresponds to README: model(images, mode="window")
+# ============================================================
+
+# ---- Model ----
+model: stream3r_window
+checkpoint: null                # null = auto-download from yslan/STream3R
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse                    # e.g. "sparse+indoor", "ropedia", "tum+sparse"
+max_scenes: null                # null = all
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+
+depth_alignment: median         # none | median | lstsq
+
+# ---- STream3R inference parameters ----
+mode: window                    # causal | window | full (this config is fixed to window)
+
+# ---- Output ----
+output_dir: results/online/stream3r_window
+output: null                    # explicit output path (overrides auto naming)
+
+# ---- Visualization ----
+visualize: False                # save GT / predicted GLB point clouds
+vis_conf_percent: 10.0          # drop lowest N% confidence points (0 = no filter)

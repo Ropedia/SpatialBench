@@ -1,0 +1,37 @@
+# ============================================================
+# VGGT-Long evaluation config
+# ============================================================
+
+# ---- Model ----
+model: vggt_long
+checkpoint: null                # HF facebook/VGGT-1B or local path
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: dense+waymo
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+
+depth_alignment: median
+
+# ---- Output ----
+output_dir: results/chunk/vggt_long
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0
+
+# ---- VGGT-Long inference parameters ----
+chunk_size: 60
+overlap: 30

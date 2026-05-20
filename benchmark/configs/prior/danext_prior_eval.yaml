@@ -1,0 +1,47 @@
+# ============================================================
+# DA-Next with GT-prior injection — evaluation config
+# NOTE: the `danext` adapter is not yet wired up in this repo
+# (DA-Next ships as a git submodule at DA-Next/). Running this
+# config will fail with `Unknown adapter 'danext'` until the
+# adapter is added under benchmark/evaluation/model_adapters/.
+# ============================================================
+
+# ---- Model ----
+model: danext
+checkpoint: null                # local DA-Next checkpoint or null = auto-discover from DA-Next/
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: medium+nrgbd
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+depth_alignment: median
+
+# ---- DA-Next inference parameters ----
+ref_view_strategy: first        # reference frame selection strategy
+
+# ---- GT Prior injection ----
+# DA-Next only supports all-or-nothing prior (partial=False); GT depth is not supported.
+use_gt_camera: true             # inject GT camera (pose + intrinsic) — all frames
+use_gt_depth: false
+gt_camera_ratio: 1.0            # DA-Next does not support partial injection
+gt_depth_ratio: 0.0
+gt_seed: 42
+
+# ---- Output ----
+output_dir: results/prior/danext_prior
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 15.0

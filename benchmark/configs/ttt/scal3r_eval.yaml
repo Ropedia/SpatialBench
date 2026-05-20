@@ -1,0 +1,48 @@
+# ============================================================
+# Scal3R evaluation config
+# ============================================================
+
+# ---- Model ----
+model: scal3r
+checkpoint: checkpoints/scal3r      # HF xbillowy/Scal3R or local path
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Resolution override ----
+# Scal3R uses the VGGT backbone: img_size=518, patch_size=14
+resolution_override:
+  width: 518
+  align: 14
+
+# ---- Scene filtering ----
+tags: medium+omniworld
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+
+depth_alignment: none
+
+# ---- Scal3R inference parameters ----
+block_size: null                # pipeline block size (null -> Scal3R default 60)
+overlap_size: null              # overlap between blocks (null -> Scal3R default 30)
+loop_size: 20                   # loop closure size
+use_xyz_align: 1                # whether to use xyz alignment
+test_use_amp: false             # whether to use AMP at test time
+use_loop: 1                     # enable loop closure (1 = SALAD closure, 0 = off)
+loop_ckpt: null                 # SALAD ckpt path (null -> use dino_salad.ckpt next to scal3r.pt)
+
+# ---- Output ----
+output_dir: results/ttt/scal3r
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

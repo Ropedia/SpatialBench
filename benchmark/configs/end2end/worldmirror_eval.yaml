@@ -1,0 +1,37 @@
+# ============================================================
+# HunyuanWorld-Mirror evaluation config
+# ============================================================
+
+# ---- Model ----
+model: worldmirror
+checkpoint: "tencent/HunyuanWorld-Mirror"   # HuggingFace Hub name or local path
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse+robotwin
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+resolution: null
+
+depth_alignment: median
+
+# ---- WorldMirror inference parameters ----
+cond_flags: [0, 0, 0]           # condition flags [pose, depth, intrinsic]
+
+# ---- Output ----
+output_dir: results/end2end/worldmirror
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

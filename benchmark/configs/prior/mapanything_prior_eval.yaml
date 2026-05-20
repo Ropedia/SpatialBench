@@ -1,0 +1,49 @@
+# ============================================================
+# MAPAnything with GT-prior injection — evaluation config
+# ============================================================
+
+# ---- Model ----
+model: mapanything
+checkpoint: null
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: medium+dtu
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+depth_alignment: median
+
+# ---- MAPAnything inference parameters ----
+memory_efficient_inference: true  # memory-efficient inference mode
+use_amp: true                     # automatic mixed precision
+apply_mask: false                 # whether to apply mask
+mask_edges: false                 # whether to mask edges
+
+# ---- GT Prior injection ----
+# MapAnything supports per-frame injection (partial=True).
+# pose and intrinsic can be controlled independently (unlike OmniVGGT, which couples them).
+# Constraint: if any frame has camera_poses, frame 0 must also have one.
+use_gt_camera: false            # inject GT camera (pose + intrinsic)
+use_gt_depth: false              # inject GT depth
+# use_gt_intrinsic_only: false  # uncomment to inject intrinsic only (no pose)
+gt_camera_ratio: 1.0            # camera GT frame ratio
+gt_depth_ratio: 1.0             # depth GT frame ratio
+gt_seed: 42
+
+# ---- Output ----
+output_dir: results/prior/mapanything_prior
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

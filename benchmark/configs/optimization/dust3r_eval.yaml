@@ -1,0 +1,46 @@
+# ============================================================
+# DUSt3R optimization-based evaluation config
+# ============================================================
+
+# ---- Model ----
+model: dust3r
+checkpoint: "naver/DUSt3R_ViTLarge_BaseDecoder_512_dpt"
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Resolution override ----
+# DUSt3R uses patch_size=16, so input width and height must be divisible by 16.
+# Width is fixed to 512; height is adjusted by original aspect ratio and aligned to a multiple of 16.
+resolution_override:
+  width: 512
+  align: 16
+
+# ---- Scene filtering ----
+tags: sparse+vkitti
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  # - pointcloud
+resolution: null
+
+depth_alignment: median         # DUSt3R outputs relative depth; evaluation uses median-scale alignment
+
+# ---- DUSt3R inference parameters ----
+niter: 300                      # global alignment iterations
+schedule: cosine                # optimization schedule: cosine | linear
+lr: 0.01                        # global alignment learning rate
+
+# ---- Output ----
+output_dir: results/optimization/dust3r
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 20.0

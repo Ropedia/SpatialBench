@@ -1,0 +1,49 @@
+# ============================================================
+# WorldMirror with GT-prior injection — evaluation config
+# ============================================================
+
+# ---- Model ----
+model: worldmirror
+checkpoint: null
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                  # null = no specific scene restriction
+
+# ---- Scene filtering ----
+tags: sparse
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  # - trajectory
+  # - pointcloud
+depth_alignment: median
+
+# ---- WorldMirror inference parameters ----
+cond_flags: [0, 0, 0]           # condition flags [pose, depth, intrinsic]
+
+# ---- Resolution (WorldMirror patch_size=14) ----
+resolution_override:
+  width: 518
+  align: 14
+
+# ---- GT Prior injection ----
+# WorldMirror only supports all-or-nothing (partial=False).
+# cond_flags = [pose, depth, intrinsic]; set use_gt_intrinsic_only=true to inject intrinsic only.
+use_gt_camera: true             # pose + intrinsic (all frames)
+use_gt_depth: false             # depth (all frames)
+gt_camera_ratio: 1.0            # WorldMirror does not support partial injection
+gt_depth_ratio: 0.0
+gt_seed: 42
+
+# ---- Output ----
+output_dir: results/prior/worldmirror_prior
+output: null
+
+# ---- Visualization ----
+visualize: False
+vis_conf_percent: 10.0

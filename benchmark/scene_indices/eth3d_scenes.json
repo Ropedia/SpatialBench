@@ -1,0 +1,512 @@
+[
+  {
+    "scene_id": "eth3d_courtyard_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "courtyard",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      10,
+      22,
+      23,
+      29,
+      32
+    ],
+    "num_frames_total": 38
+  },
+  {
+    "scene_id": "eth3d_courtyard_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "courtyard",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      10,
+      11,
+      14,
+      20,
+      22,
+      23,
+      24,
+      29,
+      32,
+      33,
+      37
+    ],
+    "num_frames_total": 38
+  },
+  {
+    "scene_id": "eth3d_courtyard_single",
+    "source_dataset": "eth3d",
+    "scene_path": "courtyard",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      28
+    ],
+    "num_frames_total": 38
+  },
+  {
+    "scene_id": "eth3d_delivery_area_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "delivery_area",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      8,
+      10,
+      34,
+      36,
+      43
+    ],
+    "num_frames_total": 44
+  },
+  {
+    "scene_id": "eth3d_delivery_area_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "delivery_area",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      6,
+      8,
+      10,
+      13,
+      15,
+      17,
+      18,
+      24,
+      27,
+      32,
+      35,
+      36,
+      40
+    ],
+    "num_frames_total": 44
+  },
+  {
+    "scene_id": "eth3d_delivery_area_single",
+    "source_dataset": "eth3d",
+    "scene_path": "delivery_area",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      29
+    ],
+    "num_frames_total": 44
+  },
+  {
+    "scene_id": "eth3d_electro_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "electro",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      3,
+      4,
+      11,
+      12,
+      16
+    ],
+    "num_frames_total": 45
+  },
+  {
+    "scene_id": "eth3d_electro_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "electro",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      3,
+      6,
+      8,
+      15,
+      18,
+      20,
+      21,
+      24,
+      25,
+      27,
+      35,
+      39
+    ],
+    "num_frames_total": 45
+  },
+  {
+    "scene_id": "eth3d_electro_single",
+    "source_dataset": "eth3d",
+    "scene_path": "electro",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      5
+    ],
+    "num_frames_total": 45
+  },
+  {
+    "scene_id": "eth3d_facade_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "facade",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      47,
+      52,
+      61,
+      68,
+      71
+    ],
+    "num_frames_total": 76
+  },
+  {
+    "scene_id": "eth3d_facade_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "facade",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      3,
+      4,
+      5,
+      7,
+      8,
+      11,
+      29,
+      33,
+      38,
+      39,
+      44,
+      45,
+      46,
+      47,
+      48,
+      52,
+      61,
+      68,
+      69,
+      70,
+      71,
+      75
+    ],
+    "num_frames_total": 76
+  },
+  {
+    "scene_id": "eth3d_facade_single",
+    "source_dataset": "eth3d",
+    "scene_path": "facade",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      8
+    ],
+    "num_frames_total": 76
+  },
+  {
+    "scene_id": "eth3d_kicker_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "kicker",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      2,
+      10,
+      14,
+      15,
+      19
+    ],
+    "num_frames_total": 31
+  },
+  {
+    "scene_id": "eth3d_kicker_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "kicker",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      0,
+      3,
+      4,
+      5,
+      10,
+      11,
+      15,
+      17,
+      25,
+      26
+    ],
+    "num_frames_total": 31
+  },
+  {
+    "scene_id": "eth3d_kicker_single",
+    "source_dataset": "eth3d",
+    "scene_path": "kicker",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      16
+    ],
+    "num_frames_total": 31
+  },
+  {
+    "scene_id": "eth3d_office_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "office",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      6,
+      7,
+      8,
+      13,
+      15
+    ],
+    "num_frames_total": 26
+  },
+  {
+    "scene_id": "eth3d_office_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "office",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      3,
+      5,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      22,
+      25
+    ],
+    "num_frames_total": 26
+  },
+  {
+    "scene_id": "eth3d_office_single",
+    "source_dataset": "eth3d",
+    "scene_path": "office",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      0
+    ],
+    "num_frames_total": 26
+  },
+  {
+    "scene_id": "eth3d_playground_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "playground",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      7,
+      15,
+      26,
+      28,
+      31
+    ],
+    "num_frames_total": 38
+  },
+  {
+    "scene_id": "eth3d_playground_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "playground",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      4,
+      6,
+      8,
+      9,
+      13,
+      15,
+      19,
+      20,
+      27,
+      32,
+      33
+    ],
+    "num_frames_total": 38
+  },
+  {
+    "scene_id": "eth3d_playground_single",
+    "source_dataset": "eth3d",
+    "scene_path": "playground",
+    "tags": {
+      "environment": "outdoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      35
+    ],
+    "num_frames_total": 38
+  },
+  {
+    "scene_id": "eth3d_terrains_sparse",
+    "source_dataset": "eth3d",
+    "scene_path": "terrains",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "sparse"
+    },
+    "frame_indices": [
+      22,
+      26,
+      29,
+      35,
+      38
+    ],
+    "num_frames_total": 42
+  },
+  {
+    "scene_id": "eth3d_terrains_medium",
+    "source_dataset": "eth3d",
+    "scene_path": "terrains",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "medium"
+    },
+    "frame_indices": [
+      18,
+      21,
+      23,
+      24,
+      26,
+      28,
+      30,
+      32,
+      35,
+      36,
+      38,
+      41
+    ],
+    "num_frames_total": 42
+  },
+  {
+    "scene_id": "eth3d_terrains_single",
+    "source_dataset": "eth3d",
+    "scene_path": "terrains",
+    "tags": {
+      "environment": "indoor",
+      "dynamics": "static",
+      "view_type": "normal",
+      "data_type": "real",
+      "view_density": "single"
+    },
+    "frame_indices": [
+      27
+    ],
+    "num_frames_total": 42
+  }
+]

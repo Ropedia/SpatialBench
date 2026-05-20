@@ -1,0 +1,45 @@
+# ============================================================
+# VGGT-Omega evaluation config
+# ============================================================
+
+# ---- Model ----
+model: vggt_omega
+checkpoint: checkpoints/VGGT-Omega   # directory containing vggt_omega_1b_512.pt
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null                     # set scene_id for single-scene debugging; keep null under sweep scripts
+
+# ---- Resolution override ----
+# VGGT-Omega requires the input resolution to be a multiple of patch_size=16;
+# training resolution is 512. Fix width at 512 and round height to a multiple of 16
+# while preserving the original aspect ratio.
+resolution_override:
+  width: 512
+  align: 16
+
+# ---- Scene filtering ----
+tags: medium                # e.g.: "sparse+indoor", "ropedia", "tum+sparse"
+max_scenes: null                   # limit number of scenes, null=all
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  - pointcloud
+resolution: null
+
+depth_alignment: median            # VGGT-Omega outputs relative depth, so median alignment is needed
+
+# ---- VGGT-Omega inference parameters ----
+# Model forward has no extra tunable parameters
+
+# ---- Output ----
+output_dir: results/end2end/vggt_omega
+output: null                       # specify output path (overrides automatic naming)
+
+# ---- Visualization ----
+visualize: False                    # whether to save GT/predicted GLB pointclouds
+vis_conf_percent: 10.0             # filter out the lowest N% confidence points (0=no filter)
