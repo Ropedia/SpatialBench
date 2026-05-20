@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="SpatialBench project page and benchmark results for spatial foundation models.">
+    <title>SpatialBench</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="SpatialBench home">
+        <span>SpatialBench</span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="#viewer">Viewer</a>
+        <a href="#results">Results</a>
+        <a href="#citation">Citation</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Cross-paradigm evaluation for spatial foundation models</p>
+          <h1>SpatialBench: Is Your Spatial Foundation Model an All&#8209;Round Player?</h1>
+
+          <p class="authors">
+            <a href="#">Haosong Peng<sup>1*</sup></a>
+            <a href="#">Hao Li<sup>2*</sup></a>
+            <a href="#">Jiaqi Chen<sup>3</sup></a>
+            <a href="#">Yuhao Pan<sup>1</sup></a>
+            <a href="#">Runmao Yao<sup>2</sup></a>
+            <a href="#">Yalun Dai<sup>2</sup></a>
+            <a href="#">Fushuo Huo<sup>4</sup></a>
+            <a href="#">Fangzhou Hong<sup>2</sup></a>
+            <a href="#">Zhaoxi Chen<sup>2</sup></a>
+            <a href="#">Haozhao Wang<sup>5</sup></a>
+            <a href="#">Dingwen Zhang<sup>3</sup></a>
+            <a href="#">Ziwei Liu<sup>2</sup></a>
+            <a href="#">Wenchao Xu<sup>1†</sup></a>
+          </p>
+
+          <p class="affiliations">
+            <span><sup>1</sup>HKUST</span>
+            <span><sup>2</sup>NTU</span>
+            <span><sup>3</sup>NWPU</span>
+            <span><sup>4</sup>SEU</span>
+            <span><sup>5</sup>HUST</span>
+          </p>
+          <p class="author-note">* Equal contribution &nbsp;&nbsp; † Corresponding author</p>
+
+          <div class="institution-strip" aria-label="Affiliated institutions">
+            <a class="institution" href="https://hkust.edu.hk/" rel="noreferrer" aria-label="HKUST">
+              <img src="assets/institutions/hkust.svg" alt="HKUST logo">
+            </a>
+            <a class="institution" href="https://www.ntu.edu.sg/" rel="noreferrer" aria-label="Nanyang Technological University">
+              <img src="assets/institutions/ntu.png" alt="NTU logo">
+            </a>
+            <a class="institution" href="https://en.nwpu.edu.cn/" rel="noreferrer" aria-label="Northwestern Polytechnical University">
+              <img src="assets/institutions/nwpu.png" alt="NWPU logo">
+            </a>
+            <a class="institution" href="https://www.seu.edu.cn/english/" rel="noreferrer" aria-label="Southeast University">
+              <img src="assets/institutions/seu.svg" alt="SEU logo">
+              <span class="institution-wordmark">Southeast<br>University</span>
+            </a>
+            <a class="institution" href="https://english.hust.edu.cn/" rel="noreferrer" aria-label="Huazhong University of Science and Technology">
+              <img src="assets/institutions/hust.svg" alt="HUST logo">
+            </a>
+          </div>
+
+          <div class="topic-tags" aria-label="Project topics">
+            <span>Spatial Foundation Models</span>
+            <span>Benchmark</span>
+            <span>3D Reconstruction</span>
+            <span>Embodied Viewpoints</span>
+          </div>
+
+          <div class="hero-actions" aria-label="Project links">
+            <a class="button primary" href="https://huggingface.co/papers"><span class="button-icon">P</span>Paper</a>
+            <a class="button" href="https://arxiv.org/" rel="noreferrer"><span class="button-icon">A</span>arXiv</a>
+            <a class="button" href="https://github.com/Ropedia/SpatialBench" rel="noreferrer"><span class="button-icon">C</span>Code</a>
+            <a class="button" href="https://huggingface.co/datasets/HarrisonPENG/SpatialBenchmark"><span class="button-icon">B</span>Benchmark</a>
+            <a class="button" href="https://huggingface.co/datasets/HarrisonPENG/DA-Next-5M"><span class="button-icon">D</span>Datasets</a>
+            <a class="button" href="https://github.com/Livioni/Depth-Anything-Next"><span class="button-icon">M</span>Model</a>
+          </div>
+
+          <p class="lede">
+            A deterministic, density-aware benchmark spanning 19 datasets, 546 scenes, 40+ model variants,
+            and six reconstruction paradigms across depth, camera pose, trajectory, reconstruction, and prior-enhanced tasks.
+          </p>
+        </div>
+        <figure class="hero-media">
+          <img src="assets/teaser.png" alt="SpatialBench teaser showing datasets, models, and benchmark findings.">
+          <figcaption>SpatialBench evaluates spatial foundation models across domains, sampling densities, all in a unified protocol</figcaption>
+        </figure>
+      </section>
+
+      <section class="stats-band" aria-label="Benchmark statistics">
+        <div id="statsGrid" class="stats-grid"></div>
+      </section>
+
+      <section class="section dataset-section">
+        <div class="section-heading">
+          <p class="eyebrow">Dataset coverage</p>
+          <h2>19 source datasets with orthogonal tags</h2>
+          <p>
+            Datasets are normalized into RGB, metric depth, camera-to-world pose, and intrinsics records,
+            with fixed scene indices for reproducible inputs.
+          </p>
+        </div>
+        <div class="paper-figure-grid" aria-label="Dataset coverage figures">
+          <figure class="paper-figure paper-figure-embed">
+            <iframe
+              class="autosize-iframe"
+              src="figures/taxonomy_radial.html"
+              title="Hierarchical composition of the SpatialBench"
+              loading="lazy"
+              scrolling="no"></iframe>
+          </figure>
+          <figure class="paper-figure paper-figure-embed">
+            <iframe
+              class="autosize-iframe"
+              src="figures/sampling_trajectories.html"
+              title="Per-dataset sampling trajectories across tiers"
+              loading="lazy"
+              scrolling="no"></iframe>
+          </figure>
+        </div>
+        <figcaption class="table-caption">
+          <strong>Source Datasets and Scene Attributes Used in Our Benchmark.</strong>
+          We summarize the datasets together with their per-dataset attribute tags.
+          The four <em>#Scenes</em> sub-columns report the number of scenes evaluated under each
+          input regime (<em>Single Frame</em>, <em>Sparse</em>, <em>Medium</em>, <em>Dense</em>);
+          &ldquo;&mdash;&rdquo; marks regimes in which a dataset does not participate.
+          <em>#Frames</em> is the total frame count actually consumed across all regimes.
+        </figcaption>
+        <div class="table-shell compact dataset-table-shell">
+          <table id="datasetTable">
+            <thead>
+              <tr>
+                <th rowspan="2">Dataset</th>
+                <th rowspan="2">Env.</th>
+                <th rowspan="2">Dyn.</th>
+                <th rowspan="2">View</th>
+                <th rowspan="2">Source</th>
+                <th colspan="4" class="dataset-group">#Scenes</th>
+                <th rowspan="2">#Frames</th>
+              </tr>
+              <tr>
+                <th class="dataset-subhead">Single</th>
+                <th class="dataset-subhead">Sparse</th>
+                <th class="dataset-subhead">Medium</th>
+                <th class="dataset-subhead">Dense</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="viewer" class="section viewer-section">
+        <div class="section-heading">
+          <p class="eyebrow">Scene viewer</p>
+          <h2>Browse the reconstructed scenes</h2>
+          <p>
+            Filter the 535 benchmark scenes by view density and tag, then load any reconstruction interactively.
+            Each scene is a Draco-compressed GLB that streams on demand &mdash; only the picked scene is downloaded.
+          </p>
+        </div>
+
+        <div class="viewer-controls" aria-label="Scene filter controls">
+          <label class="search">
+            <span>Search</span>
+            <input id="viewerSearch" type="search" placeholder="Scene id&hellip;">
+          </label>
+          <label>
+            <span>Density</span>
+            <select id="viewerDensity"></select>
+          </label>
+          <label>
+            <span>Dataset</span>
+            <select id="viewerDataset"></select>
+          </label>
+          <label>
+            <span>Environment</span>
+            <select id="viewerEnvironment"></select>
+          </label>
+          <label>
+            <span>Dynamics</span>
+            <select id="viewerDynamics"></select>
+          </label>
+          <label>
+            <span>View type</span>
+            <select id="viewerViewType"></select>
+          </label>
+          <label>
+            <span>Source</span>
+            <select id="viewerDataType"></select>
+          </label>
+        </div>
+
+        <div class="viewer-shell">
+          <aside class="viewer-list" aria-label="Scene list">
+            <div class="viewer-list-head">
+              <span id="viewerCount">0 scenes</span>
+              <button id="viewerReset" type="button" class="viewer-reset">Reset filters</button>
+            </div>
+            <ul id="viewerSceneList" role="listbox"></ul>
+          </aside>
+          <div class="viewer-stage">
+            <header class="viewer-stage-head">
+              <div>
+                <p class="eyebrow" id="viewerStageEyebrow">Scene viewer</p>
+                <h3 id="viewerStageTitle">Select a scene from the list</h3>
+              </div>
+              <a id="viewerDownload" class="button" href="#" hidden>
+                <span class="button-icon">G</span>Download GLB
+              </a>
+            </header>
+
+            <div class="viewer-canvas">
+              <model-viewer
+                id="sceneViewer"
+                camera-controls
+                touch-action="pan-y"
+                shadow-intensity="0"
+                exposure="1.05"
+                interaction-prompt="none"
+                disable-tap
+              ></model-viewer>
+              <div class="viewer-empty" id="viewerEmpty">Pick a scene from the list to render its reconstruction.</div>
+              <div class="viewer-status" id="viewerStatus" hidden>Loading&hellip;</div>
+            </div>
+
+            <dl class="viewer-meta" id="viewerMeta" hidden></dl>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="section results-section">
+        <div class="section-heading">
+          <p class="eyebrow">Main results</p>
+          <h2>Interactive leaderboard</h2>
+          <p>
+            The table is sourced from the LaTeX main-results table. Lower is better for AbsRel, ATE, and time;
+            higher is better for AUC@30 and F-Score.
+          </p>
+        </div>
+
+        <div class="model-charts" aria-label="Model size and runtime overview">
+          <article class="chart-card">
+            <header class="chart-card-head">
+              <div>
+                <p class="eyebrow">Model size</p>
+                <h3>Parameters per model</h3>
+              </div>
+              <p class="chart-note">Reported in millions (M); smaller bars are lighter models.</p>
+            </header>
+            <ol class="chart-list" id="paramsChart" aria-label="Parameter count per model"></ol>
+          </article>
+
+          <article class="chart-card">
+            <header class="chart-card-head">
+              <div>
+                <p class="eyebrow">Runtime</p>
+                <h3>Inference time per sequence</h3>
+              </div>
+              <p class="chart-note">
+                Per-sequence seconds, averaged across all scenes in the <b>sparse</b> regime.
+                Bars use a logarithmic scale so sub-second models stay readable next to outliers.
+              </p>
+            </header>
+            <ol class="chart-list" id="timeChart" aria-label="Inference time per model"></ol>
+          </article>
+        </div>
+
+        <div class="controls" aria-label="Leaderboard controls">
+          <label class="search">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Model name">
+          </label>
+          <label>
+            <span>Paradigm</span>
+            <select id="paradigmFilter"></select>
+          </label>
+          <label>
+            <span>Sort by</span>
+            <select id="sortMetric">
+              <option value="avgAuc30">Avg AUC@30</option>
+              <option value="avgAbsRel">Avg AbsRel</option>
+              <option value="avgFScore">Avg F-Score</option>
+              <option value="mediumAuc30">Medium AUC@30</option>
+              <option value="denseAuc30">Dense AUC@30</option>
+              <option value="time">Time</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="topModels" class="top-models" aria-label="Top ranked models"></div>
+
+        <div class="table-shell leaderboard-shell">
+          <table id="leaderboardTable">
+            <thead>
+              <tr>
+                <th rowspan="2" class="sticky-col">Method</th>
+                <th rowspan="2">Paradigm</th>
+                <th rowspan="2">Params (M)</th>
+                <th rowspan="2">Time (s)</th>
+                <th colspan="1" class="leaderboard-group">Single</th>
+                <th colspan="2" class="leaderboard-group">Sparse</th>
+                <th colspan="4" class="leaderboard-group">Medium</th>
+                <th colspan="4" class="leaderboard-group">Dense</th>
+                <th colspan="4" class="leaderboard-group">Average</th>
+              </tr>
+              <tr>
+                <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">AUC@30<span class="metric-arrow">&uarr;</span></th>
+                <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">AUC@30<span class="metric-arrow">&uarr;</span></th>
+                <th class="leaderboard-metric">ATE<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">F-Score<span class="metric-arrow">&uarr;</span></th>
+                <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">AUC@30<span class="metric-arrow">&uarr;</span></th>
+                <th class="leaderboard-metric">ATE<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">F-Score<span class="metric-arrow">&uarr;</span></th>
+                <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">AUC@30<span class="metric-arrow">&uarr;</span></th>
+                <th class="leaderboard-metric">ATE<span class="metric-arrow">&darr;</span></th>
+                <th class="leaderboard-metric">F-Score<span class="metric-arrow">&uarr;</span></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <div class="detail-results">
+          <div class="section-heading detail-results-heading">
+            <p class="eyebrow">Per-dataset</p>
+            <h2>Detail results on each dataset</h2>
+            <p>
+              Pick a dataset to inspect category-grouped scores. Top three values per column are highlighted in
+              progressively darker blue; OOM/T.O rows have their averages parenthesized and excluded from ranking.
+            </p>
+          </div>
+          <div class="controls detail-results-controls">
+            <label>
+              <span>Dataset</span>
+              <select id="datasetResultsPicker"></select>
+            </label>
+          </div>
+          <p id="datasetResultsEmpty" class="detail-results-empty">Select a dataset above to display its full result table.</p>
+          <div id="datasetResultsContainer" class="table-shell detail-results-shell" hidden>
+            <table id="datasetResultsTable"></table>
+          </div>
+        </div>
+
+        <div class="tag-leaderboard">
+          <div class="section-heading detail-results-heading">
+            <p class="eyebrow">By scene tags</p>
+            <h2>Leaderboard by selected scene attributes</h2>
+            <p>
+              Scene selections are matched to the per-dataset result tables and averaged over the selected
+              density regimes. Top three values per metric are highlighted.
+            </p>
+          </div>
+          <div class="viewer-controls tag-leaderboard-controls" aria-label="Scene-tag leaderboard controls">
+            <label>
+              <span>Density</span>
+              <select id="tagRankDensity"></select>
+            </label>
+            <label>
+              <span>Environment</span>
+              <select id="tagRankEnvironment"></select>
+            </label>
+            <label>
+              <span>Dynamics</span>
+              <select id="tagRankDynamics"></select>
+            </label>
+            <label>
+              <span>View type</span>
+              <select id="tagRankViewType"></select>
+            </label>
+            <label>
+              <span>Source</span>
+              <select id="tagRankDataType"></select>
+            </label>
+            <label>
+              <span>Rank by</span>
+              <select id="tagRankSort">
+                <option value="AbsRel">AbsRel</option>
+                <option value="AUC@30">AUC@30</option>
+                <option value="ATE">ATE</option>
+                <option value="F-Score">F-Score</option>
+              </select>
+            </label>
+          </div>
+          <div class="tag-leaderboard-status">
+            <span id="tagLeaderboardCount">Loading scene tags...</span>
+            <button id="tagLeaderboardReset" type="button" class="viewer-reset">Reset filters</button>
+          </div>
+          <p id="tagLeaderboardEmpty" class="detail-results-empty">Select scene tags above to display the leaderboard.</p>
+          <div id="tagLeaderboardContainer" class="table-shell tag-leaderboard-shell" hidden>
+            <table id="tagLeaderboardTable">
+              <thead>
+                <tr>
+                  <th class="sticky-col">Method</th>
+                  <th>Paradigm</th>
+                  <th>Scenes</th>
+                  <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
+                  <th class="leaderboard-metric">AUC@30<span class="metric-arrow">&uarr;</span></th>
+                  <th class="leaderboard-metric">ATE<span class="metric-arrow">&darr;</span></th>
+                  <th class="leaderboard-metric">F-Score<span class="metric-arrow">&uarr;</span></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="citation" class="section citation-section">
+        <div class="section-heading">
+          <p class="eyebrow">Citation</p>
+          <h2>Reference</h2>
+        </div>
+        <pre><code>@article{peng2026spatialbench,
+  title   = {SpatialBench: Is Your Spatial Foundation Model an All-Round Player?},
+  author  = {Peng, Haosong and Li, Hao and Chen, Jiaqi and Pan, Yuhao and others},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+      </section>
+    </main>
+
+    <footer>
+      <span>SpatialBench</span>
+      <span>Static project page ready for GitHub Pages.</span>
+    </footer>
+
+    <script src="data/results.js"></script>
+    <script src="script.js"></script>
+    <script>
+      (function () {
+        const iframes = Array.from(document.querySelectorAll('iframe.autosize-iframe'));
+        const measure = (frame) => {
+          const doc = frame.contentDocument;
+          if (!doc || !doc.body) return 0;
+          const page = doc.querySelector('.page');
+          if (page) return Math.max(page.scrollHeight, page.getBoundingClientRect().height);
+          return doc.body.scrollHeight;
+        };
+        /* Equalize: each iframe height = max content height across the row. */
+        const fitAll = () => {
+          let maxH = 0;
+          iframes.forEach((f) => { const h = measure(f); if (h > maxH) maxH = h; });
+          if (maxH > 0) {
+            const px = Math.ceil(maxH) + 'px';
+            iframes.forEach((f) => { f.style.height = px; });
+          }
+        };
+        iframes.forEach((frame) => {
+          const wireObservers = () => {
+            try {
+              const doc = frame.contentDocument;
+              if (!doc) return;
+              fitAll();
+              const ro = new ResizeObserver(fitAll);
+              if (doc.documentElement) ro.observe(doc.documentElement);
+              if (doc.body) ro.observe(doc.body);
+              if (doc.fonts && doc.fonts.ready) {
+                doc.fonts.ready.then(fitAll);
+              }
+              setTimeout(fitAll, 80);
+              setTimeout(fitAll, 400);
+            } catch (err) { /* same-origin only */ }
+          };
+          frame.addEventListener('load', wireObservers);
+          try {
+            const url = frame.contentWindow && frame.contentWindow.location && frame.contentWindow.location.href;
+            if (url && url !== 'about:blank') wireObservers();
+          } catch (e) { /* cross-origin guard */ }
+        });
+        window.addEventListener('resize', fitAll);
+      })();
+    </script>
+  </body>
+</html>

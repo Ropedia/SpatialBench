@@ -1,0 +1,102 @@
+\begin{table*}[t]
+\centering
+\setlength{\fboxsep}{0pt}
+\caption{\textbf{Per-Dataset Results on Xperience}.
+Performance across different input regimes: \textit{Single Frame}, \textit{Sparse}, \textit{Medium}, \textit{Dense}, and the \textit{Average}.
+The best, second-best, and third-best results in each column are highlighted in
+\colorbox{bestred}{deep blue}, \colorbox{secondorange}{medium blue}, and \colorbox{thirdyellow}{light blue}, respectively.
+Out-of-memory (OOM) and Timeout (T.O) cells are shaded \colorbox{oomred}{light red};
+\textit{Average} values for those rows are wrapped in parentheses and excluded from per-column ranking.
+Within each sub-category, the \textbf{bold} value marks the in-group best.
+Note that \ours (Ours) is excluded from the per-column rankings.
+}
+\label{tab:dataset_ropedia}
+\resizebox{\textwidth}{!}{%
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c >{\columncolor{subcol}}c}
+\toprule
+\multirow{2.5}{*}{\textbf{Method}}
+& \multirow{2.5}{*}{\makecell{\textbf{\#Params}\\\textbf{(M)}}}
+& \multicolumn{1}{c}{\textbf{Single Frame}}
+& \multicolumn{2}{c}{\textbf{Sparse}}
+& \multicolumn{3}{c}{\textbf{Medium}}
+& \multicolumn{3}{c}{\textbf{Dense}}
+& \multicolumn{3}{c}{\textbf{Average}} \\
+\cmidrule(lr){3-3} \cmidrule(lr){4-5} \cmidrule(lr){6-8} \cmidrule(lr){9-11} \cmidrule(lr){12-14}
+ & &
+ AbsRel$\downarrow$ &
+ AbsRel$\downarrow$ & AUC@30$\uparrow$ &
+ AbsRel$\downarrow$ & AUC@30$\uparrow$ & ATE$\downarrow$ &
+ AbsRel$\downarrow$ & AUC@30$\uparrow$ & ATE$\downarrow$ &
+ AbsRel$\downarrow$ & AUC@30$\uparrow$ & ATE$\downarrow$ \\
+\midrule
+% =========================================================
+\multicolumn{14}{c}{\cellcolor{catgray}\textbf{Optimization-based}} \\
+\midrule
+ DUSt3R & 571.2 & \cellcolor{secondorange}\textbf{0.054} & 0.092 & 0.471 & \textbf{0.240} & 0.079 & \cellcolor{thirdyellow}\textbf{4.312} & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.166) & (0.275) & (4.312) \\
+ MASt3R & 688.6 & 0.087 & \textbf{0.068} & \cellcolor{bestred}\textbf{0.694} & 0.261 & \textbf{0.202} & 4.373 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.164) & (0.448) & (4.373) \\
+\midrule
+% =========================================================
+\multicolumn{14}{c}{\cellcolor{catgray}\textbf{End-to-End Feed-Forward}} \\
+\midrule
+ VGGT & 1257 & 0.126 & 0.051 & 0.070 & 0.078 & 0.047 & 7.239 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.065) & (0.059) & (7.239) \\
+ Fast3R & 647.5 & 0.085 & 0.359 & 0.005 & 0.468 & 0.001 & 7.571 & -- & -- & -- & 0.413 & 0.003 & 7.571 \\
+ FastVGGT & 1158 & 0.128 & 0.048 & 0.073 & 0.076 & 0.036 & 7.024 & 0.113 & 0.062 & 7.943 & \cellcolor{thirdyellow}0.079 & 0.057 & 7.483 \\
+ MUSt3R & 423.4 & 0.058 & 0.059 & 0.496 & 0.111 & \cellcolor{secondorange}\textbf{0.282} & 5.645 & \cellcolor{oomred}T.O & \cellcolor{oomred}T.O & \cellcolor{oomred}T.O & (0.085) & (0.389) & (5.645) \\
+ MapAnything & 1228 & 0.062 & 0.040 & \cellcolor{secondorange}\textbf{0.617} & 0.098 & 0.138 & 5.422 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.069) & (0.377) & (5.422) \\
+ OmniVGGT & 1217 & \cellcolor{thirdyellow}\textbf{0.056} & \cellcolor{thirdyellow}0.033 & 0.042 & 0.072 & 0.042 & 6.971 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.052) & (0.042) & (6.971) \\
+ $\pi^{3}$ & 958.7 & 0.133 & \cellcolor{secondorange}0.031 & 0.127 & \cellcolor{secondorange}0.050 & 0.130 & 7.219 & 0.265 & 0.009 & 7.460 & 0.115 & \textbf{0.089} & 7.340 \\
+ $\pi^{3}$-X & 1360 & 0.089 & \cellcolor{bestred}\textbf{0.029} & 0.421 & \cellcolor{bestred}\textbf{0.046} & 0.022 & 6.461 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.038) & (0.221) & (6.461) \\
+ AMB3R & 1563 & 0.104 & 0.041 & 0.022 & 0.069 & 0.045 & 7.102 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.055) & (0.034) & (7.102) \\
+ DA3-Small & 34.3 & 0.112 & 0.061 & 0.011 & 0.094 & 0.025 & 6.493 & 0.104 & 0.041 & 6.741 & 0.086 & 0.026 & 6.617 \\
+ DA3-Base & 135.4 & 0.103 & 0.053 & 0.071 & 0.078 & 0.053 & 5.507 & \cellcolor{bestred}\textbf{0.088} & \textbf{0.081} & \textbf{5.624} & \cellcolor{secondorange}\textbf{0.073} & 0.068 & \textbf{5.565} \\
+ DA3-Large & 410.9 & 0.099 & 0.064 & 0.103 & 0.073 & 0.116 & 5.989 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.068) & (0.109) & (5.989) \\
+ DA3-Giant & 1356 & 0.162 & 0.049 & 0.291 & 0.057 & 0.193 & \textbf{4.895} & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.053) & (0.242) & (4.895) \\
+ DA3-Nested & 1690 & 0.180 & 0.044 & 0.201 & \cellcolor{thirdyellow}0.051 & 0.185 & 6.236 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.047) & (0.193) & (6.236) \\
+ WorldMirror & 1263 & 0.076 & 0.048 & 0.197 & 0.091 & 0.040 & 7.172 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.069) & (0.118) & (7.172) \\
+ VGGT-Omega & 1144 & 0.070 & 0.038 & \cellcolor{thirdyellow}0.528 & 0.069 & \cellcolor{thirdyellow}0.275 & 5.317 & -- & -- & -- & (0.054) & (0.401) & (5.317) \\ \hdashline
+ \ours (Ours) & 1304 & 0.064 & 0.037 & 0.703 & 0.046 & 0.385 & 4.508 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.041) & (0.544) & (4.508) \\
+\midrule
+% =========================================================
+\multicolumn{14}{c}{\cellcolor{catgray}\textbf{Online}} \\
+\midrule
+ Spann3r$^{224}$ & 658.7 & 0.156 & 0.292 & 0.066 & 0.221 & 0.012 & 5.472 & 0.171 & 0.216 & 4.852 & 0.228 & 0.098 & 5.162 \\
+ CUT3R & 793.3 & 0.148 & 0.074 & 0.124 & 0.114 & 0.027 & 4.663 & 0.316 & 0.029 & 7.244 & 0.168 & 0.060 & 5.954 \\
+ MonST3R & 571.2 & 0.191 & 0.116 & 0.021 & 0.283 & 0.007 & 5.104 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.200) & (0.014) & (5.104) \\
+ Point3R & 828 & 0.114 & 0.074 & 0.031 & 0.156 & 0.017 & 6.804 & 0.234 & 0.029 & 7.762 & 0.154 & 0.025 & 7.283 \\
+ Stream3R-S & 1191 & 0.083 & 0.055 & 0.046 & 0.419 & 0.005 & 7.469 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.237) & (0.025) & (7.469) \\
+ Stream3R-W & 1191 & 0.083 & 0.056 & 0.047 & 0.407 & 0.006 & 7.484 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.231) & (0.027) & (7.484) \\
+ StreamVGGT & 1257 & 0.108 & 0.131 & 0.054 & 0.159 & 0.033 & 7.306 & 0.185 & 0.053 & 8.103 & 0.158 & 0.047 & 7.705 \\
+ Page4D & 1257 & 0.134 & \textbf{0.049} & 0.075 & \textbf{0.073} & 0.032 & 7.165 & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & \cellcolor{oomred}OOM & (0.061) & (0.054) & (7.165) \\
+ InfiniteVGGT & 1257 & 0.109 & 0.131 & 0.051 & 0.159 & 0.033 & 7.317 & 0.185 & 0.054 & 8.087 & 0.159 & 0.046 & 7.702 \\
+ Wint3R & 749.5 & \cellcolor{bestred}\textbf{0.053} & 0.054 & 0.039 & 0.074 & 0.065 & 6.512 & 0.290 & 0.059 & 7.698 & 0.139 & 0.054 & 7.105 \\
+ LongStream-B & 1191 & 0.142 & 0.079 & 0.029 & 0.118 & 0.004 & 6.245 & 0.259 & 0.027 & 2.884 & 0.152 & 0.020 & 4.565 \\
+ LongStream-S & 1191 & 0.142 & 0.075 & 0.028 & 0.137 & 0.004 & 6.278 & 0.223 & 0.020 & 6.397 & 0.145 & 0.017 & 6.337 \\
+ LingbotMap$^{*}$-W & 1158 & 0.060 & 0.050 & \textbf{0.197} & 0.086 & \cellcolor{bestred}\textbf{0.299} & \cellcolor{bestred}\textbf{2.164} & 0.157 & 0.193 & \textbf{1.458} & 0.098 & 0.230 & \cellcolor{bestred}\textbf{1.811} \\
+ LingbotMap$^{*}$-S & 1158 & 0.060 & 0.050 & \textbf{0.197} & 0.097 & 0.270 & \cellcolor{secondorange}2.445 & \cellcolor{thirdyellow}\textbf{0.100} & \cellcolor{thirdyellow}\textbf{0.451} & 3.616 & \textbf{0.082} & \cellcolor{secondorange}\textbf{0.306} & \cellcolor{thirdyellow}3.031 \\
+\midrule
+% =========================================================
+\multicolumn{14}{c}{\cellcolor{catgray}\textbf{Chunk-wise}} \\
+\midrule
+ VGGT-Long & 1257 & \textbf{0.126} & 0.051 & 0.070 & 0.244 & 0.067 & 7.389 & 1.390 & 0.075 & 5.495 & 0.562 & 0.071 & 6.442 \\
+ $\pi^{3}$-Long & 958.7 & 0.133 & \cellcolor{secondorange}\textbf{0.031} & 0.127 & \textbf{0.091} & 0.134 & 6.415 & \textbf{0.465} & \cellcolor{bestred}\textbf{0.809} & \cellcolor{bestred}\textbf{0.215} & \textbf{0.196} & \cellcolor{bestred}\textbf{0.357} & \textbf{3.315} \\
+ DA3-Streaming & 1356 & 0.162 & 0.049 & \textbf{0.285} & 0.175 & \textbf{0.173} & \textbf{5.291} & 0.474 & 0.319 & 2.817 & 0.233 & \cellcolor{thirdyellow}0.259 & 4.054 \\
+\midrule
+% =========================================================
+\multicolumn{14}{c}{\cellcolor{catgray}\textbf{SLAM-based}} \\
+\midrule
+ MASt3R-SLAM & 688.6 & 0.206 & 0.144 & 0.000 & \textbf{0.201} & 0.001 & \textbf{6.986} & \textbf{0.279} & \textbf{0.423} & \textbf{4.841} & \textbf{0.208} & \textbf{0.141} & \textbf{5.913} \\
+ VGGT-SLAM & 1257 & \textbf{0.126} & \textbf{0.051} & \textbf{0.070} & 0.302 & \textbf{0.044} & 7.735 & 0.973 & 0.051 & 5.342 & 0.442 & 0.055 & 6.538 \\
+\midrule
+% =========================================================
+\multicolumn{14}{c}{\cellcolor{catgray}\textbf{Test-Time Training}} \\
+\midrule
+ TTT3R & 793.3 & 0.148 & 0.064 & \textbf{0.107} & 0.102 & 0.061 & 7.159 & 0.143 & 0.119 & 5.582 & 0.103 & 0.096 & 6.371 \\
+ Scal3R & 1266 & 0.256 & 0.045 & 0.056 & 0.192 & 0.010 & 7.411 & 0.462 & 0.195 & 3.739 & 0.233 & 0.087 & 5.575 \\
+ LoGeR & 1255 & 0.122 & 0.040 & 0.036 & 0.076 & 0.043 & \textbf{4.821} & 0.158 & 0.400 & \cellcolor{thirdyellow}1.088 & 0.092 & 0.160 & \cellcolor{secondorange}\textbf{2.954} \\
+ LoGeR$^*$ & 1255 & \textbf{0.113} & \textbf{0.034} & 0.071 & \textbf{0.066} & \textbf{0.093} & 7.053 & \cellcolor{secondorange}\textbf{0.090} & \cellcolor{secondorange}\textbf{0.583} & \cellcolor{secondorange}\textbf{0.608} & \cellcolor{bestred}\textbf{0.064} & \textbf{0.249} & 3.830 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

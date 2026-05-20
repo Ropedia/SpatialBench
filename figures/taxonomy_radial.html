@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Hierarchical Composition of the SpatialBench</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #FEFCFA;     /* warm cream — figure2.py palette */
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+  }
+  .page {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: clamp(14px, 2.4vw, 28px) clamp(12px, 2vw, 24px) clamp(16px, 2.4vw, 32px);
+    box-sizing: border-box;
+  }
+  .eyebrow {
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #B21D1D;
+    margin: 0 0 8px 0;
+  }
+  h1.title {
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #111;
+    line-height: 1.15;
+  }
+  .subtitle {
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    font-style: italic;
+    color: #333;
+    margin: 0 0 14px 0;
+  }
+  .stats-strip {
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    color: #2a2a2a;
+    border-top: 0.6px solid #c8c2b3;
+    border-bottom: 0.6px solid #c8c2b3;
+    padding: 8px 0;
+    margin: 6px 0 18px 0;
+  }
+  .stats-strip .sep {
+    color: #B21D1D;
+    margin: 0 8px;
+    font-weight: 700;
+  }
+  .figure-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    aspect-ratio: 1 / 1;
+    margin: 12px auto 8px auto;
+  }
+  .figure-wrap svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .caption {
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #222;
+    line-height: 1.5;
+    margin: 14px 24px 0 24px;
+    text-align: justify;
+  }
+  .caption b { font-weight: 700; }
+  #tooltip {
+    position: absolute;
+    pointer-events: none;
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    background: #FBF7F2;
+    color: #1a1a1a;
+    border: 1px solid #c8c2b3;
+    padding: 8px 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(60,40,20,0.18);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+    z-index: 20;
+    white-space: nowrap;
+  }
+  #tooltip .path { font-weight: 700; }
+  #tooltip .stat { font-style: italic; color: #333; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="title">Hierarchical Composition of the SpatialBench</h1>
+  <div class="subtitle">A four-ring radial portrait of 546 evaluation cases drawn from 19 datasets, organised by environment, motion, and viewpoint.</div>
+  <div class="stats-strip">
+    546 cases<span class="sep">&middot;</span>19 datasets<span class="sep">&middot;</span>426:120 indoor:outdoor<span class="sep">&middot;</span>251:295 static:dynamic<span class="sep">&middot;</span>362:184 real:simulation
+  </div>
+
+  <div class="figure-wrap" id="figureWrap">
+    <svg id="chart" width="880" height="880" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="tooltip"></div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+/* =========================================================================
+   Data
+========================================================================= */
+const RAW = [
+  {name:"indoor",children:[
+    {name:"static",children:[
+      {name:"room_object",children:[
+        {name:"7scenes",value:28},
+        {name:"hiroom",value:18},
+        {name:"nrgbd",value:32},
+        {name:"scannetpp",value:44},
+        {name:"dtu",value:39},
+        {name:"eth3d",value:9},
+        {name:"tanks_and_temples",value:4},
+        {name:"lingbot",value:25}]},
+      {name:"wrist",children:[
+        {name:"lingbot",value:14}]}]},
+    {name:"dynamic",children:[
+      {name:"room_object",children:[
+        {name:"tum",value:24}]},
+      {name:"ego",children:[
+        {name:"adt",value:16},
+        {name:"ropedia",value:8}]},
+      {name:"wrist",children:[
+        {name:"droid",value:64},
+        {name:"robolab",value:32},
+        {name:"rlbench",value:38},
+        {name:"robotwin",value:31}]}]}]},
+  {name:"outdoor",children:[
+    {name:"static",children:[
+      {name:"roaming",children:[
+        {name:"eth3d",value:15},
+        {name:"tanks_and_temples",value:12},
+        {name:"lingbot",value:11}]}]},
+    {name:"dynamic",children:[
+      {name:"driving",children:[
+        {name:"waymo",value:32},
+        {name:"vkitti",value:20},
+        {name:"omniworld",value:19},
+        {name:"kitti_odometry",value:11}]}]}]}
+];
+
+const ROOT = { name:"root", children: RAW };
+
+/* Display-name helpers — canonical capitalisation for taxonomy + datasets */
+function toTitle(s) {
+  if (s === "egoview") return "Ego-view";
+  if (s === "normal")  return "Exo-view";   /* exocentric / third-person camera */
+  if (s === "room_object") return "Room/Object";
+  if (s === "roaming") return "Roaming";
+  if (s === "driving") return "Driving";
+  if (s === "ego") return "Ego";
+  if (s === "wrist") return "Wrist";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+/* Short canonical abbreviations used inside the petals — matches the way
+ * each dataset is cited in 3D-recon literature. The full formal names are
+ * preserved in DATASET_FULL for the hover tooltip. */
+const DATASET_NAMES = {
+  droid:             "DROID",
+  robotwin:          "RoboTwin",
+  rlbench:           "RLBench",
+  robolab:           "RoboLab",
+  tum:               "TUM",
+  nrgbd:             "NRGBD",
+  "7scenes":         "7-Scenes",
+  scannetpp:         "ScanNet++",
+  tanks_and_temples: "T&T",
+  dtu:               "DTU",
+  eth3d:             "ETH3D",
+  ropedia:           "X-10M",
+  adt:               "ADT",
+  lingbot:           "LingBot",
+  hiroom:            "HiRoom",
+  omniworld:         "OmniWorld",
+  vkitti:            "VKITTI",
+  waymo:             "Waymo",
+  kitti_odometry:    "KITTI",
+};
+const DATASET_FULL = {
+  droid:             "DROID",
+  robotwin:          "RoboTwin",
+  rlbench:           "RLBench",
+  robolab:           "RoboLab",
+  tum:               "TUM RGB-D",
+  nrgbd:             "Neural RGB-D",
+  "7scenes":         "7-Scenes",
+  scannetpp:         "ScanNet++",
+  tanks_and_temples: "Tanks & Temples",
+  dtu:               "DTU MVS",
+  eth3d:             "ETH3D",
+  ropedia:           "Xperience-10M",
+  adt:               "Aria Digital Twin",
+  lingbot:           "LingBot",
+  hiroom:            "HiRoom",
+  omniworld:         "OmniWorld",
+  vkitti:            "Virtual KITTI",
+  waymo:             "Waymo Open",
+  kitti_odometry:    "KITTI Odometry",
+};
+function dsFullName(s) { return DATASET_FULL[s] || s; }
+function dsName(s) { return DATASET_NAMES[s] || s; }
+
+/* =========================================================================
+   Layout constants
+========================================================================= */
+const W = 880, H = 880;
+const CX = W / 2, CY = H / 2;
+const R = 360;
+
+const RING = {
+  r0_env:    0.13 * R,   /* donut hole carved out for centre summary */
+  r1_env:    0.22 * R,
+  r0_dyn:    0.22 * R,
+  r1_dyn:    0.40 * R,
+  r0_view:   0.40 * R,
+  r1_view:   0.55 * R,
+  r0_bar:    0.55 * R,
+  r_bar_max: 0.95 * R,
+};
+const BAR_LENGTH_MAX = RING.r_bar_max - RING.r0_bar;
+const VALUE_MAX = 48;
+const TOTAL_CASES = 367;
+const TICK_VALUES = [5, 20, 50];    /* radial-axis ticks for outer bar zone */
+
+/* Soft visual encoding for the outer ring:
+ *   frac(v) = BASE + (1 − BASE) · (v / VMAX)^GAMMA
+ * Compresses both extremes — high counts don't dominate, low counts stay visible.
+ * BASE 0.20, GAMMA 0.5 → n=64 maps to 100%, n=4 maps to ~40%, ratio ≈ 2.5:1.   */
+const SCALE = { BASE: 0.20, GAMMA: 0.5 };
+function valueToFrac(v) {
+  return SCALE.BASE + (1 - SCALE.BASE) * Math.pow(v / VALUE_MAX, SCALE.GAMMA);
+}
+
+/* =========================================================================
+   Pre-compute leaf counts and angular ranges
+========================================================================= */
+function annotate(node) {
+  if (!node.children || node.children.length === 0) {
+    node.numLeaves = 1;
+    node.depth = node.depth ?? 0;
+    return 1;
+  }
+  let n = 0;
+  for (const c of node.children) {
+    c.parent = node;
+    c.depth  = (node.depth ?? 0) + 1;
+    n += annotate(c);
+  }
+  node.numLeaves = n;
+  return n;
+}
+annotate(ROOT);
+
+const TOTAL_LEAVES = ROOT.numLeaves; // 23
+
+// Walk in pre-order, assigning [a0, a1] in radians, starting from -PI/2 (12 o'clock), clockwise.
+function assignAngles(node, a0, a1) {
+  node.a0 = a0;
+  node.a1 = a1;
+  if (node.children) {
+    let cursor = a0;
+    for (const c of node.children) {
+      const span = (c.numLeaves / TOTAL_LEAVES) * 2 * Math.PI;
+      assignAngles(c, cursor, cursor + span);
+      cursor += span;
+    }
+  }
+}
+assignAngles(ROOT, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI);
+
+// Collect nodes per ring
+const ring1 = [], ring2 = [], ring3 = [], ring4 = [];
+(function walk(n){
+  if (n.depth === 1) ring1.push(n);
+  else if (n.depth === 2) ring2.push(n);
+  else if (n.depth === 3) ring3.push(n);
+  else if (n.depth === 4) ring4.push(n);
+  if (n.children) n.children.forEach(walk);
+})(ROOT);
+
+/* =========================================================================
+   Colour palettes
+========================================================================= */
+// hex to hsl/back, with lighten/darken
+function hexToRgb(h){h=h.replace('#','');return[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];}
+function rgbToHex(r,g,b){const t=v=>('0'+Math.max(0,Math.min(255,Math.round(v))).toString(16)).slice(-2);return '#'+t(r)+t(g)+t(b);}
+function shade(hex, pct){ // pct positive = lighter, negative = darker
+  const [r,g,b] = hexToRgb(hex);
+  const f = pct/100;
+  if (f >= 0) return rgbToHex(r+(255-r)*f, g+(255-g)*f, b+(255-b)*f);
+  return rgbToHex(r*(1+f), g*(1+f), b*(1+f));
+}
+/* Pull a colour toward its grayscale equivalent — "amt" in [0,1].
+   amt=0 keeps the original; amt=1 makes it fully gray. */
+function desaturate(hex, amt){
+  const [r,g,b] = hexToRgb(hex);
+  const lum = 0.299*r + 0.587*g + 0.114*b;
+  return rgbToHex(r + (lum-r)*amt, g + (lum-g)*amt, b + (lum-b)*amt);
+}
+/* Vivid hues + transparency — let the cream background bleed through for a
+ * watercolour feel rather than washing out the colours themselves. */
+const SAT_INNER = 0.00;   /* keep inner rings vivid */
+const SAT_OUTER = 0.00;   /* keep outer bars vivid too */
+const ALPHA_INNER = 0.78; /* inner-ring opacity */
+const ALPHA_OUTER = 0.58; /* outer dataset bars more translucent */
+
+const FAMILY_RAW = {
+  indoor:      ["#0B3D91", "#1565C0", "#1E88E5", "#4FC3F7"],
+  outdoor:     ["#8B0000", "#D32F2F", "#F57C00", "#FFB300"],
+  room_object: ["#0B7BC1", "#37A2D8", "#8FD3F4", "#DDF2FC"],
+  roaming:     ["#F0783D", "#FFA46B", "#FFD1B0", "#FFF0E6"],
+  driving:     ["#C94E56", "#DF7E84", "#F3B7B9", "#FBE3E4"],
+  ego:         ["#2C9B90", "#6FBFB5", "#A8DCD5", "#E0F3F0"],
+  wrist:       ["#8A63B7", "#AE89D0", "#D6C2EA", "#F0E8F7"],
+};
+const FAMILY = Object.fromEntries(Object.entries(FAMILY_RAW)
+  .map(([k, arr]) => [k, arr.map(c => desaturate(c, SAT_INNER))]));
+
+/*
+  Color assignment strategy:
+  - Ring 1 (env)      -> family[0]
+  - Ring 2 (dynamics) -> family[1] (sibling tint +/-12%)
+  - Ring 3 (viewpoint)-> family[2] (sibling tint +/-15%)
+  - Ring 4 (dataset bar) -> ring-3 color, darkened ~12% for emphasis
+*/
+function assignColors() {
+  for (const r1 of ring1) {
+    const envFam = FAMILY[r1.name] || ["#777", "#999", "#bbb", "#ddd"];
+    r1.color = envFam[0];
+    if (r1.children) {
+      r1.children.forEach((r2) => {
+        const dynTint = r2.name === "static" ? 8 : -6;
+        r2.color = shade(envFam[1], dynTint);
+        if (r2.children) {
+          r2.children.forEach((r3) => {
+            const typeFam = FAMILY[r3.name] || envFam;
+            r3.color = shade(typeFam[0], dynTint / 2);
+            if (r3.children) {
+              const k = r3.children.length;
+              r3.children.forEach((leaf, j) => {
+                const tint = k === 1 ? 0 : (j - (k - 1) / 2) * 6;
+                leaf.color = shade(typeFam[2], tint + dynTint / 2);
+              });
+            }
+          });
+        }
+      });
+    }
+  }
+}
+assignColors();
+
+/* Per-type dataset colours, matching the environment / dynamics / scene-type hierarchy. */
+ring4.forEach(d => {
+  const type = d.parent?.name;
+  const dyn = d.parent?.parent?.name;
+  const fam = FAMILY[type] || ["#777", "#999", "#bbb", "#ddd"];
+  const siblings = d.parent?.children || ring4;
+  const i = siblings.indexOf(d);
+  const m = siblings.length;
+  const tint = m === 1 ? 0 : (i - (m - 1) / 2) * 6;
+  const dynTint = dyn === "static" ? 6 : -4;
+  d.color = shade(desaturate(fam[2], SAT_OUTER), tint + dynTint + 4);
+});
+
+/* =========================================================================
+   Build the SVG
+========================================================================= */
+const svg = d3.select("#chart")
+  .attr("viewBox", `0 0 ${W} ${H}`)
+  .attr("xmlns", "http://www.w3.org/2000/svg")
+  .style("background", "#FEFCFA");   /* warm cream — figure2.py palette */
+
+// Defs for arc paths used by curved labels and drop-shadow filter
+const defs = svg.append("defs");
+
+/* Soft drop shadow — feMerge with offset+blurred SourceAlpha behind the path */
+const shadow = defs.append("filter")
+  .attr("id", "petalShadow")
+  .attr("x", "-20%").attr("y", "-20%")
+  .attr("width", "140%").attr("height", "140%");
+shadow.append("feGaussianBlur")
+  .attr("in", "SourceAlpha")
+  .attr("stdDeviation", 2.4);
+shadow.append("feOffset")
+  .attr("dx", 2).attr("dy", 2).attr("result", "offsetBlur");
+const shadowComp = shadow.append("feComponentTransfer").attr("in", "offsetBlur");
+shadowComp.append("feFuncA").attr("type", "linear").attr("slope", 0.20);
+const merge = shadow.append("feMerge");
+merge.append("feMergeNode");
+merge.append("feMergeNode").attr("in", "SourceGraphic");
+
+const g = svg.append("g").attr("transform", `translate(${CX},${CY})`);
+
+const arcGen = d3.arc()
+  .padAngle(0.012)        /* ~0.7° gap between adjacent petals (figure2.py vibe) */
+  .padRadius(R)
+  .cornerRadius(6);       /* rounded corners on every petal */
+
+function makeArc(d, r0, r1) {
+  return arcGen({ innerRadius: r0, outerRadius: r1, startAngle: d.a0 + Math.PI/2, endAngle: d.a1 + Math.PI/2 });
+  // Note: arcGen's angle convention is 0 at 12 o'clock by default if we feed startAngle directly.
+  // We stored a0,a1 with -PI/2 = 12 o'clock baseline, so add +PI/2 to convert to d3.arc's convention.
+}
+
+/* ---- Inner three rings ---- */
+const ringSpec = [
+  { nodes: ring1, r0: RING.r0_env,  r1: RING.r1_env,  cls: "ring1" },
+  { nodes: ring2, r0: RING.r0_dyn,  r1: RING.r1_dyn,  cls: "ring2" },
+  { nodes: ring3, r0: RING.r0_view, r1: RING.r1_view, cls: "ring3" },
+];
+
+const segLayer = g.append("g").attr("class", "segments");
+
+ringSpec.forEach(spec => {
+  const sel = segLayer.selectAll(`path.${spec.cls}`)
+    .data(spec.nodes)
+    .enter()
+    .append("path")
+      .attr("class", `seg ${spec.cls}`)
+      .attr("d", d => makeArc(d, spec.r0, spec.r1))
+      .attr("fill", d => d.color)
+      .attr("fill-opacity", ALPHA_INNER)
+      .attr("stroke", "#FEFCFA")             /* cream, blends with bg */
+      .attr("stroke-width", 1.8)
+      .attr("stroke-linejoin", "round")
+      .attr("filter", "url(#petalShadow)");
+});
+
+/* ---- Value grid: dashed reference circles in the bar zone ---- */
+const gridLayer = g.append("g").attr("class", "value-grid");
+TICK_VALUES.forEach(v => {
+  const r = RING.r0_bar + valueToFrac(v) * BAR_LENGTH_MAX;
+  gridLayer.append("circle")
+    .attr("r", r)
+    .attr("fill", "none")
+    .attr("stroke", "#888")
+    .attr("stroke-width", 0.5)
+    .attr("stroke-dasharray", "2 3")
+    .attr("opacity", 0.75);
+});
+
+/* ---- Outer bars (ring 4) ---- */
+const barLayer = g.append("g").attr("class", "bars");
+
+const SLOT = (2 * Math.PI) / TOTAL_LEAVES;
+const BAR_FRAC = 0.92; // angular fill fraction within slot
+
+ring4.forEach(d => {
+  const mid = (d.a0 + d.a1) / 2;
+  const half = (SLOT * BAR_FRAC) / 2;
+  d.b0 = mid - half;
+  d.b1 = mid + half;
+  d.barLen = valueToFrac(d.value) * BAR_LENGTH_MAX;
+  d.barR1 = RING.r0_bar + d.barLen;
+});
+
+barLayer.selectAll("path.bar")
+  .data(ring4)
+  .enter()
+  .append("path")
+    .attr("class", "seg bar")
+    .attr("d", d => arcGen({
+      innerRadius: RING.r0_bar,
+      outerRadius: d.barR1,
+      startAngle: d.b0 + Math.PI/2,
+      endAngle:   d.b1 + Math.PI/2,
+    }))
+    .attr("fill", d => d.color)
+    .attr("fill-opacity", ALPHA_OUTER)
+    .attr("stroke", "#FEFCFA")
+    .attr("stroke-width", 1.4)
+    .attr("stroke-linejoin", "round")
+    .attr("filter", "url(#petalShadow)");
+
+// Faint baseline ring at r0_bar (subtle cream-on-cream guide)
+g.append("circle")
+  .attr("r", RING.r0_bar)
+  .attr("fill", "none")
+  .attr("stroke", "#cdc7b8")
+  .attr("stroke-width", 0.5)
+  .attr("opacity", 0.6);
+
+/* ---- Tick labels at 12 o'clock (above bars, in indoor/outdoor seam) ---- */
+const tickLayer = g.append("g").attr("class", "value-ticks");
+TICK_VALUES.forEach(v => {
+  const r = RING.r0_bar + valueToFrac(v) * BAR_LENGTH_MAX;
+  // White rounded pill so the tick reads cleanly on top of any segment behind
+  tickLayer.append("rect")
+    .attr("x", -15).attr("y", -r - 8)
+    .attr("width", 30).attr("height", 16)
+    .attr("fill", "#FEFCFA")
+    .attr("stroke", "#b8b09c")
+    .attr("stroke-width", 0.6)
+    .attr("rx", 5);
+  tickLayer.append("text")
+    .attr("x", 0).attr("y", -r)
+    .attr("text-anchor", "middle")
+    .attr("dy", "0.35em")
+    .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+    .attr("font-size", 11)
+    .attr("font-weight", 700)
+    .attr("fill", "#333")
+    .text(`n=${v}`);
+});
+
+/* =========================================================================
+   Labels
+========================================================================= */
+const labelLayer = g.append("g").attr("class", "labels");
+
+// Helper: build an arc path string for textPath. Goes counter-clockwise on top
+// half (so text reads left-to-right) and clockwise on bottom half (flipped).
+function arcPathForText(a0, a1, radius) {
+  // Convert our internal angles (0 deg = 3 o'clock, but stored relative to -PI/2 baseline)
+  // Our a0,a1: -PI/2 means 12 o'clock. Convert to standard math angle for x,y.
+  // x = r*cos(theta), y = r*sin(theta) where theta=0 is 3 o'clock, increasing CCW.
+  // But in SVG screen coords, y goes down, and we want clockwise to match our drawing.
+  // In d3.arc convention, angle 0 = 12 o'clock and increases clockwise.
+  // To map our (a0,a1) where -PI/2 = 12 o'clock CW positive, the screen-coord angle is:
+  //   phi = a (already correct: x = r*cos(a), y = r*sin(a) gives 12 o'clock at -PI/2)
+  // So x = r*cos(a), y = r*sin(a) with screen-coord y-down places -PI/2 at top. Good.
+  const mid = (a0 + a1) / 2;
+  // bottom half if mid in (0, PI) i.e. y > 0
+  const isBottom = (mid > 0 && mid < Math.PI);
+  const sweep = isBottom ? 0 : 1; // direction
+  // For top half: draw from a1 -> a0 (so text along path reads left-to-right)
+  // For bottom half: draw from a0 -> a1 reversed... actually flip so reading is upright.
+  let s, e;
+  if (isBottom) {
+    s = a1; e = a0; // reversed
+  } else {
+    s = a0; e = a1;
+  }
+  const x0 = radius * Math.cos(s);
+  const y0 = radius * Math.sin(s);
+  const x1 = radius * Math.cos(e);
+  const y1 = radius * Math.sin(e);
+  const delta = Math.abs(e - s);
+  const largeArc = delta > Math.PI ? 1 : 0;
+  // sweep: 1 = CW in SVG, 0 = CCW. Our angles increase CW in screen coords already (since
+  // y-down). Going from s to e where e > s means CW; e < s means CCW.
+  const sweepFlag = (e > s) ? 1 : 0;
+  return `M ${x0.toFixed(3)} ${y0.toFixed(3)} A ${radius} ${radius} 0 ${largeArc} ${sweepFlag} ${x1.toFixed(3)} ${y1.toFixed(3)}`;
+}
+
+let pathIdCounter = 0;
+function ensureArcPath(a0, a1, radius) {
+  const id = `arcPath_${pathIdCounter++}`;
+  defs.append("path")
+    .attr("id", id)
+    .attr("d", arcPathForText(a0, a1, radius))
+    .attr("fill", "none")
+    .attr("stroke", "none");
+  return id;
+}
+
+/* ---- Ring 1 labels: Indoor / Outdoor, fitted to ring thickness ---- */
+ring1.forEach(d => {
+  const radius = (RING.r0_env + RING.r1_env) / 2;
+  const id = ensureArcPath(d.a0, d.a1, radius);
+  const display = toTitle(d.name);
+  const arcLen = (d.a1 - d.a0) * radius;
+  const fontSize = Math.max(9, Math.min(13, arcLen / Math.max(1, display.length * 0.62)));
+  labelLayer.append("text")
+    .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+    .attr("font-size", fontSize)
+    .attr("font-weight", 700)
+    .attr("fill", "#ffffff")
+    .attr("dy", "0.35em")
+    .attr("paint-order", "stroke")
+    .attr("stroke", "rgba(0,0,0,0.30)")
+    .attr("stroke-width", 2.5)
+    .attr("stroke-linejoin", "round")
+    .append("textPath")
+      .attr("href", `#${id}`)
+      .attr("startOffset", "50%")
+      .attr("text-anchor", "middle")
+      .text(display);
+});
+
+/* ---- Ring 2 & Ring 3 labels: curved via textPath, skip narrow segments ---- */
+function curvedLabel(d, r0, r1, fontSize) {
+  const radius = (r0 + r1) / 2;
+  let display = toTitle(d.name);
+  // Skip if the arc is too short to host the text without spilling out
+  const arcLen = (d.a1 - d.a0) * radius;
+  const compact = {
+    room_object: "Room/Obj.",
+    roaming: "Roam",
+    driving: "Drive",
+  };
+  if (arcLen < display.length * fontSize * 0.55 + 4 && compact[d.name]) {
+    display = compact[d.name];
+  }
+  const fitFontSize = Math.max(6.5, Math.min(fontSize, arcLen / Math.max(1, display.length * 0.55)));
+  const textLen = display.length * fitFontSize * 0.55;
+  if (arcLen < textLen + 2) return;
+  const id = ensureArcPath(d.a0, d.a1, radius);
+  labelLayer.append("text")
+    .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+    .attr("font-size", fitFontSize)
+    .attr("font-weight", 700)
+    .attr("fill", "#ffffff")
+    .attr("dy", "0.35em")
+    .attr("paint-order", "stroke")
+    .attr("stroke", "rgba(0,0,0,0.30)")
+    .attr("stroke-width", 2.5)
+    .attr("stroke-linejoin", "round")
+    .append("textPath")
+      .attr("href", `#${id}`)
+      .attr("startOffset", "50%")
+      .attr("text-anchor", "middle")
+      .text(display);
+}
+
+ring2.forEach(d => curvedLabel(d, RING.r0_dyn,  RING.r1_dyn,  15));
+ring3.forEach(d => curvedLabel(d, RING.r0_view, RING.r1_view, 12));
+
+/* ---- Ring 4 labels: count INSIDE the cylinder, name OUTSIDE the tip ---- */
+ring4.forEach(d => {
+  const mid = (d.a0 + d.a1) / 2;
+  let rotDeg = (mid * 180 / Math.PI);
+  let outerAnchor = "start";
+  let flipped = false;
+  if (mid > Math.PI / 2 || mid < -Math.PI / 2) {
+    flipped = true;
+    rotDeg += 180;
+    outerAnchor = "end";
+  }
+
+  // (a) Dataset name INSIDE the bar — adaptive font so long formal names fit.
+  const innerR = (RING.r0_bar + d.barR1) / 2;
+  const ix = innerR * Math.cos(mid);
+  const iy = innerR * Math.sin(mid);
+  const label = dsName(d.name);
+  // Auto-fit font: estimate width @ 11px (≈6.4 px/char for sans-serif bold),
+  // then shrink linearly to fit inside (barLen − 6) padding. Clamp to [7.5, 11].
+  const FIT_PAD = 6;
+  const targetW = Math.max(0, d.barLen - FIT_PAD);
+  const estW11  = label.length * 6.4;
+  const fitFs   = Math.max(7.5, Math.min(11, 11 * targetW / Math.max(1, estW11)));
+  labelLayer.append("text")
+    .attr("transform", `translate(${ix.toFixed(2)},${iy.toFixed(2)}) rotate(${rotDeg.toFixed(2)})`)
+    .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+    .attr("font-size", fitFs.toFixed(2))
+    .attr("font-weight", 700)
+    .attr("fill", "#ffffff")
+    .attr("text-anchor", "middle")
+    .attr("dy", "0.35em")
+    .attr("pointer-events", "none")
+    .text(label);
+
+  // (b) Count number OUTSIDE the bar tip — radial orientation, dark fill.
+  const r = d.barR1 + 6;
+  const ox = r * Math.cos(mid);
+  const oy = r * Math.sin(mid);
+  labelLayer.append("text")
+    .attr("transform", `translate(${ox.toFixed(2)},${oy.toFixed(2)}) rotate(${rotDeg.toFixed(2)})`)
+    .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+    .attr("font-size", 13)
+    .attr("font-weight", 700)
+    .attr("fill", "#1a1a1a")
+    .attr("text-anchor", outerAnchor)
+    .attr("dy", "0.35em")
+    .text(d.value);
+});
+
+/* =========================================================================
+   Centre summary (carved donut hole)
+========================================================================= */
+const centerLayer = g.append("g").attr("class", "center-summary");
+
+// Cream disc backdrop matching figure2.py's centre (#FBF7F2)
+centerLayer.append("circle")
+  .attr("r", RING.r0_env - 1)
+  .attr("fill", "#FBF7F2")
+  .attr("stroke", "none")
+  .attr("filter", "url(#petalShadow)");
+
+// Eyebrow — small red caps brand mark
+centerLayer.append("text")
+  .attr("text-anchor", "middle")
+  .attr("y", -19).attr("dy", "0.35em")
+  .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+  .attr("font-size", 9)
+  .attr("font-weight", 700)
+  .attr("letter-spacing", "0.18em")
+  .attr("fill", "#B21D1D")
+  .text("SPATIALBENCH");
+
+// Big number
+centerLayer.append("text")
+  .attr("text-anchor", "middle")
+  .attr("y", 1).attr("dy", "0.35em")
+  .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+  .attr("font-size", 26)
+  .attr("font-weight", 700)
+  .attr("fill", "#111")
+  .text("546");
+
+// Subtitle
+centerLayer.append("text")
+  .attr("text-anchor", "middle")
+  .attr("y", 22).attr("dy", "0.35em")
+  .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+  .attr("font-size", 10)
+  .attr("font-style", "italic")
+  .attr("fill", "#555")
+  .text("total cases");
+
+/* =========================================================================
+   Interactivity: hover -> tooltip + dim non-ancestors
+========================================================================= */
+const tooltip = d3.select("#tooltip");
+const figureWrap = document.getElementById("figureWrap");
+
+function pathOf(node) {
+  const parts = [];
+  let cur = node;
+  while (cur && cur.name !== "root") {
+    /* Use full formal name for leaves (depth 4); Title-case taxonomy levels. */
+    const display = (!cur.children) ? dsFullName(cur.name) : toTitle(cur.name);
+    parts.unshift(display);
+    cur = cur.parent;
+  }
+  return parts.join(" › ");
+}
+
+function ancestorSet(node) {
+  const s = new Set();
+  let cur = node;
+  while (cur) { s.add(cur); cur = cur.parent; }
+  return s;
+}
+
+function leafCount(node) {
+  if (!node.children) return node.value;
+  return node.children.reduce((a,c)=>a+leafCount(c),0);
+}
+
+function onEnter(event, d) {
+  const ancs = ancestorSet(d);
+  segLayer.selectAll("path.seg").attr("fill-opacity", n => ancs.has(n) ? 1 : 0.35);
+  barLayer.selectAll("path.bar").attr("fill-opacity", n => ancs.has(n) ? 1 : 0.35);
+  const n = leafCount(d);
+  const pct = (n / TOTAL_CASES * 100).toFixed(1);
+  tooltip
+    .style("opacity", 1)
+    .html(`<div class="path">${pathOf(d)}</div><div class="stat">n = ${n} (${pct}%)</div>`);
+}
+function onMove(event) {
+  const rect = figureWrap.getBoundingClientRect();
+  const x = event.clientX - rect.left + 12;
+  const y = event.clientY - rect.top + 12;
+  tooltip.style("left", x + "px").style("top", y + "px");
+}
+function onLeave() {
+  segLayer.selectAll("path.seg").attr("fill-opacity", 1);
+  barLayer.selectAll("path.bar").attr("fill-opacity", 1);
+  tooltip.style("opacity", 0);
+}
+
+segLayer.selectAll("path.seg")
+  .on("mouseenter", onEnter).on("mousemove", onMove).on("mouseleave", onLeave);
+barLayer.selectAll("path.bar")
+  .on("mouseenter", onEnter).on("mousemove", onMove).on("mouseleave", onLeave);
+
+</script>
+</body>
+</html>

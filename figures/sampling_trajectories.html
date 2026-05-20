@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sampling Trajectories &mdash; SpatialBench</title>
+<style>
+  html, body {
+    margin: 0; padding: 0;
+    background: #FFFFFF;
+    font-family: "PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+  }
+  .page { max-width: 100%; margin: 0 auto; padding: clamp(14px, 2.4vw, 28px) clamp(12px, 2vw, 24px) clamp(16px, 2.4vw, 32px); box-sizing: border-box; }
+  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #B21D1D; margin: 0 0 8px 0; }
+  h1.title { font-size: 30px; font-weight: 700; margin: 0 0 8px 0; color: #111; line-height: 1.15; }
+  .subtitle { font-size: 17px; font-style: italic; color: #333; margin: 0 0 14px 0; }
+  .stats-strip {
+    font-size: 15px; color: #2a2a2a;
+    border-top: 0.6px solid #c8c2b3; border-bottom: 0.6px solid #c8c2b3;
+    padding: 8px 0; margin: 6px 0 18px 0;
+  }
+  .stats-strip .sep { color: #B21D1D; margin: 0 8px; font-weight: 700; }
+  .figure-wrap { position: relative; width: 100%; max-width: 1300px; aspect-ratio: 970 / 760; margin: 12px auto 8px auto; }
+  .figure-wrap svg { width: 100%; height: 100%; display: block; }
+  .caption { font-size: 14px; color: #222; line-height: 1.5; margin: 14px 24px 0 24px; text-align: justify; }
+  .caption b { font-weight: 700; }
+  #tooltip {
+    position: absolute; pointer-events: none; font-size: 13px;
+    background: #FBF7F2; color: #1a1a1a;
+    border: 1px solid #c8c2b3; padding: 8px 12px; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(60,40,20,0.18);
+    opacity: 0; transition: opacity 0.12s ease; z-index: 20; white-space: nowrap;
+  }
+  #tooltip .path { font-weight: 700; }
+  #tooltip .stat { font-style: italic; color: #333; margin-top: 2px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="title">From Sparse to Dense, One Track per Dataset</h1>
+  <div class="subtitle">Each dataset's median frame count, traced across the three sampling tiers on a shared log axis. Dot area = scenes; trajectory = the dataset's escalation profile from sparse to dense.</div>
+  <div class="stats-strip">
+    23 dataset-domain rows<span class="sep">&middot;</span>4 tiers<span class="sep">&middot;</span>546 cases<span class="sep">&middot;</span>1&ndash;1800 frames range
+  </div>
+
+  <div class="figure-wrap" id="figureWrap">
+    <svg id="chart" width="970" height="760" xmlns="http://www.w3.org/2000/svg"></svg>
+    <div id="tooltip"></div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+const PAYLOAD = {"rows":[{"ds":"7scenes","domain":"room_object","total":28,"single":{"n":7,"min":1,"max":1,"median":1},"sparse":{"n":7,"min":5,"max":5,"median":5},"medium":{"n":7,"min":100,"max":100,"median":100},"dense":{"n":7,"min":500,"max":1000,"median":1000}},{"ds":"hiroom","domain":"room_object","total":18,"single":{"n":6,"min":1,"max":1,"median":1},"sparse":{"n":6,"min":4,"max":4,"median":4},"medium":{"n":6,"min":10,"max":10,"median":10},"dense":null},{"ds":"nrgbd","domain":"room_object","total":32,"single":{"n":8,"min":1,"max":1,"median":1},"sparse":{"n":8,"min":5,"max":8,"median":6},"medium":{"n":8,"min":85,"max":85,"median":85},"dense":{"n":8,"min":920,"max":1676,"median":1197}},{"ds":"scannetpp","domain":"room_object","total":44,"single":{"n":11,"min":1,"max":1,"median":1},"sparse":{"n":11,"min":5,"max":9,"median":7},"medium":{"n":11,"min":35,"max":100,"median":95},"dense":{"n":11,"min":100,"max":534,"median":298}},{"ds":"tum","domain":"room_object","total":24,"single":{"n":6,"min":1,"max":1,"median":1},"sparse":{"n":6,"min":5,"max":5,"median":5},"medium":{"n":6,"min":90,"max":90,"median":90},"dense":{"n":6,"min":712,"max":1243,"median":1042.5}},{"ds":"dtu","domain":"room_object","total":39,"single":{"n":13,"min":1,"max":1,"median":1},"sparse":{"n":13,"min":5,"max":5,"median":5},"medium":{"n":13,"min":26,"max":28,"median":27},"dense":null},{"ds":"eth3d","domain":"room_object","total":9,"single":{"n":3,"min":1,"max":1,"median":1},"sparse":{"n":3,"min":5,"max":5,"median":5},"medium":{"n":3,"min":10,"max":12,"median":10},"dense":null},{"ds":"tanks_and_temples","domain":"room_object","total":4,"single":{"n":1,"min":1,"max":1,"median":1},"sparse":{"n":1,"min":20,"max":20,"median":20},"medium":{"n":1,"min":71,"max":71,"median":71},"dense":{"n":1,"min":226,"max":226,"median":226}},{"ds":"lingbot","domain":"room_object","total":25,"single":{"n":25,"min":1,"max":1,"median":1},"sparse":null,"medium":null,"dense":null},{"ds":"eth3d","domain":"roaming","total":15,"single":{"n":5,"min":1,"max":1,"median":1},"sparse":{"n":5,"min":5,"max":5,"median":5},"medium":{"n":5,"min":11,"max":22,"median":13},"dense":null},{"ds":"tanks_and_temples","domain":"roaming","total":12,"single":{"n":3,"min":1,"max":1,"median":1},"sparse":{"n":3,"min":5,"max":20,"median":10},"medium":{"n":3,"min":35,"max":59,"median":50},"dense":{"n":3,"min":117,"max":182,"median":135}},{"ds":"lingbot","domain":"roaming","total":11,"single":{"n":11,"min":1,"max":1,"median":1},"sparse":null,"medium":null,"dense":null},{"ds":"waymo","domain":"driving","total":32,"single":{"n":8,"min":1,"max":1,"median":1},"sparse":{"n":8,"min":10,"max":25,"median":10},"medium":{"n":8,"min":65,"max":100,"median":100},"dense":{"n":8,"min":196,"max":199,"median":198}},{"ds":"vkitti","domain":"driving","total":20,"single":{"n":5,"min":1,"max":1,"median":1},"sparse":{"n":5,"min":15,"max":20,"median":15},"medium":{"n":5,"min":71,"max":200,"median":131},"dense":{"n":5,"min":233,"max":837,"median":339}},{"ds":"omniworld","domain":"driving","total":19,"single":{"n":5,"min":1,"max":1,"median":1},"sparse":{"n":5,"min":10,"max":20,"median":10},"medium":{"n":5,"min":24,"max":85,"median":85},"dense":{"n":4,"min":401,"max":401,"median":401}},{"ds":"kitti_odometry","domain":"driving","total":11,"single":null,"sparse":null,"medium":null,"dense":{"n":11,"min":271,"max":1591,"median":1201}},{"ds":"adt","domain":"ego","total":16,"single":{"n":4,"min":1,"max":1,"median":1},"sparse":{"n":4,"min":8,"max":8,"median":8},"medium":{"n":4,"min":100,"max":100,"median":100},"dense":{"n":4,"min":364,"max":475,"median":418.5}},{"ds":"ropedia","domain":"ego","total":8,"single":{"n":2,"min":1,"max":1,"median":1},"sparse":{"n":2,"min":10,"max":20,"median":15},"medium":{"n":2,"min":100,"max":100,"median":100},"dense":{"n":2,"min":1410,"max":1447,"median":1428.5}},{"ds":"lingbot","domain":"wrist","total":14,"single":{"n":14,"min":1,"max":1,"median":1},"sparse":null,"medium":null,"dense":null},{"ds":"droid","domain":"wrist","total":64,"single":{"n":16,"min":1,"max":1,"median":1},"sparse":{"n":16,"min":5,"max":5,"median":5},"medium":{"n":16,"min":31,"max":100,"median":40},"dense":{"n":16,"min":104,"max":346,"median":134}},{"ds":"robolab","domain":"wrist","total":32,"single":{"n":8,"min":1,"max":1,"median":1},"sparse":{"n":8,"min":3,"max":7,"median":5},"medium":{"n":8,"min":46,"max":100,"median":100},"dense":{"n":8,"min":156,"max":1800,"median":900}},{"ds":"rlbench","domain":"wrist","total":38,"single":{"n":10,"min":1,"max":1,"median":1},"sparse":{"n":10,"min":5,"max":5,"median":5},"medium":{"n":10,"min":27,"max":63,"median":46},"dense":{"n":8,"min":135,"max":211,"median":163.5}},{"ds":"robotwin","domain":"wrist","total":31,"single":{"n":8,"min":1,"max":1,"median":1},"sparse":{"n":8,"min":5,"max":5,"median":5},"medium":{"n":8,"min":27,"max":93,"median":40},"dense":{"n":7,"min":121,"max":312,"median":140}}],"tiers":["single","sparse","medium","dense"],"col_totals":{"single":179,"sparse":129,"medium":129,"dense":109},"tier_ranges":{"single":[1,1],"sparse":[3,25],"medium":[10,200],"dense":[100,1800]},"ds_full":{"droid":"DROID","robotwin":"RoboTwin","rlbench":"RLBench","robolab":"RoboLab","tum":"TUM RGB-D","nrgbd":"Neural RGB-D","7scenes":"7-Scenes","scannetpp":"ScanNet++","tanks_and_temples":"Tanks & Temples","dtu":"DTU MVS","eth3d":"ETH3D","ropedia":"Xperience-10M","adt":"Aria Digital Twin","lingbot":"LingBot","hiroom":"HiRoom","omniworld":"OmniWorld","vkitti":"Virtual KITTI","waymo":"Waymo Open","kitti_odometry":"KITTI Odometry"},"palette":{"indoor_sparse":"#A9C2F2","indoor_medium":"#6F95DD","indoor_dense":"#4776D1","outdoor_sparse":"#FFD1B0","outdoor_medium":"#FFA46B","outdoor_dense":"#F0783D","driving_sparse":"#F3B7B9","driving_medium":"#DF7E84","driving_dense":"#C94E56","ego_sparse":"#A8DCD5","ego_medium":"#6FBFB5","ego_dense":"#2C9B90","wrist_sparse":"#D6C2EA","wrist_medium":"#AE89D0","wrist_dense":"#8A63B7","sparse_band":"#F5F5F5","medium_band":"#EEEEEE","dense_band":"#E0E0E0","sparse_chip":"#9E9E9E","medium_chip":"#616161","dense_chip":"#212121","indoor_label":"#4776D1","outdoor_label":"#F0783D","driving_label":"#C94E56","ego_label":"#2C9B90","wrist_label":"#8A63B7","indoor_bar":"#4776D1","outdoor_bar":"#F0783D","driving_bar":"#C94E56","ego_bar":"#2C9B90","wrist_bar":"#8A63B7","room_object_sparse":"#A9D9F0","room_object_medium":"#4FA7D5","room_object_dense":"#0B7BC1","roaming_sparse":"#FFD1B0","roaming_medium":"#FFA46B","roaming_dense":"#F0783D","room_object_label":"#0B7BC1","roaming_label":"#F0783D","room_object_bar":"#0B7BC1","roaming_bar":"#F0783D","single_band":"#FAFAFA","single_chip":"#BDBDBD","room_object_single":"#D9EEF8","roaming_single":"#FFE5D0","driving_single":"#F8DADD","ego_single":"#D6F0EC","wrist_single":"#E8DAF4"},"tier_display_ranges":{"single":[0.75,3],"sparse":[3,25],"medium":[10,200],"dense":[100,1800]},"tier_labels":{"single":"1f","sparse":"3-25f","medium":"10-200f","dense":"100-1800f"}};
+const ROWS    = PAYLOAD.rows;
+const TIERS   = PAYLOAD.tiers;
+const PAL     = PAYLOAD.palette;
+const DS_FULL = PAYLOAD.ds_full;
+
+const W = 970, H = 760;
+const M = { left: 180, right: 170, top: 110, bottom: 70 };
+/* extra vertical space inserted before each new family group (section-break row) */
+const GROUP_GAP = 20;
+const PLOT_W = W - M.left - M.right;
+const PLOT_H = H - M.top - M.bottom;
+const N_ROWS = ROWS.length;
+
+/* group-aware y layout: each new Figure 7 domain group adds GROUP_GAP before its rows */
+function buildLayout() {
+  const yByRow = [];
+  const groupHeaders = [];   // {y, env, dyn}
+  let prev = null;
+  let cursor = M.top;
+  /* first compute "natural" row height that fits everything */
+  const groupCount = (() => {
+    let c = 0, p = null;
+    for (const r of ROWS) {
+      const k = r.domain;
+      if (k !== p) { c++; p = k; }
+    }
+    return c;
+  })();
+  const rowH = (PLOT_H - groupCount * GROUP_GAP) / N_ROWS;
+  ROWS.forEach((r, i) => {
+    const k = r.domain;
+    if (k !== prev) {
+      groupHeaders.push({ y: cursor + GROUP_GAP / 2 - 4, domain: r.domain, idx: i });
+      cursor += GROUP_GAP;
+      prev = k;
+    }
+    yByRow.push(cursor + rowH / 2);
+    cursor += rowH;
+  });
+  return { yByRow, groupHeaders, rowH };
+}
+const LAYOUT = buildLayout();
+const yOf = i => LAYOUT.yByRow[i];
+
+const xScale = d3.scaleLog()
+  .domain([0.75, 2000])
+  .range([M.left, M.left + PLOT_W]);
+
+const TIER_RANGE_DISPLAY = PAYLOAD.tier_display_ranges || PAYLOAD.tier_ranges;
+
+const allCounts = ROWS.flatMap(r => TIERS.map(t => r[t] ? r[t].n : 0)).filter(n => n > 0);
+const N_MAX = Math.max(...allCounts);
+const R_MIN = 5, R_MAX = 13;
+function dotR(n) { return R_MIN + (R_MAX - R_MIN) * Math.sqrt(n / N_MAX); }
+
+const svg = d3.select("#chart")
+  .attr("viewBox", `0 0 ${W} ${H}`)
+  .attr("overflow", "visible")
+  .attr("font-family", '"PingFang SC", "Noto Sans CJK JP", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif')
+  .style("background", "transparent")
+  .style("overflow", "visible");
+
+/* shared soft drop shadow */
+const defs = svg.append("defs");
+const sh = defs.append("filter").attr("id","softShadow")
+  .attr("x","-30%").attr("y","-30%").attr("width","160%").attr("height","160%");
+sh.append("feGaussianBlur").attr("in","SourceAlpha").attr("stdDeviation",1.6);
+sh.append("feOffset").attr("dx",1).attr("dy",1.2).attr("result","off");
+const sct = sh.append("feComponentTransfer").attr("in","off");
+sct.append("feFuncA").attr("type","linear").attr("slope",0.22);
+const me = sh.append("feMerge");
+me.append("feMergeNode");
+me.append("feMergeNode").attr("in","SourceGraphic");
+
+/* =========================================================================
+   Background tier bands — concept ranges, drawn first
+========================================================================= */
+TIERS.forEach(t => {
+  const [lo, hi] = TIER_RANGE_DISPLAY[t];
+  const x0 = xScale(lo);
+  const x1 = xScale(hi);
+  svg.append("rect")
+    .attr("x", x0).attr("y", M.top - 6)
+    .attr("width", x1 - x0).attr("height", PLOT_H + 12)
+    .attr("fill", PAL[t + "_band"])
+    .attr("opacity", 0.55);
+});
+
+/* tier band labels at top */
+TIERS.forEach(t => {
+  const [lo, hi] = TIER_RANGE_DISPLAY[t];
+  const cx = (xScale(lo) + xScale(hi)) / 2;
+  /* color chip behind label */
+  const chipW = 70;
+  svg.append("rect")
+    .attr("x", cx - chipW/2).attr("y", M.top - 56)
+    .attr("width", chipW).attr("height", 24)
+    .attr("rx", 7).attr("fill", PAL[t + "_chip"]).attr("fill-opacity", 0.95)
+    .attr("stroke", "#FFFFFF").attr("stroke-width", 1.4)
+    .attr("filter", "url(#softShadow)");
+  svg.append("text")
+    .attr("x", cx).attr("y", M.top - 44).attr("dy", "0.35em")
+    .attr("text-anchor", "middle")
+    .attr("font-size", 13).attr("font-weight", 700)
+    .attr("fill", "#FFFFFF")
+    .text(t.charAt(0).toUpperCase() + t.slice(1));
+  svg.append("text")
+    .attr("x", cx).attr("y", M.top - 22).attr("dy", "0.35em")
+    .attr("text-anchor", "middle")
+    .attr("font-size", 10).attr("font-style", "italic").attr("fill", "#666")
+    .text(`n=${PAYLOAD.col_totals[t]}  ·  ${PAYLOAD.tier_labels?.[t] || `~${lo}–${hi} frames`}`);
+});
+
+
+/* =========================================================================
+   Section-break headers — horizontal "chapter breaks" between row groups
+========================================================================= */
+LAYOUT.groupHeaders.forEach(g => {
+  const tagColor = PAL[g.domain + "_label"] || "#555";
+  const yLine = g.y;
+  /* Section label — right-aligned to the same anchor x as the dataset names
+     (M.left - 14), so the entire left column reads as a single right-aligned
+     block: dataset rows + section headers all flush-right. */
+  const labelText = ({ room_object: "ROOM/OBJECT", roaming: "ROAMING", driving: "DRIVING", ego: "EGO", wrist: "WRIST" }[g.domain] || g.domain.toUpperCase());
+  const labelAnchorX = M.left - 14;
+  svg.append("text")
+    .attr("x", labelAnchorX).attr("y", yLine).attr("dy", "0.35em")
+    .attr("text-anchor", "end")
+    .attr("font-size", 10).attr("font-weight", 700)
+    .attr("font-style", "italic")
+    .attr("letter-spacing", "0.18em")
+    .attr("fill", tagColor)
+    .text(labelText);
+
+  /* Rule line starts AFTER the label ends, so the two elements are
+     structurally separated — no white-rect "cut", no visual collision.
+     The line spans from just past the dataset-name column through the band
+     area to the dataset-count tag on the right. */
+  svg.append("line")
+    .attr("x1", M.left - 6).attr("x2", M.left + PLOT_W + 130)
+    .attr("y1", yLine).attr("y2", yLine)
+    .attr("stroke", tagColor).attr("stroke-width", 0.6)
+    .attr("opacity", 0.5);
+  /* small dataset count on the right side of the rule */
+  const groupCount = ROWS.filter(r => r.domain === g.domain).length;
+  const rightLabel = `${groupCount} datasets`;
+  const rightX = M.left + PLOT_W + 130;
+  const rightW = rightLabel.length * 6.2;
+  const padX = 4, padY = 8;
+  svg.append("rect")
+    .attr("x", rightX - rightW - padX).attr("y", yLine - padY)
+    .attr("width", rightW + padX * 2).attr("height", padY * 2)
+    .attr("fill", "#FFFFFF");
+  svg.append("text")
+    .attr("x", rightX).attr("y", yLine).attr("dy", "0.35em")
+    .attr("text-anchor", "end")
+    .attr("font-size", 9.5).attr("font-style", "italic")
+    .attr("fill", "#888")
+    .text(rightLabel);
+});
+
+/* =========================================================================
+   X axis (single shared log)
+========================================================================= */
+const xTicks = [1, 3, 5, 10, 25, 50, 100, 300, 500, 1000];
+const axisY = M.top + PLOT_H + 8;
+
+svg.append("line")
+  .attr("x1", M.left).attr("x2", M.left + PLOT_W)
+  .attr("y1", axisY).attr("y2", axisY)
+  .attr("stroke", "#3a3a3a").attr("stroke-width", 1);
+
+xTicks.forEach(v => {
+  const x = xScale(v);
+  /* tick mark */
+  svg.append("line")
+    .attr("x1", x).attr("x2", x)
+    .attr("y1", axisY).attr("y2", axisY + 5)
+    .attr("stroke", "#3a3a3a").attr("stroke-width", 1);
+  /* label */
+  svg.append("text")
+    .attr("x", x).attr("y", axisY + 18)
+    .attr("text-anchor", "middle")
+    .attr("font-size", 11).attr("fill", "#444")
+    .text(v);
+  /* faint vertical guide */
+  svg.append("line")
+    .attr("x1", x).attr("x2", x)
+    .attr("y1", M.top - 6).attr("y2", axisY)
+    .attr("stroke", "#a8a08c").attr("stroke-width", 0.4)
+    .attr("stroke-dasharray", "2 4").attr("opacity", 0.4);
+});
+svg.append("text")
+  .attr("x", M.left + PLOT_W / 2).attr("y", axisY + 38)
+  .attr("text-anchor", "middle")
+  .attr("font-size", 12).attr("font-weight", 700).attr("fill", "#1a1a1a")
+  .text("frames sampled per scene  (median, log₁₀)");
+
+/* =========================================================================
+   Per-dataset rows: connector + dots
+========================================================================= */
+const tooltip = d3.select("#tooltip");
+const figureWrap = document.getElementById("figureWrap");
+
+ROWS.forEach((r, i) => {
+  const cy = yOf(i);
+  /* dataset label (left of plot) — single line, family-coloured */
+  const labelColor = PAL[r.domain + "_label"] || "#555";
+  svg.append("text")
+    .attr("x", M.left - 14).attr("y", cy).attr("dy", "0.35em")
+    .attr("text-anchor", "end")
+    .attr("font-size", 13).attr("font-weight", 700)
+    .attr("fill", labelColor)
+    .text(DS_FULL[r.ds] || r.ds);
+
+  /* gather dots present for this row */
+  const points = TIERS.map(t => r[t] ? { tier: t, x: xScale(r[t].median), n: r[t].n, cell: r[t] } : null)
+                      .filter(Boolean);
+
+  /* flight-path connector between consecutive present tiers */
+  if (points.length >= 2) {
+    /* draw a soft white outline first for legibility on band overlap */
+    svg.append("polyline")
+      .attr("points", points.map(p => `${p.x},${cy}`).join(" "))
+      .attr("fill", "none")
+      .attr("stroke", "#FFFFFF").attr("stroke-width", 4.5)
+      .attr("opacity", 0.85);
+    svg.append("polyline")
+      .attr("points", points.map(p => `${p.x},${cy}`).join(" "))
+      .attr("fill", "none")
+      .attr("stroke", "#5a5a5a").attr("stroke-width", 1.4)
+      .attr("opacity", 0.55)
+      .attr("stroke-linecap", "round");
+  }
+
+  /* dots — dot fill encodes BOTH env (hue: indoor blue / outdoor red) AND
+     tier (shade: sparse light → dense dark). Light sparse dots get dark text;
+     darker medium/dense dots get white text. */
+  points.forEach(p => {
+    const radius = dotR(p.n);
+    const dotKey = `${r.domain}_${p.tier}`;
+    const dotFill = PAL[dotKey];
+    const textColor = (p.tier === "single" || p.tier === "sparse") ? "#1a1a1a" : "#FFFFFF";
+    const grp = svg.append("g").style("cursor", "pointer");
+    grp.append("circle")
+      .attr("cx", p.x).attr("cy", cy).attr("r", radius)
+      .attr("fill", dotFill).attr("fill-opacity", 0.95)
+      .attr("stroke", "#FFFFFF").attr("stroke-width", 1.6)
+      .attr("filter", "url(#softShadow)");
+    /* count text inside if dot is large enough */
+    if (radius >= 8) {
+      grp.append("text")
+        .attr("x", p.x).attr("y", cy).attr("dy", "0.35em")
+        .attr("text-anchor", "middle")
+        .attr("font-size", radius >= 11 ? 10 : 9)
+        .attr("font-weight", 700)
+        .attr("fill", textColor)
+        .attr("pointer-events", "none")
+        .text(p.n);
+    }
+
+    grp.on("mouseenter", function(ev) {
+      d3.select(this).select("circle")
+        .attr("fill-opacity", 1).attr("stroke-width", 2.4);
+      tooltip
+        .style("opacity", 1)
+        .html(
+          `<div class="path">${DS_FULL[r.ds] || r.ds} &middot; ${p.tier}</div>` +
+          `<div class="stat">${p.n} scenes  &middot;  ${({ room_object: "Room/Object", roaming: "Roaming", driving: "Driving", ego: "Ego", wrist: "Wrist" })[r.domain] || r.domain}</div>` +
+          `<div class="stat">frames sampled: median ${p.cell.median}, range [${p.cell.min}, ${p.cell.max}]</div>`
+        );
+    }).on("mousemove", function(ev) {
+      const rect = figureWrap.getBoundingClientRect();
+      tooltip.style("left", (ev.clientX - rect.left + 14) + "px")
+             .style("top", (ev.clientY - rect.top + 14) + "px");
+    }).on("mouseleave", function() {
+      d3.select(this).select("circle")
+        .attr("fill-opacity", 0.9).attr("stroke-width", 1.6);
+      tooltip.style("opacity", 0);
+    });
+  });
+});
+
+/* =========================================================================
+   Right margin: total scene count bar per dataset
+========================================================================= */
+const totals = ROWS.map(r => r.total);
+const T_MAX = Math.max(...totals);
+const BAR_X0 = M.left + PLOT_W + 16;
+const BAR_W  = 110;
+
+svg.append("text")
+  .attr("x", BAR_X0).attr("y", M.top - 22)
+  .attr("font-size", 10).attr("font-weight", 700)
+  .attr("letter-spacing", "0.16em").attr("fill", "#B21D1D")
+  .text("TOTAL SCENES");
+
+ROWS.forEach((r, i) => {
+  const cy = yOf(i);
+  const w = BAR_W * r.total / T_MAX;
+  svg.append("rect")
+    .attr("x", BAR_X0).attr("y", cy - 6)
+    .attr("width", BAR_W).attr("height", 12)
+    .attr("rx", 3).attr("fill", "#e8e1d3").attr("opacity", 0.5);
+  const barColor = PAL[r.domain + "_bar"] || "#777";
+  svg.append("rect")
+    .attr("x", BAR_X0).attr("y", cy - 6)
+    .attr("width", w).attr("height", 12)
+    .attr("rx", 3).attr("fill", barColor).attr("fill-opacity", 0.55)
+    .attr("stroke", "#FFFFFF").attr("stroke-width", 0.9);
+  svg.append("text")
+    .attr("x", BAR_X0 + BAR_W + 4).attr("y", cy).attr("dy", "0.35em")
+    .attr("font-size", 11).attr("font-weight", 700).attr("fill", "#1a1a1a")
+    .text(r.total);
+});
+
+</script>
+</body>
+</html>
