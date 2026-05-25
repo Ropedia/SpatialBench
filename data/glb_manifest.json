@@ -1054,8 +1054,8 @@
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_01_dense",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_01_dense",
+    "source_dataset": "ropedia",
     "view_density": "dense",
     "tags": {
       "environment": "indoor",
@@ -1064,15 +1064,15 @@
       "data_type": "real",
       "view_density": "dense"
     },
-    "glb_path": "dense/xperience/xperience_slab_01_dense.glb",
+    "glb_path": "dense/ropedia/ropedia_slab_01_dense.glb",
     "size_mb": 11.36,
     "num_points": 500000,
     "n_frames": 1447,
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_02_dense",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_02_dense",
+    "source_dataset": "ropedia",
     "view_density": "dense",
     "tags": {
       "environment": "indoor",
@@ -1081,7 +1081,7 @@
       "data_type": "real",
       "view_density": "dense"
     },
-    "glb_path": "dense/xperience/xperience_slab_02_dense.glb",
+    "glb_path": "dense/ropedia/ropedia_slab_02_dense.glb",
     "size_mb": 11.293,
     "num_points": 500000,
     "n_frames": 1410,
@@ -3248,8 +3248,8 @@
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_01_medium",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_01_medium",
+    "source_dataset": "ropedia",
     "view_density": "medium",
     "tags": {
       "environment": "indoor",
@@ -3258,15 +3258,15 @@
       "data_type": "real",
       "view_density": "medium"
     },
-    "glb_path": "medium/xperience/xperience_slab_01_medium.glb",
+    "glb_path": "medium/ropedia/ropedia_slab_01_medium.glb",
     "size_mb": 8.244,
     "num_points": 500000,
     "n_frames": 100,
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_02_medium",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_02_medium",
+    "source_dataset": "ropedia",
     "view_density": "medium",
     "tags": {
       "environment": "indoor",
@@ -3275,7 +3275,7 @@
       "data_type": "real",
       "view_density": "medium"
     },
-    "glb_path": "medium/xperience/xperience_slab_02_medium.glb",
+    "glb_path": "medium/ropedia/ropedia_slab_02_medium.glb",
     "size_mb": 8.244,
     "num_points": 500000,
     "n_frames": 100,
@@ -6291,8 +6291,8 @@
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_01_single",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_01_single",
+    "source_dataset": "ropedia",
     "view_density": "single",
     "tags": {
       "environment": "indoor",
@@ -6301,15 +6301,15 @@
       "data_type": "real",
       "view_density": "single"
     },
-    "glb_path": "single/xperience/xperience_slab_01_single.glb",
+    "glb_path": "single/ropedia/ropedia_slab_01_single.glb",
     "size_mb": 2.916,
     "num_points": 181895,
     "n_frames": 1,
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_02_single",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_02_single",
+    "source_dataset": "ropedia",
     "view_density": "single",
     "tags": {
       "environment": "indoor",
@@ -6318,7 +6318,7 @@
       "data_type": "real",
       "view_density": "single"
     },
-    "glb_path": "single/xperience/xperience_slab_02_single.glb",
+    "glb_path": "single/ropedia/ropedia_slab_02_single.glb",
     "size_mb": 2.564,
     "num_points": 159908,
     "n_frames": 1,
@@ -8500,8 +8500,8 @@
     "compressed": false
   },
   {
-    "scene_id": "xperience_slab_01_sparse",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_01_sparse",
+    "source_dataset": "ropedia",
     "view_density": "sparse",
     "tags": {
       "environment": "indoor",
@@ -8510,7 +8510,7 @@
       "data_type": "real",
       "view_density": "sparse"
     },
-    "glb_path": "sparse/xperience/xperience_slab_01_sparse.glb",
+    "glb_path": "sparse/ropedia/ropedia_slab_01_sparse.glb",
     "size_mb": 8.027,
     "num_points": null,
     "n_frames": 10,
@@ -8518,8 +8518,8 @@
     "skipped_existing": true
   },
   {
-    "scene_id": "xperience_slab_02_sparse",
-    "source_dataset": "xperience",
+    "scene_id": "ropedia_slab_02_sparse",
+    "source_dataset": "ropedia",
     "view_density": "sparse",
     "tags": {
       "environment": "indoor",
@@ -8528,7 +8528,7 @@
       "data_type": "real",
       "view_density": "sparse"
     },
-    "glb_path": "sparse/xperience/xperience_slab_02_sparse.glb",
+    "glb_path": "sparse/ropedia/ropedia_slab_02_sparse.glb",
     "size_mb": 8.051,
     "num_points": null,
     "n_frames": 20,

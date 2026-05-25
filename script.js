@@ -1,11 +1,9 @@
 const data = window.SPATIALBENCH_DATA;
 
-const lowerIsBetter = new Set(["avgAbsRel", "mediumAbsRel", "denseAbsRel", "time"]);
+const lowerIsBetter = new Set(["avgAbsRel", "mediumAbsRel", "denseAbsRel"]);
 const columns = [
   "method",
   "paradigm",
-  "params",
-  "time",
   "singleAbsRel",
   "sparseAbsRel",
   "sparseAuc30",
@@ -28,11 +26,9 @@ const labels = {
   avgAbsRel: "Avg AbsRel",
   avgFScore: "Avg F-Score",
   mediumAuc30: "Medium AUC@30",
-  denseAuc30: "Dense AUC@30",
-  time: "Time"
+  denseAuc30: "Dense AUC@30"
 };
 
-const statsGrid = document.querySelector("#statsGrid");
 const paradigmFilter = document.querySelector("#paradigmFilter");
 const sortMetric = document.querySelector("#sortMetric");
 const searchInput = document.querySelector("#searchInput");
@@ -67,7 +63,7 @@ function formatValue(value, row, key) {
   if (!isNumber(value)) {
     return value ?? "--";
   }
-  const fixed = key === "params" || key === "time" || key.includes("Ate") ? 2 : 3;
+  const fixed = key.includes("Ate") ? 2 : 3;
   const text = value.toFixed(fixed).replace(/\.?0+$/, "");
   if (row?.incompleteDense && key.startsWith("avg")) {
     return `<span class="incomplete">(${text})</span>`;
@@ -91,16 +87,6 @@ function formatLeaderboardValue(value, row, key) {
 
 function slug(text) {
   return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-}
-
-function renderStats() {
-  statsGrid.innerHTML = data.stats.map((item) => `
-    <article class="stat">
-      <strong>${item.value}</strong>
-      <b>${item.label}</b>
-      <span>${item.detail}</span>
-    </article>
-  `).join("");
 }
 
 function setupFilters() {
@@ -205,57 +191,8 @@ function renderDatasets() {
   el.addEventListener("input", renderLeaderboard);
 });
 
-function renderModelChart(targetId, valueKey, { ascending = true, scale = "linear", unit = "" } = {}) {
-  const target = document.querySelector(`#${targetId}`);
-  if (!target) return;
-  const rows = data.leaderboard
-    .filter((row) => isNumber(row[valueKey]))
-    .slice()
-    .sort((a, b) => {
-      const diff = a[valueKey] - b[valueKey];
-      return ascending ? diff : -diff;
-    });
-  if (!rows.length) {
-    target.innerHTML = "";
-    return;
-  }
-  const values = rows.map((row) => row[valueKey]);
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
-  const project = (v) => {
-    if (scale === "log") {
-      const lo = Math.log10(Math.max(minVal, 1e-3));
-      const hi = Math.log10(Math.max(maxVal, lo + 1e-3));
-      return ((Math.log10(Math.max(v, 1e-3)) - lo) / Math.max(hi - lo, 1e-6)) * 100;
-    }
-    return (v / Math.max(maxVal, 1e-6)) * 100;
-  };
-  const fixed = valueKey === "time" ? 2 : (rows[0][valueKey] >= 100 ? 0 : 1);
-  target.innerHTML = rows.map((row) => {
-    const pct = Math.max(2, project(row[valueKey])); // floor so tiny bars stay visible
-    const valueText = row[valueKey].toFixed(fixed) + unit;
-    const oursClass = row.ours ? " is-ours" : "";
-    return `
-      <li class="chart-row${oursClass}" title="${row.method} — ${row.paradigm}: ${valueText}">
-        <span class="chart-name">${row.method}${row.ours ? ' <span class="chart-ours-tag">Ours</span>' : ""}</span>
-        <span class="chart-bar-track" aria-hidden="true">
-          <span class="chart-bar-fill ${slug(row.paradigm)}" style="width:${pct.toFixed(2)}%"></span>
-        </span>
-        <span class="chart-value">${valueText}</span>
-      </li>
-    `;
-  }).join("");
-}
-
-function renderModelCharts() {
-  renderModelChart("paramsChart", "params", { ascending: true, scale: "linear", unit: " M" });
-  renderModelChart("timeChart",   "time",   { ascending: true, scale: "log",    unit: " s" });
-}
-
-renderStats();
 setupFilters();
 renderLeaderboard();
-renderModelCharts();
 renderDatasets();
 
 // ===== Per-dataset detail results =====
@@ -314,14 +251,13 @@ function renderDatasetResults(allData) {
   const groups = detailGroupHeader(ds.layout);
   const groupHeader = `<tr>
     <th rowspan="2" class="sticky-col">Method</th>
-    <th rowspan="2">Params (M)</th>
     ${groups.map((g) => `<th colspan="${g.span}" class="detail-group">${g.name}</th>`).join("")}
   </tr>`;
   const metricHeader = `<tr>${ds.layout
     .map((col) => `<th class="detail-metric">${col.metric}<span>${METRIC_ARROW[col.metric] ?? ""}</span></th>`)
     .join("")}</tr>`;
 
-  const ncols = 2 + ds.layout.length;
+  const ncols = 1 + ds.layout.length;
   const body = [];
   let lastCat = null;
   for (const row of ds.rows) {
@@ -329,12 +265,10 @@ function renderDatasetResults(allData) {
       body.push(`<tr class="detail-cat"><td colspan="${ncols}">${row.category}</td></tr>`);
       lastCat = row.category;
     }
-    const params = typeof row.params === "number" ? row.params.toFixed(1) : (row.params ?? "");
     const oursBadge = row.ours ? ' <span class="tag slam-based">Ours</span>' : "";
     const cells = row.cells.map(detailCell).join("");
     body.push(`<tr class="${row.ours ? "ours-row" : ""}">
       <td class="method-name sticky-col">${row.method}${oursBadge}</td>
-      <td>${params}</td>
       ${cells}
     </tr>`);
   }
@@ -343,24 +277,26 @@ function renderDatasetResults(allData) {
   datasetResultsEmpty.hidden = true;
 }
 
-fetch("data/dataset_results.json")
-  .then((r) => {
-    if (!r.ok) throw new Error(`dataset_results.json fetch failed (${r.status})`);
-    return r.json();
-  })
-  .then((all) => {
-    datasetResultsData = all;
-    const entries = Object.entries(all).sort((a, b) => a[1].name.localeCompare(b[1].name));
-    datasetResultsPicker.innerHTML = [
-      `<option value="">Select a dataset…</option>`,
-      ...entries.map(([k, d]) => `<option value="${k}">${d.name}</option>`)
-    ].join("");
-    datasetResultsPicker.addEventListener("change", () => renderDatasetResults(all));
-    renderTagLeaderboard();
-  })
-  .catch((err) => {
-    datasetResultsEmpty.textContent = `Could not load per-dataset results: ${err.message}`;
-  });
+if (datasetResultsPicker && datasetResultsContainer && datasetResultsTable && datasetResultsEmpty) {
+  fetch("data/dataset_results.json")
+    .then((r) => {
+      if (!r.ok) throw new Error(`dataset_results.json fetch failed (${r.status})`);
+      return r.json();
+    })
+    .then((all) => {
+      datasetResultsData = all;
+      const entries = Object.entries(all).sort((a, b) => a[1].name.localeCompare(b[1].name));
+      datasetResultsPicker.innerHTML = [
+        `<option value="">Select a dataset…</option>`,
+        ...entries.map(([k, d]) => `<option value="${k}">${d.name}</option>`)
+      ].join("");
+      datasetResultsPicker.addEventListener("change", () => renderDatasetResults(all));
+      renderTagLeaderboard();
+    })
+    .catch((err) => {
+      datasetResultsEmpty.textContent = `Could not load per-dataset results: ${err.message}`;
+    });
+}
 
 // ===== Scene viewer =====
 // GLBs are hosted on Hugging Face Datasets so we don't bundle ~1 GB into the GitHub repo.
@@ -369,7 +305,6 @@ const GLB_BASE_URL = "https://huggingface.co/datasets/HarrisonPENG/SpatialBenchG
 const MANIFEST_URL = "data/glb_manifest.json";
 
 const viewerFilters = {
-  search: document.querySelector("#viewerSearch"),
   density: document.querySelector("#viewerDensity"),
   dataset: document.querySelector("#viewerDataset"),
   environment: document.querySelector("#viewerEnvironment"),
@@ -379,6 +314,7 @@ const viewerFilters = {
 };
 const viewerListEl = document.querySelector("#viewerSceneList");
 const viewerCountEl = document.querySelector("#viewerCount");
+const viewerBarsEl = document.querySelector("#viewerBars");
 const viewerResetBtn = document.querySelector("#viewerReset");
 const viewerStageTitle = document.querySelector("#viewerStageTitle");
 const viewerStageEyebrow = document.querySelector("#viewerStageEyebrow");
@@ -396,13 +332,21 @@ function titleCase(text) {
   return text.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+const DATASET_DISPLAY_NAMES = {
+  ropedia: "Xperience"
+};
+
+function displayDatasetName(dataset) {
+  return DATASET_DISPLAY_NAMES[dataset] ?? titleCase(dataset);
+}
+
 function uniqueValues(rows, key) {
   return [...new Set(rows.map((row) => key.includes(".") ? key.split(".").reduce((acc, k) => acc?.[k], row) : row[key]))].filter(Boolean);
 }
 
-function populateSelect(select, label, values, sorter) {
+function populateSelect(select, label, values, sorter, formatter = titleCase) {
   const sorted = sorter ? [...values].sort(sorter) : [...values].sort();
-  select.innerHTML = [`<option value="">${label}</option>`, ...sorted.map((v) => `<option value="${v}">${titleCase(v)}</option>`)].join("");
+  select.innerHTML = [`<option value="">${label}</option>`, ...sorted.map((v) => `<option value="${v}">${formatter(v)}</option>`)].join("");
 }
 
 // ===== Scene-tag leaderboard =====
@@ -617,8 +561,6 @@ tagLeaderboardReset?.addEventListener("click", () => {
 });
 
 function matchesFilters(scene) {
-  const q = viewerFilters.search.value.trim().toLowerCase();
-  if (q && !scene.scene_id.toLowerCase().includes(q)) return false;
   if (viewerFilters.density.value && scene.view_density !== viewerFilters.density.value) return false;
   if (viewerFilters.dataset.value && scene.source_dataset !== viewerFilters.dataset.value) return false;
   if (viewerFilters.environment.value && scene.tags.environment !== viewerFilters.environment.value) return false;
@@ -628,35 +570,55 @@ function matchesFilters(scene) {
   return true;
 }
 
+function renderViewerBars(rows) {
+  if (!viewerBarsEl) return;
+  const counts = new Map(densityOrder.map((density) => [density, 0]));
+  rows.forEach((scene) => {
+    counts.set(scene.view_density, (counts.get(scene.view_density) ?? 0) + 1);
+  });
+  const max = Math.max(1, ...counts.values());
+  viewerBarsEl.innerHTML = densityOrder.map((density) => {
+    const value = counts.get(density) ?? 0;
+    const width = (value / max) * 100;
+    return `
+      <div class="scene-bar">
+        <span>${titleCase(density)}</span>
+        <div class="scene-bar-track"><i style="width:${width.toFixed(2)}%"></i></div>
+        <b>${value}</b>
+      </div>
+    `;
+  }).join("");
+}
+
 function renderViewerList() {
   const rows = viewerScenes.filter(matchesFilters);
-  viewerCountEl.textContent = `${rows.length} scene${rows.length === 1 ? "" : "s"}`;
-  viewerListEl.innerHTML = rows.map((scene) => `
+  viewerCountEl.textContent = `${rows.length} matched scene${rows.length === 1 ? "" : "s"}`;
+  renderViewerBars(rows);
+  viewerListEl.innerHTML = rows.slice(0, 80).map((scene) => `
     <li>
       <button type="button" data-scene-id="${scene.scene_id}" class="viewer-item ${activeScene?.scene_id === scene.scene_id ? "active" : ""}">
         <span class="viewer-item-name">${scene.scene_id}</span>
-        <span class="viewer-item-meta">
-          <span class="tag density-${scene.view_density}">${scene.view_density}</span>
-          <span>${scene.size_mb.toFixed(1)} MB</span>
-        </span>
+        <span class="viewer-item-size">${scene.size_mb.toFixed(1)} MB</span>
+        <span class="viewer-item-dataset">${displayDatasetName(scene.source_dataset)} / ${titleCase(scene.view_density)}</span>
+        <span class="viewer-item-view">${titleCase(scene.tags.view_type)}</span>
       </button>
     </li>
-  `).join("");
+  `).join("") || `<li class="viewer-empty-row">No scenes match these filters.</li>`;
 }
 
 function renderMeta(scene) {
   const entries = [
-    ["Dataset", scene.source_dataset],
+    ["Dataset", displayDatasetName(scene.source_dataset)],
     ["Density", scene.view_density],
     ["Environment", scene.tags.environment],
     ["Dynamics", scene.tags.dynamics],
-    ["View type", scene.tags.view_type],
+    ["Viewpoint", scene.tags.view_type],
     ["Source", scene.tags.data_type],
     ["Frames", scene.n_frames?.toLocaleString?.() ?? scene.n_frames],
     ["Points", scene.num_points?.toLocaleString?.() ?? scene.num_points],
     ["Size", `${scene.size_mb.toFixed(1)} MB`]
   ];
-  viewerMeta.innerHTML = entries.map(([k, v]) => `<div><dt>${k}</dt><dd>${titleCase(String(v))}</dd></div>`).join("");
+  viewerMeta.innerHTML = entries.map(([k, v]) => `<div><dt>${k}</dt><dd>${k === "Dataset" ? v : titleCase(String(v))}</dd></div>`).join("");
   viewerMeta.hidden = false;
 }
 
@@ -710,7 +672,7 @@ function applyFrustumVisibility(scene) {
 function loadScene(scene) {
   activeScene = scene;
   const url = GLB_BASE_URL + scene.glb_path;
-  viewerStageEyebrow.textContent = `${titleCase(scene.source_dataset)} · ${scene.view_density}`;
+  viewerStageEyebrow.textContent = "GLB Sample";
   viewerStageTitle.textContent = scene.scene_id;
   viewerDownload.href = url;
   viewerDownload.hidden = false;
@@ -776,7 +738,7 @@ fetch(MANIFEST_URL)
     viewerScenes = scenes;
     populateSelect(viewerFilters.density, "All densities", uniqueValues(scenes, "view_density"),
       (a, b) => densityOrder.indexOf(a) - densityOrder.indexOf(b));
-    populateSelect(viewerFilters.dataset, "All datasets", uniqueValues(scenes, "source_dataset"));
+    populateSelect(viewerFilters.dataset, "All datasets", uniqueValues(scenes, "source_dataset"), undefined, displayDatasetName);
     populateSelect(viewerFilters.environment, "All environments", uniqueValues(scenes, "tags.environment"));
     populateSelect(viewerFilters.dynamics, "All dynamics", uniqueValues(scenes, "tags.dynamics"));
     populateSelect(viewerFilters.viewType, "All view types", uniqueValues(scenes, "tags.view_type"));
@@ -788,23 +750,25 @@ fetch(MANIFEST_URL)
     viewerListEl.innerHTML = `<li class="viewer-empty-row">Could not load manifest: ${err.message}</li>`;
   });
 
-fetch(TAG_SCENES_URL)
-  .then((r) => {
-    if (!r.ok) throw new Error(`all_scenes.json fetch failed (${r.status})`);
-    return r.json();
-  })
-  .then((scenes) => {
-    tagRankScenes = scenes;
-    populateSelect(tagRankFilters.density, "All densities", uniqueValues(scenes, "tags.view_density"),
-      (a, b) => densityOrder.indexOf(a) - densityOrder.indexOf(b));
-    populateSelect(tagRankFilters.environment, "All environments", uniqueValues(scenes, "tags.environment"));
-    populateSelect(tagRankFilters.dynamics, "All dynamics", uniqueValues(scenes, "tags.dynamics"));
-    populateSelect(tagRankFilters.viewType, "All view types", uniqueValues(scenes, "tags.view_type"));
-    populateSelect(tagRankFilters.dataType, "All sources", uniqueValues(scenes, "tags.data_type"));
-    renderTagLeaderboard();
-  })
-  .catch((err) => {
-    tagLeaderboardCount.textContent = "Scene tags unavailable";
-    tagLeaderboardEmpty.hidden = false;
-    tagLeaderboardEmpty.textContent = `Could not load scene-tag leaderboard: ${err.message}`;
-  });
+if (tagLeaderboardTableBody && tagLeaderboardContainer && tagLeaderboardEmpty && tagLeaderboardCount) {
+  fetch(TAG_SCENES_URL)
+    .then((r) => {
+      if (!r.ok) throw new Error(`all_scenes.json fetch failed (${r.status})`);
+      return r.json();
+    })
+    .then((scenes) => {
+      tagRankScenes = scenes;
+      populateSelect(tagRankFilters.density, "All densities", uniqueValues(scenes, "tags.view_density"),
+        (a, b) => densityOrder.indexOf(a) - densityOrder.indexOf(b));
+      populateSelect(tagRankFilters.environment, "All environments", uniqueValues(scenes, "tags.environment"));
+      populateSelect(tagRankFilters.dynamics, "All dynamics", uniqueValues(scenes, "tags.dynamics"));
+      populateSelect(tagRankFilters.viewType, "All view types", uniqueValues(scenes, "tags.view_type"));
+      populateSelect(tagRankFilters.dataType, "All sources", uniqueValues(scenes, "tags.data_type"));
+      renderTagLeaderboard();
+    })
+    .catch((err) => {
+      tagLeaderboardCount.textContent = "Scene tags unavailable";
+      tagLeaderboardEmpty.hidden = false;
+      tagLeaderboardEmpty.textContent = `Could not load scene-tag leaderboard: ${err.message}`;
+    });
+}

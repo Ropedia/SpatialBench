@@ -1,9 +1,8 @@
 window.SPATIALBENCH_DATA = {
   stats: [
-    { label: "Datasets", value: "19", detail: "indoor, outdoor, egocentric, wrist, driving" },
-    { label: "Scenes", value: "546", detail: "deterministic multi-density scene entries" },
-    { label: "Model variants", value: "42", detail: "six reconstruction paradigms" },
-    { label: "Frames", value: "72,540", detail: "consumed by the benchmark protocol" }
+    { label: "Datasets", value: "19", detail: "multi-domain sources" },
+    { label: "Scenes", value: "546", detail: "fixed density entries" },
+    { label: "Model variants", value: "42", detail: "six paradigms" }
   ],
   leaderboard: [
     { method: "DUSt3R", paradigm: "Optimization-based", params: 571.17, time: 7.59, singleAbsRel: 0.385, sparseAbsRel: 0.257, sparseAuc30: 0.498, mediumAbsRel: 0.276, mediumAuc30: 0.448, mediumAte: 1.691, mediumFScore: 0.343, denseAbsRel: "OOM", denseAuc30: "OOM", denseAte: "OOM", denseFScore: "OOM", avgAbsRel: 0.267, avgAuc30: 0.473, avgAte: 1.691, avgFScore: 0.343, incompleteDense: true },

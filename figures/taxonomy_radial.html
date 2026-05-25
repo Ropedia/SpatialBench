@@ -14,7 +14,7 @@
   .page {
     max-width: 100%;
     margin: 0 auto;
-    padding: clamp(14px, 2.4vw, 28px) clamp(12px, 2vw, 24px) clamp(16px, 2.4vw, 32px);
+    padding: clamp(12px, 1.8vw, 22px) clamp(8px, 1.2vw, 16px) clamp(14px, 1.8vw, 24px);
     box-sizing: border-box;
   }
   .eyebrow {
@@ -89,7 +89,7 @@
     box-shadow: 0 4px 12px rgba(60,40,20,0.18);
     opacity: 0;
     transition: opacity 0.12s ease;
-    z-index: 20;
+    z-index: 9999;
     white-space: nowrap;
   }
   #tooltip .path { font-weight: 700; }
@@ -221,7 +221,7 @@ function dsName(s) { return DATASET_NAMES[s] || s; }
 ========================================================================= */
 const W = 880, H = 880;
 const CX = W / 2, CY = H / 2;
-const R = 360;
+const R = 440;
 
 const RING = {
   r0_env:    0.13 * R,   /* donut hole carved out for centre summary */
@@ -767,8 +767,17 @@ function onEnter(event, d) {
 }
 function onMove(event) {
   const rect = figureWrap.getBoundingClientRect();
-  const x = event.clientX - rect.left + 12;
-  const y = event.clientY - rect.top + 12;
+  const tip = tooltip.node();
+  const offset = 14;
+  const margin = 8;
+  const tipW = tip ? tip.offsetWidth : 0;
+  const tipH = tip ? tip.offsetHeight : 0;
+  let x = event.clientX - rect.left + offset;
+  let y = event.clientY - rect.top + offset;
+  if (x + tipW > rect.width - margin) x = event.clientX - rect.left - tipW - offset;
+  if (y + tipH > rect.height - margin) y = event.clientY - rect.top - tipH - offset;
+  x = Math.max(margin, x);
+  y = Math.max(margin, y);
   tooltip.style("left", x + "px").style("top", y + "px");
 }
 function onLeave() {

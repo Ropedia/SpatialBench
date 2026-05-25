@@ -8,110 +8,60 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="shortcut icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/favicon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=teaser-fit-compact-table-v3">
     <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
   </head>
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="SpatialBench home">
-        <span>SpatialBench</span>
+        <img class="brand-logo" src="assets/ropedia-logo.svg" alt="Ropedia">
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-project">SpatialBench</span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="#viewer">Viewer</a>
-        <a href="#results">Results</a>
-        <a href="#citation">Citation</a>
+        <a href="#top">Teaser</a>
+        <a href="#coverage">Benchmark Coverage</a>
+        <a href="#findings">Findings</a>
+        <a href="#explorer">Scene Explorer</a>
+        <a href="#leaderboard">Leaderboard</a>
       </nav>
     </header>
 
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Cross-paradigm evaluation for spatial foundation models</p>
-          <h1>SpatialBench: Is Your Spatial Foundation Model an All&#8209;Round Player?</h1>
-
-          <p class="authors">
-            <a href="#">Haosong Peng<sup>1*</sup></a>
-            <a href="#">Hao Li<sup>2*</sup></a>
-            <a href="#">Jiaqi Chen<sup>3</sup></a>
-            <a href="#">Yuhao Pan<sup>1</sup></a>
-            <a href="#">Runmao Yao<sup>2</sup></a>
-            <a href="#">Yalun Dai<sup>2</sup></a>
-            <a href="#">Fushuo Huo<sup>4</sup></a>
-            <a href="#">Fangzhou Hong<sup>2</sup></a>
-            <a href="#">Zhaoxi Chen<sup>2</sup></a>
-            <a href="#">Haozhao Wang<sup>5</sup></a>
-            <a href="#">Dingwen Zhang<sup>3</sup></a>
-            <a href="#">Ziwei Liu<sup>2</sup></a>
-            <a href="#">Wenchao Xu<sup>1†</sup></a>
-          </p>
-
-          <p class="affiliations">
-            <span><sup>1</sup>HKUST</span>
-            <span><sup>2</sup>NTU</span>
-            <span><sup>3</sup>NWPU</span>
-            <span><sup>4</sup>SEU</span>
-            <span><sup>5</sup>HUST</span>
-          </p>
-          <p class="author-note">* Equal contribution &nbsp;&nbsp; † Corresponding author</p>
-
-          <div class="institution-strip" aria-label="Affiliated institutions">
-            <a class="institution" href="https://hkust.edu.hk/" rel="noreferrer" aria-label="HKUST">
-              <img src="assets/institutions/hkust.svg" alt="HKUST logo">
-            </a>
-            <a class="institution" href="https://www.ntu.edu.sg/" rel="noreferrer" aria-label="Nanyang Technological University">
-              <img src="assets/institutions/ntu.png" alt="NTU logo">
-            </a>
-            <a class="institution" href="https://en.nwpu.edu.cn/" rel="noreferrer" aria-label="Northwestern Polytechnical University">
-              <img src="assets/institutions/nwpu.png" alt="NWPU logo">
-            </a>
-            <a class="institution" href="https://www.seu.edu.cn/english/" rel="noreferrer" aria-label="Southeast University">
-              <img src="assets/institutions/seu.svg" alt="SEU logo">
-              <span class="institution-wordmark">Southeast<br>University</span>
-            </a>
-            <a class="institution" href="https://english.hust.edu.cn/" rel="noreferrer" aria-label="Huazhong University of Science and Technology">
-              <img src="assets/institutions/hust.svg" alt="HUST logo">
-            </a>
-          </div>
-
-          <div class="topic-tags" aria-label="Project topics">
-            <span>Spatial Foundation Models</span>
-            <span>Benchmark</span>
-            <span>3D Reconstruction</span>
-            <span>Embodied Viewpoints</span>
-          </div>
+          <h1><span class="brand-sky">Spatial</span><span class="brand-navy">Bench</span></h1>
+          <p class="hero-subtitle">Is your spatial foundation model an all-round player?</p>
 
           <div class="hero-actions" aria-label="Project links">
-            <a class="button primary" href="https://huggingface.co/papers"><span class="button-icon">P</span>Paper</a>
+            <a class="button primary" href="#citation"><span class="button-icon">P</span>Paper</a>
             <a class="button" href="https://arxiv.org/" rel="noreferrer"><span class="button-icon">A</span>arXiv</a>
             <a class="button" href="https://github.com/Ropedia/SpatialBench" rel="noreferrer"><span class="button-icon">C</span>Code</a>
-            <a class="button" href="https://huggingface.co/datasets/HarrisonPENG/SpatialBenchmark"><span class="button-icon">B</span>Benchmark</a>
-            <a class="button" href="https://huggingface.co/datasets/HarrisonPENG/DA-Next-5M"><span class="button-icon">D</span>Datasets</a>
-            <a class="button" href="https://github.com/Livioni/Depth-Anything-Next"><span class="button-icon">M</span>Model</a>
+            <a class="button" href="https://ropedia.github.io/spatialbench" rel="noreferrer"><span class="button-icon">W</span>Project Page</a>
+            <a class="button" href="https://huggingface.co/datasets/ropedia-ai/SpatialBenchmark" rel="noreferrer"><span class="button-icon">B</span>Bench</a>
+            <a class="button" href="https://huggingface.co/datasets/ropedia-ai/DA-Next-5M" rel="noreferrer"><span class="button-icon">D</span>Dataset</a>
+            <a class="button" href="https://huggingface.co/ropedia-ai/DA-Next" rel="noreferrer"><span class="button-icon">M</span>Model</a>
           </div>
 
-          <p class="lede">
-            A deterministic, density-aware benchmark spanning 19 datasets, 546 scenes, 40+ model variants,
-            and six reconstruction paradigms across depth, camera pose, trajectory, reconstruction, and prior-enhanced tasks.
-          </p>
         </div>
+
+        <!-- Video placed below the title and above the teaser image
+        <div class="hero-video">
+          <video controls playsinline muted loop poster="assets/teaser.png">
+            <source src="https://huggingface.co/datasets/HarrisonPENG/SpatialBenchGLBs/resolve/main/spatialbench.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div> -->
+
         <figure class="hero-media">
           <img src="assets/teaser.png" alt="SpatialBench teaser showing datasets, models, and benchmark findings.">
-          <figcaption>SpatialBench evaluates spatial foundation models across domains, sampling densities, all in a unified protocol</figcaption>
         </figure>
+
       </section>
 
-      <section class="stats-band" aria-label="Benchmark statistics">
-        <div id="statsGrid" class="stats-grid"></div>
-      </section>
-
-      <section class="section dataset-section">
+      <section id="coverage" class="section dataset-section">
         <div class="section-heading">
-          <p class="eyebrow">Dataset coverage</p>
-          <h2>19 source datasets with orthogonal tags</h2>
-          <p>
-            Datasets are normalized into RGB, metric depth, camera-to-world pose, and intrinsics records,
-            with fixed scene indices for reproducible inputs.
-          </p>
+          <h2>Benchmark Coverage</h2>
         </div>
         <div class="paper-figure-grid" aria-label="Dataset coverage figures">
           <figure class="paper-figure paper-figure-embed">
@@ -131,25 +81,26 @@
               scrolling="no"></iframe>
           </figure>
         </div>
-        <figcaption class="table-caption">
-          <strong>Source Datasets and Scene Attributes Used in Our Benchmark.</strong>
-          We summarize the datasets together with their per-dataset attribute tags.
-          The four <em>#Scenes</em> sub-columns report the number of scenes evaluated under each
-          input regime (<em>Single Frame</em>, <em>Sparse</em>, <em>Medium</em>, <em>Dense</em>);
-          &ldquo;&mdash;&rdquo; marks regimes in which a dataset does not participate.
-          <em>#Frames</em> is the total frame count actually consumed across all regimes.
-        </figcaption>
+        <p class="table-caption">
+          <strong>Dataset tags and density regimes.</strong> Fixed scene counts and consumed frames for the unified protocol.
+        </p>
         <div class="table-shell compact dataset-table-shell">
           <table id="datasetTable">
+            <colgroup>
+              <col class="dataset-name-col">
+              <col class="dataset-tag-col" span="4">
+              <col class="dataset-scene-col" span="4">
+              <col class="dataset-frames-col">
+            </colgroup>
             <thead>
               <tr>
                 <th rowspan="2">Dataset</th>
-                <th rowspan="2">Env.</th>
-                <th rowspan="2">Dyn.</th>
-                <th rowspan="2">View</th>
+                <th rowspan="2">Environment</th>
+                <th rowspan="2">Dynamics</th>
+                <th rowspan="2">Viewpoint</th>
                 <th rowspan="2">Source</th>
-                <th colspan="4" class="dataset-group">#Scenes</th>
-                <th rowspan="2">#Frames</th>
+                <th colspan="4" class="dataset-group">Scenes</th>
+                <th rowspan="2">Frames</th>
               </tr>
               <tr>
                 <th class="dataset-subhead">Single</th>
@@ -163,67 +114,100 @@
         </div>
       </section>
 
-      <section id="viewer" class="section viewer-section">
+      <section id="findings" class="section findings-section">
         <div class="section-heading">
-          <p class="eyebrow">Scene viewer</p>
-          <h2>Browse the reconstructed scenes</h2>
-          <p>
-            Filter the 535 benchmark scenes by view density and tag, then load any reconstruction interactively.
-            Each scene is a Draco-compressed GLB that streams on demand &mdash; only the picked scene is downloaded.
-          </p>
+          <h2>Findings: How to Train Your Best Spatial Foundation Models?</h2>
         </div>
-
-        <div class="viewer-controls" aria-label="Scene filter controls">
-          <label class="search">
-            <span>Search</span>
-            <input id="viewerSearch" type="search" placeholder="Scene id&hellip;">
-          </label>
-          <label>
-            <span>Density</span>
-            <select id="viewerDensity"></select>
-          </label>
-          <label>
-            <span>Dataset</span>
-            <select id="viewerDataset"></select>
-          </label>
-          <label>
-            <span>Environment</span>
-            <select id="viewerEnvironment"></select>
-          </label>
-          <label>
-            <span>Dynamics</span>
-            <select id="viewerDynamics"></select>
-          </label>
-          <label>
-            <span>View type</span>
-            <select id="viewerViewType"></select>
-          </label>
-          <label>
-            <span>Source</span>
-            <select id="viewerDataType"></select>
-          </label>
-        </div>
-
-        <div class="viewer-shell">
-          <aside class="viewer-list" aria-label="Scene list">
-            <div class="viewer-list-head">
-              <span id="viewerCount">0 scenes</span>
-              <button id="viewerReset" type="button" class="viewer-reset">Reset filters</button>
+        <div class="finding-grid">
+          <article class="finding-card">
+            <div class="finding-copy">
+              <span class="finding-number">Finding 1</span>
+              <h3>Full-Context Attention Sets the Accuracy Upper Bound on High-Memory GPUs.</h3>
+              <p>At the same input budget, globally coupled feed-forward models occupy the strongest accuracy region.</p>
             </div>
-            <ul id="viewerSceneList" role="listbox"></ul>
+            <img src="assets/geobench_p2_operating_snapshot.png" alt="Operating snapshot comparing memory, depth error, and inference time.">
+          </article>
+          <article class="finding-card">
+            <div class="finding-copy">
+              <span class="finding-number">Finding 2</span>
+              <h3>Bounded-Memory Modeling Enables Long-Sequence Reconstruction on Limited GPUs.</h3>
+              <p>Streaming, chunk-wise, and TTT models trade some accuracy for dense long-horizon reconstruction.</p>
+            </div>
+            <img src="assets/geobench_p1_memory_curve.png" alt="Memory scaling curves across model paradigms.">
+          </article>
+          <article class="finding-card">
+            <div class="finding-copy">
+              <span class="finding-number">Finding 3</span>
+              <h3>Training Data Volume Correlates with Performance, but Data Quality is the Critical Factor.</h3>
+              <p>Curated pseudo-GT supervision outperforms larger but noisier training mixtures at comparable scale.</p>
+            </div>
+            <img src="assets/geobench_p4_data_vs_performance.png" alt="Training data coverage versus benchmark performance.">
+          </article>
+          <article class="finding-card">
+            <div class="finding-copy">
+              <span class="finding-number">Finding 4</span>
+              <h3>Egocentric-View and Wrist-View Remain the Dominant OOD Failure Modes.</h3>
+              <p>Embodied viewpoints expose the largest field-level generalization drop; DA-Next targets this gap.</p>
+            </div>
+            <img src="assets/geobench_p3_auc30_domains.png" alt="Domain-level AUC@30 by evaluation domain.">
+          </article>
+        </div>
+      </section>
+
+      <section id="explorer" class="section viewer-section explorer-section">
+        <div class="section-heading explorer-heading">
+          <div>
+            <h2>Scene Explorer</h2>
+          </div>
+        </div>
+
+        <div class="explorer-layout">
+          <aside class="explorer-panel" aria-label="Scene filters and list">
+            <div class="explorer-controls" aria-label="Scene filter controls">
+              <label>
+                <span>Density</span>
+                <select id="viewerDensity"></select>
+              </label>
+              <label>
+                <span>Dataset</span>
+                <select id="viewerDataset"></select>
+              </label>
+              <label>
+                <span>Environment</span>
+                <select id="viewerEnvironment"></select>
+              </label>
+              <label>
+                <span>Dynamics</span>
+                <select id="viewerDynamics"></select>
+              </label>
+              <label>
+                <span>Viewpoint</span>
+                <select id="viewerViewType"></select>
+              </label>
+              <label>
+                <span>Source</span>
+                <select id="viewerDataType"></select>
+              </label>
+            </div>
+            <div class="scene-summary">
+              <strong id="viewerCount">Loading scenes...</strong>
+              <button id="viewerReset" type="button">Reset</button>
+            </div>
+            <div id="viewerBars" class="scene-bars" aria-label="Matched scenes by density"></div>
+            <ul id="viewerSceneList" class="scene-list" role="listbox"></ul>
           </aside>
-          <div class="viewer-stage">
-            <header class="viewer-stage-head">
+          <div class="viewer-panel">
+            <header class="viewer-panel-head">
               <div>
-                <p class="eyebrow" id="viewerStageEyebrow">Scene viewer</p>
-                <h3 id="viewerStageTitle">Select a scene from the list</h3>
+                <p class="console-label" id="viewerStageEyebrow">GLB Sample</p>
+                <h3 id="viewerStageTitle">Select a scene</h3>
               </div>
               <a id="viewerDownload" class="button" href="#" hidden>
                 <span class="button-icon">G</span>Download GLB
               </a>
             </header>
 
-            <div class="viewer-canvas">
+            <div class="model-stage">
               <model-viewer
                 id="sceneViewer"
                 camera-controls
@@ -233,7 +217,7 @@
                 interaction-prompt="none"
                 disable-tap
               ></model-viewer>
-              <div class="viewer-empty" id="viewerEmpty">Pick a scene from the list to render its reconstruction.</div>
+              <div class="viewer-empty" id="viewerEmpty">Choose a scene from the filtered list.</div>
               <div class="viewer-status" id="viewerStatus" hidden>Loading&hellip;</div>
             </div>
 
@@ -242,41 +226,9 @@
         </div>
       </section>
 
-      <section id="results" class="section results-section">
+      <section id="leaderboard" class="section results-section">
         <div class="section-heading">
-          <p class="eyebrow">Main results</p>
-          <h2>Interactive leaderboard</h2>
-          <p>
-            The table is sourced from the LaTeX main-results table. Lower is better for AbsRel, ATE, and time;
-            higher is better for AUC@30 and F-Score.
-          </p>
-        </div>
-
-        <div class="model-charts" aria-label="Model size and runtime overview">
-          <article class="chart-card">
-            <header class="chart-card-head">
-              <div>
-                <p class="eyebrow">Model size</p>
-                <h3>Parameters per model</h3>
-              </div>
-              <p class="chart-note">Reported in millions (M); smaller bars are lighter models.</p>
-            </header>
-            <ol class="chart-list" id="paramsChart" aria-label="Parameter count per model"></ol>
-          </article>
-
-          <article class="chart-card">
-            <header class="chart-card-head">
-              <div>
-                <p class="eyebrow">Runtime</p>
-                <h3>Inference time per sequence</h3>
-              </div>
-              <p class="chart-note">
-                Per-sequence seconds, averaged across all scenes in the <b>sparse</b> regime.
-                Bars use a logarithmic scale so sub-second models stay readable next to outliers.
-              </p>
-            </header>
-            <ol class="chart-list" id="timeChart" aria-label="Inference time per model"></ol>
-          </article>
+          <h2>Leaderboard</h2>
         </div>
 
         <div class="controls" aria-label="Leaderboard controls">
@@ -296,7 +248,6 @@
               <option value="avgFScore">Avg F-Score</option>
               <option value="mediumAuc30">Medium AUC@30</option>
               <option value="denseAuc30">Dense AUC@30</option>
-              <option value="time">Time</option>
             </select>
           </label>
         </div>
@@ -309,8 +260,6 @@
               <tr>
                 <th rowspan="2" class="sticky-col">Method</th>
                 <th rowspan="2">Paradigm</th>
-                <th rowspan="2">Params (M)</th>
-                <th rowspan="2">Time (s)</th>
                 <th colspan="1" class="leaderboard-group">Single</th>
                 <th colspan="2" class="leaderboard-group">Sparse</th>
                 <th colspan="4" class="leaderboard-group">Medium</th>
@@ -339,89 +288,6 @@
           </table>
         </div>
 
-        <div class="detail-results">
-          <div class="section-heading detail-results-heading">
-            <p class="eyebrow">Per-dataset</p>
-            <h2>Detail results on each dataset</h2>
-            <p>
-              Pick a dataset to inspect category-grouped scores. Top three values per column are highlighted in
-              progressively darker blue; OOM/T.O rows have their averages parenthesized and excluded from ranking.
-            </p>
-          </div>
-          <div class="controls detail-results-controls">
-            <label>
-              <span>Dataset</span>
-              <select id="datasetResultsPicker"></select>
-            </label>
-          </div>
-          <p id="datasetResultsEmpty" class="detail-results-empty">Select a dataset above to display its full result table.</p>
-          <div id="datasetResultsContainer" class="table-shell detail-results-shell" hidden>
-            <table id="datasetResultsTable"></table>
-          </div>
-        </div>
-
-        <div class="tag-leaderboard">
-          <div class="section-heading detail-results-heading">
-            <p class="eyebrow">By scene tags</p>
-            <h2>Leaderboard by selected scene attributes</h2>
-            <p>
-              Scene selections are matched to the per-dataset result tables and averaged over the selected
-              density regimes. Top three values per metric are highlighted.
-            </p>
-          </div>
-          <div class="viewer-controls tag-leaderboard-controls" aria-label="Scene-tag leaderboard controls">
-            <label>
-              <span>Density</span>
-              <select id="tagRankDensity"></select>
-            </label>
-            <label>
-              <span>Environment</span>
-              <select id="tagRankEnvironment"></select>
-            </label>
-            <label>
-              <span>Dynamics</span>
-              <select id="tagRankDynamics"></select>
-            </label>
-            <label>
-              <span>View type</span>
-              <select id="tagRankViewType"></select>
-            </label>
-            <label>
-              <span>Source</span>
-              <select id="tagRankDataType"></select>
-            </label>
-            <label>
-              <span>Rank by</span>
-              <select id="tagRankSort">
-                <option value="AbsRel">AbsRel</option>
-                <option value="AUC@30">AUC@30</option>
-                <option value="ATE">ATE</option>
-                <option value="F-Score">F-Score</option>
-              </select>
-            </label>
-          </div>
-          <div class="tag-leaderboard-status">
-            <span id="tagLeaderboardCount">Loading scene tags...</span>
-            <button id="tagLeaderboardReset" type="button" class="viewer-reset">Reset filters</button>
-          </div>
-          <p id="tagLeaderboardEmpty" class="detail-results-empty">Select scene tags above to display the leaderboard.</p>
-          <div id="tagLeaderboardContainer" class="table-shell tag-leaderboard-shell" hidden>
-            <table id="tagLeaderboardTable">
-              <thead>
-                <tr>
-                  <th class="sticky-col">Method</th>
-                  <th>Paradigm</th>
-                  <th>Scenes</th>
-                  <th class="leaderboard-metric">AbsRel<span class="metric-arrow">&darr;</span></th>
-                  <th class="leaderboard-metric">AUC@30<span class="metric-arrow">&uarr;</span></th>
-                  <th class="leaderboard-metric">ATE<span class="metric-arrow">&darr;</span></th>
-                  <th class="leaderboard-metric">F-Score<span class="metric-arrow">&uarr;</span></th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
       </section>
 
       <section id="citation" class="section citation-section">
@@ -438,13 +304,8 @@
       </section>
     </main>
 
-    <footer>
-      <span>SpatialBench</span>
-      <span>Static project page ready for GitHub Pages.</span>
-    </footer>
-
-    <script src="data/results.js"></script>
-    <script src="script.js"></script>
+    <script src="data/results.js?v=scene-explorer"></script>
+    <script src="script.js?v=scene-explorer"></script>
     <script>
       (function () {
         const iframes = Array.from(document.querySelectorAll('iframe.autosize-iframe'));
@@ -455,13 +316,17 @@
           if (page) return Math.max(page.scrollHeight, page.getBoundingClientRect().height);
           return doc.body.scrollHeight;
         };
-        /* Equalize: each iframe height = max content height across the row. */
         const fitAll = () => {
           let maxH = 0;
-          iframes.forEach((f) => { const h = measure(f); if (h > maxH) maxH = h; });
+          iframes.forEach((frame) => {
+            const height = measure(frame);
+            if (height > maxH) maxH = height;
+          });
           if (maxH > 0) {
-            const px = Math.ceil(maxH) + 'px';
-            iframes.forEach((f) => { f.style.height = px; });
+            const height = Math.ceil(maxH) + 'px';
+            iframes.forEach((frame) => {
+              frame.style.height = height;
+            });
           }
         };
         iframes.forEach((frame) => {
@@ -478,13 +343,17 @@
               }
               setTimeout(fitAll, 80);
               setTimeout(fitAll, 400);
-            } catch (err) { /* same-origin only */ }
+            } catch (err) {
+              /* same-origin only */
+            }
           };
           frame.addEventListener('load', wireObservers);
           try {
             const url = frame.contentWindow && frame.contentWindow.location && frame.contentWindow.location.href;
             if (url && url !== 'about:blank') wireObservers();
-          } catch (e) { /* cross-origin guard */ }
+          } catch (err) {
+            /* cross-origin guard */
+          }
         });
         window.addEventListener('resize', fitAll);
       })();
