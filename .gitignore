@@ -5,6 +5,7 @@ dist/
 .idea/
 .vscode/
 .claude/
+.agents/
 /SpatialBenchGLBs/
 /SpatialBenchmark/
 upload_glbs.sh
