@@ -46,6 +46,7 @@ dependencies = [
 #   pip install -e ".[da3]"         # DA3 / DA3Nested / DA3-Streaming adapters
 #   pip install -e ".[scal3r]"      # Scal3R TTT adapter
 #   pip install -e ".[zipmap]"      # ZipMap TTT adapter
+#   pip install -e ".[vgg_ttt]"     # VGG-TTT adapter
 #   pip install -e ".[streaming]"   # StreamVGGT / InfiniteVGGT (needs transformers)
 #   pip install -e ".[amb3r]"       # AMB3R benchmark adapter
 #   pip install -e ".[optimization]" # DUSt3R / MASt3R optimization adapters
@@ -60,6 +61,7 @@ dependencies = [
 #   [da3]        da3_{small,base,large,giant}, da3nested, da3_streaming
 #   [scal3r]     scal3r
 #   [zipmap]     zipmap
+#   [vgg_ttt]    vgg_ttt
 #   [streaming]  streamvggt, infinitevggt
 #   [amb3r]      amb3r
 #   [optimization] dust3r, mast3r
@@ -139,6 +141,15 @@ zipmap = [
     "spatialbench[vggt]",
 ]
 
+# ---- VGG-TTT ----
+# Uses vendored source under benchmark/models/vgg_ttt/. VGG-TTT shares the
+# VGGT-family runtime dependencies and additionally needs Hydra to instantiate
+# attention classes from the Hugging Face model config.
+vgg_ttt = [
+    "spatialbench[vggt]",
+    "hydra-core",
+]
+
 # ---- StreamVGGT / InfiniteVGGT ----
 # Both adapters wrap benchmark/models/streamvggt/, whose heads use
 # HuggingFace transformers for the causal aggregator.
@@ -177,7 +188,7 @@ amb3r = [
 
 # Convenience: install everything supported above.
 all = [
-    "spatialbench[vggt,mapanything,lingbot-map,da3,scal3r,zipmap,streaming,amb3r,optimization]",
+    "spatialbench[vggt,mapanything,lingbot-map,da3,scal3r,zipmap,vgg_ttt,streaming,amb3r,optimization]",
 ]
 
 [tool.setuptools.packages.find]

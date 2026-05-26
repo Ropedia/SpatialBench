@@ -19,7 +19,7 @@ resolution_override:
   align: 14
 
 # ---- Scene filtering ----
-tags: medium
+tags: dense
 max_scenes: null
 
 # ---- Evaluation parameters ----

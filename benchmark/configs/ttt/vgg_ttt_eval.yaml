@@ -1,0 +1,48 @@
+# ============================================================
+# VGG-TTT evaluation config
+# Offline feed-forward 3D reconstruction with test-time training attention
+# ============================================================
+
+# ---- Model ----
+model: vgg_ttt
+checkpoint: checkpoints/nvidia__vgg-ttt           # null = auto-download nvidia/vgg-ttt
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null
+
+# ---- Resolution override ----
+# VGG-TTT uses a VGGT-style ViT-L/14 patch embedding; H/W must be divisible by 14.
+resolution_override:
+  width: 518
+  align: 14
+
+# ---- Scene filtering ----
+tags: dense
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - camera
+  - trajectory
+  - pointcloud
+resolution: null
+depth_alignment: median
+
+# ---- VGG-TTT inference parameters ----
+num_ttt_steps: 2                 # upstream evaluation often uses 2; 1 keeps the default smoke test small
+memory_efficient_inference: true
+use_global_pred: false           # false = construct point maps from depth/camera when pointcloud is requested
+log_ttt_details: false
+offload_to_cpu: false
+dtype: null                      # null = auto bf16/fp16; or set bf16/fp16/fp32
+
+# ---- Output ----
+output_dir: results/ttt/vgg_ttt
+output: null
+
+# ---- Visualization ----
+visualize: false
+vis_conf_percent: 10.0

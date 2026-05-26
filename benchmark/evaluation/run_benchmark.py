@@ -93,6 +93,7 @@ import benchmark.evaluation.model_adapters.da3_streaming_adapter     # noqa: F40
 import benchmark.evaluation.model_adapters.scal3r_adapter            # noqa: F401
 import benchmark.evaluation.model_adapters.loger_adapter             # noqa: F401
 import benchmark.evaluation.model_adapters.zipmap_adapter            # noqa: F401
+import benchmark.evaluation.model_adapters.vgg_ttt_adapter           # noqa: F401
 from benchmark.evaluation.model_adapters import get_adapter
 
 

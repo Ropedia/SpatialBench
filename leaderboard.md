@@ -57,7 +57,7 @@ Bold values mark the best result within each method group. Superscripts `1`, `2`
 <tr><td>DA3-Giant</td><td>1355.67</td><td>0.47</td><td>0.368</td><td>0.095</td><td>0.785<sup>3</sup></td><td>0.086</td><td>0.776<sup>2</sup></td><td>1.161</td><td><strong>0.742</strong><sup>1</sup></td><td>OOM</td><td>OOM</td><td>OOM</td><td>OOM</td><td>(0.091)</td><td>(0.780)</td><td>(1.161)</td><td>(0.742)</td></tr>
 <tr><td>DA3-Nested</td><td>1689.85</td><td>0.52</td><td>0.364</td><td>0.106</td><td>0.779</td><td>0.086</td><td>0.770<sup>3</sup></td><td>1.980</td><td>0.737<sup>2</sup></td><td>OOM</td><td>OOM</td><td>OOM</td><td>OOM</td><td>(0.096)</td><td>(0.774)</td><td>(1.980)</td><td>(0.737)</td></tr>
 <tr><td>WorldMirror</td><td>1263.34</td><td>0.22</td><td>0.349</td><td>0.139</td><td>0.660</td><td>0.118</td><td>0.674</td><td>1.357</td><td>0.575</td><td>OOM</td><td>OOM</td><td>OOM</td><td>OOM</td><td>(0.129)</td><td>(0.667)</td><td>(1.357)</td><td>(0.575)</td></tr>
-<tr><td>VGGT-Omega</td><td>1143.81</td><td>0.48</td><td>0.516</td><td><strong>0.077</strong><sup>1</sup></td><td><strong>0.803</strong><sup>1</sup></td><td><strong>0.067</strong><sup>1</sup></td><td><strong>0.795</strong><sup>1</sup></td><td>0.659</td><td>0.706</td><td>--</td><td>--</td><td>--</td><td>--</td><td>(0.072)</td><td>(0.799)</td><td>(0.659)</td><td>(0.706)</td></tr>
+<tr><td>VGGT-Omega</td><td>1143.81</td><td>0.48</td><td>0.516</td><td><strong>0.077</strong><sup>1</sup></td><td><strong>0.803</strong><sup>1</sup></td><td><strong>0.067</strong><sup>1</sup></td><td><strong>0.795</strong><sup>1</sup></td><td>0.659</td><td>0.706</td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>(0.072)</td><td>(0.799)</td><td>(0.659)</td><td>(0.706)</td></tr>
 
 <tr><th colspan="18">Online</th></tr>
 <tr><td>Spann3r<sup>224</sup></td><td>658.69</td><td>0.55</td><td>0.370</td><td>0.274</td><td>0.329</td><td>0.252</td><td>0.361</td><td>4.312</td><td>0.254</td><td>0.315</td><td>0.246</td><td>26.48</td><td>0.159</td><td>0.280</td><td>0.312</td><td>15.39</td><td>0.207</td></tr>
@@ -89,7 +89,8 @@ Bold values mark the best result within each method group. Superscripts `1`, `2`
 <tr><td>Scal3R</td><td>1266.14</td><td>2.32</td><td>0.227</td><td>0.114</td><td><strong>0.732</strong></td><td>0.147</td><td>0.670</td><td><strong>0.400</strong><sup>2</sup></td><td><strong>0.671</strong></td><td>0.244</td><td>0.480</td><td><strong>2.396</strong><sup>1</sup></td><td><strong>0.498</strong><sup>2</sup></td><td>0.168</td><td>0.627</td><td><strong>1.398</strong><sup>1</sup></td><td><strong>0.585</strong><sup>2</sup></td></tr>
 <tr><td>LoGeR</td><td>1254.62</td><td><strong>0.26</strong></td><td>0.251</td><td>0.095</td><td>0.687</td><td>0.113</td><td>0.693</td><td>0.591</td><td>0.504</td><td>0.197</td><td>0.552</td><td>5.217</td><td>0.335</td><td>0.135</td><td>0.644</td><td>2.904</td><td>0.419</td></tr>
 <tr><td>LoGeR<sup>*</sup></td><td>1254.60</td><td>0.30</td><td><strong>0.200</strong></td><td><strong>0.077</strong><sup>2</sup></td><td>0.708</td><td><strong>0.083</strong></td><td><strong>0.714</strong></td><td>0.566</td><td>0.574</td><td><strong>0.156</strong></td><td><strong>0.598</strong><sup>3</sup></td><td>4.598</td><td>0.421</td><td><strong>0.105</strong><sup>2</sup></td><td><strong>0.673</strong><sup>2</sup></td><td>2.582</td><td>0.497</td></tr>
-<tr><td>ZipMap</td><td>1366.87</td><td>--</td><td>0.230</td><td>0.099</td><td>0.657</td><td>0.093</td><td>0.668</td><td>1.186</td><td>0.605</td><td>--</td><td>--</td><td>--</td><td>--</td><td>(0.096)</td><td>(0.662)</td><td>(1.186)</td><td>(0.605)</td></tr>
+<tr><td>ZipMap</td><td>1366.87</td><td>--</td><td>0.230</td><td>0.099</td><td>0.657</td><td>0.093</td><td>0.668</td><td>1.186</td><td>0.605</td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>(0.096)</td><td>(0.662)</td><td>(1.186)</td><td>(0.605)</td></tr>
+<tr><td>VGG-TTT</td><td>1191.99</td><td>--</td><td>0.208</td><td>0.115</td><td>0.542</td><td>0.114</td><td>0.530</td><td>3.127</td><td>0.416</td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>OOM<sup>*</sup></td><td>(0.114)</td><td>(0.536)</td><td>(3.127)</td><td>(0.416)</td></tr>
 </tbody>
 </table>
 
@@ -100,3 +101,4 @@ Notes:
 - `S` denotes stream, `B` denotes batch, and `W` denotes window.
 - LingbotMap<sup>*</sup> indicates the best checkpoint is selected in each regime.
 - OOM means out of memory with memory greater than 140G. T.O means timeout with runtime greater than 4h per scene.
+- OOM<sup>*</sup> means out of memory on an A100 80G GPU.

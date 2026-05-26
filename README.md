@@ -77,6 +77,9 @@ pip install -e ".[scal3r]"
 # ZipMap TTT adapter (depends on [vggt]; source is vendored under benchmark/models/zipmap)
 pip install -e ".[zipmap]"
 
+# VGG-TTT adapter (depends on [vggt] + hydra-core; source is vendored under benchmark/models/vgg_ttt)
+pip install -e ".[vgg_ttt]"
+
 # StreamVGGT / InfiniteVGGT (depends on [vggt] + transformers)
 pip install -e ".[streaming]"
 
@@ -91,7 +94,7 @@ pip install flash-attn==2.7.3 --no-build-isolation
 pip install -e ".[amb3r]"
 
 # Combine multiple at once, for example
-pip install -e ".[vggt,optimization,mapanything,lingbot-map,da3,scal3r,zipmap]"
+pip install -e ".[vggt,optimization,mapanything,lingbot-map,da3,scal3r,zipmap,vgg_ttt]"
 
 # Install all currently supported model deps
 pip install -e ".[all]"
@@ -246,7 +249,7 @@ SpatialBenchmark
 
 ### Download Model Checkpoints
 
-Most adapters auto-download from the Hugging Face Hub the first time they run (e.g. `facebook/VGGT-1B`, `depth-anything/DA3-GIANT-1.1`). If you prefer to pre-stage them, set `checkpoint` in each model yaml to your cache directory before running an evaluation.
+Most adapters auto-download from the Hugging Face Hub the first time they run (e.g. `facebook/VGGT-1B`, `depth-anything/DA3-GIANT-1.1`, `nvidia/vgg-ttt`). If you prefer to pre-stage them, set `checkpoint` in each model yaml to your cache directory before running an evaluation.
 
 ### Visualize Benchmark Scenes
 
@@ -351,7 +354,7 @@ SpatialBench ships adapters for 40+ spatial foundation model variants. Each live
 - **Online**: Spann3R, CUT3R, MonST3R, Point3R, Stream3R (Stream / Window), StreamVGGT, PAGE4D, InfiniteVGGT, WinT3R, LongStream (Batch / Streaming), LingbotMap (Stream / Window)
 - **Chunk-wise**: VGGT-Long, π³-Long, DA3-Streaming
 - **SLAM-based**: MASt3R-SLAM, VGGT-SLAM
-- **Test-Time Training**: TTT3R, Scal3R, LoGeR, LoGeR*, ZipMap
+- **Test-Time Training**: TTT3R, Scal3R, LoGeR, LoGeR*, ZipMap, VGG-TTT
 
 See [benchmark/README.md](benchmark/README.md#currently-supported-models) for the full table and per-model configs under [benchmark/configs/](benchmark/configs/).
 
@@ -508,6 +511,7 @@ SpatialBench builds on a large body of prior work. We thank the authors of the f
 - [Scal3R](https://github.com/zju3dv/Scal3R)
 - [LoGeR](https://github.com/Junyi42/LoGeR)
 - [ZipMap](https://github.com/Haian-Jin/ZipMap)
+- [VGG-TTT](https://github.com/nv-dvl/vgg-ttt)
 
 </details>
 

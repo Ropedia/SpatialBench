@@ -27,7 +27,7 @@ Configs are grouped by **inference paradigm** so the harness can apply the right
 | `benchmark/configs/end2end/` | Feed-forward, all frames at once | **populated** (`vggt`, `vggt_omega`, `da3_{small,base,large,giant}`, `da3nested`, `fastvggt`, `mapanything`, `omnivggt`, `pi3`, `pi3x`, `worldmirror`, `amb3r`) |
 | `benchmark/configs/online/` | Per-frame / chunked streaming | **populated** (`infinitevggt`, `lingbot_map_{window,stream}`, `stream3r_{stream,window}`, `streamvggt`, `page4d`) |
 | `benchmark/configs/chunk/` | Sliding-window chunk reconstruction | **populated** (`vggt_long`, `pi_long`, `da3_streaming`) |
-| `benchmark/configs/ttt/` | Test-time training | **populated** (`scal3r`, `loger`, `loger_star`, `zipmap`) |
+| `benchmark/configs/ttt/` | Test-time training | **populated** (`scal3r`, `loger`, `loger_star`, `zipmap`, `vgg_ttt`) |
 | `benchmark/configs/prior/` | GT prior injection (intrinsics / depth) | **populated** (`da3_giant_prior`, `mapanything_prior`, `omnivggt_prior`, `pi3x_prior`, `worldmirror_prior`) |
 | `benchmark/configs/optimization/` | Iterative global alignment (DUSt3R-style) | **populated** (`dust3r`, `mast3r`) |
 | `benchmark/configs/slam/` | SLAM-based backends | reserved, empty today |
@@ -162,6 +162,7 @@ The adapter registry currently exposes the following models (others on the [pare
 | LoGeR | `ttt/loger_eval.yaml` | `[vggt]` | — | `window_size`, `overlap_size`, `variant=LoGeR` | LoGeR base variant |
 | LoGeR* | `ttt/loger_star_eval.yaml` | `[vggt]` | — | `window_size`, `overlap_size`, `se3=true`, `variant=LoGeR_star` | LoGeR* SE(3)-aligned variant |
 | ZipMap | `ttt/zipmap_eval.yaml` | `[zipmap]` | — | `variant`, `affine_invariant`, `align_first_view`, `window_size` | Vendored ZipMap TTT adapter; default checkpoint `checkpoints/zipmap/checkpoint_aff_inv.pt` |
+| VGG-TTT | `ttt/vgg_ttt_eval.yaml` | `[vgg_ttt]` | — | `num_ttt_steps`, `memory_efficient_inference`, `use_global_pred` | Adapter name `vgg_ttt`; vendored source under `benchmark/models/vgg_ttt/`; auto-downloads `nvidia/vgg-ttt` |
 
 Install the per-model extra(s) listed above before running the config (see [parent README "Per-model extras"](../README.md#per-model-extras)).
 
@@ -262,6 +263,7 @@ benchmark/
 │   ├── depth_anything_3/
 │   ├── dust3r_root/
 │   ├── mast3r_root/
+│   ├── vgg_ttt/
 │   ├── zipmap/
 │   └── vggt/
 ├── utils/                         # helpers (cropping, image_ranking, visualization)
@@ -341,12 +343,16 @@ Datasets with extra modalities (Ropedia confidence masks, ScanNet++ rendered dep
 | DUSt3R | [`benchmark/models/dust3r_root/`](models/dust3r_root/) | `naver/DUSt3R_ViTLarge_BaseDecoder_512_dpt` |
 | MASt3R | [`benchmark/models/mast3r_root/`](models/mast3r_root/) | `naver/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric` |
 | ZipMap | [`benchmark/models/zipmap/`](models/zipmap/) | `checkpoints/zipmap/checkpoint_aff_inv.pt`; download with `hf download coast01/ZipMap checkpoint_aff_inv.pt --local-dir checkpoints/zipmap` |
+| VGG-TTT | [`benchmark/models/vgg_ttt/`](models/vgg_ttt/) | auto-download `nvidia/vgg-ttt`; or set `checkpoint` to a local Hugging Face snapshot directory |
 
 DUSt3R / MASt3R vendor their own CroCo copies. CroCo's CUDA RoPE extension is
 optional; when it is not compiled, the models use the slower PyTorch fallback.
 ZipMap vendors the inference source under `benchmark/models/zipmap/`; install
 its benchmark extra with `pip install -e ".[zipmap]"` before running
 `benchmark/configs/ttt/zipmap_eval.yaml`.
+VGG-TTT vendors the NVIDIA source under `benchmark/models/vgg_ttt/`; install
+its benchmark extra with `pip install -e ".[vgg_ttt]"` before running
+`benchmark/configs/ttt/vgg_ttt_eval.yaml`.
 
 ### Integrating a New Model
 
