@@ -422,12 +422,14 @@ Predicted poses are aligned to GT via **Procrustes**, and depth metrics are repo
 If SpatialBench is useful for your research, please cite:
 
 ```bibtex
-@article{peng2026spatialbench,
-  title   = {SpatialBench: Is Your Spatial Foundation Model an All-Round Player?},
-  author  = {Peng, Haosong and Li, Hao and Chen, Jiaqi and Pan, Yuhao and Yao, Runmao and Dai, Yalun and Huo, Fushuo and Hong, Fangzhou and Chen, Zhaoxi and Wang, Haozhao and Zhang, Dingwen and Liu, Ziwei and Xu, Wenchao},
-  journal = {arXiv preprint},
-  year    = {2026}
-}
+@misc{peng2026spatialbench,
+      title={SpatialBench: Is Your Spatial Foundation Model an All-Round Player?}, 
+      author={Haosong Peng and Hao Li and Jiaqi Chen and Yuhao Pan and Runmao Yao and Yalun Dai and Fushuo Huo and Fangzhou Hong and Zhaoxi Chen and Haozhao Wang and Dingwen Zhang and Ziwei Liu and Wenchao Xu},
+      year={2026},
+      eprint={2605.27367},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2605.27367}, 
 ```
 
 ## 📄 License
