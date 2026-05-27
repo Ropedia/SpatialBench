@@ -5,9 +5,9 @@
 <h1>SpatialBench: Is Your Spatial Foundation Model an All-Round Player?</h1>
 
 
-<a href="#citation"><img src="https://img.shields.io/badge/Paper-SpatialBench-red" alt="Paper"></a>
-<a href="https://arxiv.org/"><img src="https://img.shields.io/badge/arXiv-coming_soon-b31b1b" alt="arXiv"></a>
-<a href="https://ropedia.github.io/spatialbench"><img src="https://img.shields.io/badge/Project_Page-green" alt="Project Page"></a>
+<a href="https://huggingface.co/papers/2605.27367"><img src="https://img.shields.io/badge/Paper-SpatialBench-red" alt="Paper"></a>
+<a href="https://arxiv.org/abs/2605.27367"><img src="https://img.shields.io/badge/arXiv-2605.27367-b31b1b" alt="arXiv"></a>
+<a href="https://ropedia.github.io/SpatialBench"><img src="https://img.shields.io/badge/Project_Page-green" alt="Project Page"></a>
 <a href="https://huggingface.co/datasets/ropedia-ai/SpatialBenchmark"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging_Face-Bench-yellow" alt="SpatialBench"></a>
 <a href="https://huggingface.co/datasets/ropedia-ai/DA-Next-5M"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging_Face-Dataset-yellow" alt="DA-Next-5M"></a>
 <a href="https://huggingface.co/ropedia-ai/DA-Next"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging_Face-Model-yellow" alt="DA-Next"></a>
