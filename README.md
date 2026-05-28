@@ -83,6 +83,9 @@ pip install -e ".[vgg_ttt]"
 # StreamVGGT / InfiniteVGGT (depends on [vggt] + transformers)
 pip install -e ".[streaming]"
 
+# R3 online adapter (vendored under benchmark/models/r3; depends on DA3 + xformers)
+pip install -e ".[r3]"
+
 # AMB3R benchmark adapter for the README environment above:
 # Python 3.11 + torch==2.7.0+cu128 / torchvision==0.22.0+cu128.
 # Install the CUDA extension wheels first, then install the Python extra.
@@ -94,7 +97,7 @@ pip install flash-attn==2.7.3 --no-build-isolation
 pip install -e ".[amb3r]"
 
 # Combine multiple at once, for example
-pip install -e ".[vggt,optimization,mapanything,lingbot-map,da3,scal3r,zipmap,vgg_ttt]"
+pip install -e ".[vggt,optimization,mapanything,lingbot-map,da3,scal3r,zipmap,vgg_ttt,r3]"
 
 # Install all currently supported model deps
 pip install -e ".[all]"

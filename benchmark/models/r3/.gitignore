@@ -1,0 +1,48 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+build/
+dist/
+
+# Local environments
+.env
+.venv/
+venv/
+env/
+
+# IDE/agent local state
+.vscode/
+.idea/
+.codex/
+.claude/
+.agents/
+
+# Models and generated outputs
+ckpt/
+checkpoints/
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+scratch/
+demo_tmp/
+logs/
+vis_output/
+vis_output*/
+
+# Heavy media / render artifacts
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.glb
+*.ply
+*.obj
+*.npz
+*.npy
+
+# Examples are part of the public release.

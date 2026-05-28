@@ -82,6 +82,7 @@ import benchmark.evaluation.model_adapters.worldmirror_adapter       # noqa: F40
 import benchmark.evaluation.model_adapters.infinitevggt_adapter      # noqa: F401
 import benchmark.evaluation.model_adapters.lingbot_map_adapter       # noqa: F401
 import benchmark.evaluation.model_adapters.lingbot_map_stream_adapter  # noqa: F401
+import benchmark.evaluation.model_adapters.r3_adapter                 # noqa: F401
 import benchmark.evaluation.model_adapters.stream3r_adapter          # noqa: F401
 import benchmark.evaluation.model_adapters.page4d_adapter            # noqa: F401
 import benchmark.evaluation.model_adapters.streamvggt_adapter        # noqa: F401

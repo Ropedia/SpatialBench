@@ -1,0 +1,34 @@
+# Core R3 inference stack.
+# Install a torch/torchvision/xformers build that matches your CUDA driver.
+torch>=2
+torchvision
+xformers
+
+addict
+einops
+huggingface_hub
+imageio
+numpy<2
+opencv-python
+pillow
+pillow_heif
+omegaconf
+safetensors
+scipy
+tqdm
+requests
+
+# Viewer.
+matplotlib
+viser
+
+# Pulled in transitively when `--mode long`/`sampled` enables the metric-depth
+# helper (depth_anything_3.api -> utils.pose_align/export).
+trimesh
+plyfile
+pycolmap
+evo
+
+# Optional:
+#   gsplat       — 3D-Gaussian rendering head (not used by R3 inference).
+#   flashinfer   — required only for `--kv_backend paged`.

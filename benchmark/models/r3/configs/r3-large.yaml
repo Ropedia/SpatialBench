@@ -1,0 +1,40 @@
+__object__:
+  path: depth_anything_3.model.da3
+  name: DepthAnything3Net
+  args: as_params
+
+relative_cam: true
+
+net:
+  __object__:
+    path: depth_anything_3.model.dinov2.dinov2
+    name: DinoV2
+    args: as_params
+  name: vitl
+  out_layers: [11, 15, 19, 23]
+  alt_start: 8
+  qknorm_start: 8
+  rope_start: 8
+  cat_token: true
+  causal_attn: true
+  attention_mode: causal
+  gradient_checkpointing: false
+
+head:
+  __object__:
+    path: depth_anything_3.model.dualdpt
+    name: DualDPT
+    args: as_params
+  dim_in: 2048
+  output_dim: 2
+  features: 256
+  out_channels: [256, 512, 1024, 1024]
+
+cam_dec:
+  __object__:
+    path: depth_anything_3.model.cam_dec
+    name: CameraDecRel
+    args: as_params
+  dim_in: 2048
+  attention_mode: causal
+  separate_rel_pose_confidence: true

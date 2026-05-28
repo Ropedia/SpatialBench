@@ -1,0 +1,59 @@
+# ============================================================
+# R3 strided evaluation config
+# Mirrors R3/demo.py --mode strided.
+# ============================================================
+
+# ---- Model ----
+model: r3
+checkpoint: checkpoints/R3/r3_long.safetensors
+device: cuda
+
+# ---- Data ----
+scene_index: benchmark/scene_indices/all_scenes.json
+scene_id: null
+
+
+resolution_override:
+  width: 504
+  align: 14
+
+# ---- Scene filtering ----
+tags: dense
+max_scenes: null
+
+# ---- Evaluation parameters ----
+eval_metrics:
+  - depth
+  - pose
+  - trajectory
+  - pointcloud
+resolution: null
+depth_alignment: median
+
+# ---- R3 strided inference parameters ----
+config_name: r3-large
+mode: strided
+wrapper_mode: online
+online_kv_cache_mode: all
+online_kv_backend: dense
+online_recent_frames: 0
+bootstrap_full_attention_frames: 0
+online_fallback_enabled: true
+fallback_drought_threshold_pct: 45.0
+max_segment_frames: 100
+metric_scale_enabled: true
+metric_bootstrap_frames: 5
+online_finalize_pose_reconstruction: false
+rel_pose_reconstruction_method: greedy
+rel_pose_topn_conf: 999
+rel_pose_score_mode: auto
+use_amp: true
+amp_dtype: bf16
+
+# ---- Output ----
+output_dir: results/online/r3_strided
+output: null
+
+# ---- Visualization ----
+visualize: false
+vis_conf_percent: 20.0

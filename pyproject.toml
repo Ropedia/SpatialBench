@@ -48,6 +48,7 @@ dependencies = [
 #   pip install -e ".[zipmap]"      # ZipMap TTT adapter
 #   pip install -e ".[vgg_ttt]"     # VGG-TTT adapter
 #   pip install -e ".[streaming]"   # StreamVGGT / InfiniteVGGT (needs transformers)
+#   pip install -e ".[r3]"          # R3 online adapter
 #   pip install -e ".[amb3r]"       # AMB3R benchmark adapter
 #   pip install -e ".[optimization]" # DUSt3R / MASt3R optimization adapters
 #   pip install -e ".[all]"         # everything above at once
@@ -63,6 +64,7 @@ dependencies = [
 #   [zipmap]     zipmap
 #   [vgg_ttt]    vgg_ttt
 #   [streaming]  streamvggt, infinitevggt
+#   [r3]         r3
 #   [amb3r]      amb3r
 #   [optimization] dust3r, mast3r
 [project.optional-dependencies]
@@ -158,6 +160,18 @@ streaming = [
     "transformers",
 ]
 
+# ---- R3 ----
+# Uses vendored source under benchmark/models/r3/. R3 carries a modified
+# Depth Anything 3 package and needs xFormers for its CUDA attention path.
+# Install torch/torchvision separately as described in README.md.
+r3 = [
+    "spatialbench[da3]",
+    "numpy<2",
+    "xformers",
+    "pillow-heif",
+    "requests",
+]
+
 # ---- AMB3R ----
 # benchmark/models/amb3r_root/thirdparty/ vendors its own snapshots of VGGT,
 # DA3, croco, dust3r, moge, ptv3, segformer, and robustmvd. The adapter
@@ -188,7 +202,7 @@ amb3r = [
 
 # Convenience: install everything supported above.
 all = [
-    "spatialbench[vggt,mapanything,lingbot-map,da3,scal3r,zipmap,vgg_ttt,streaming,amb3r,optimization]",
+    "spatialbench[vggt,mapanything,lingbot-map,da3,scal3r,zipmap,vgg_ttt,streaming,r3,amb3r,optimization]",
 ]
 
 [tool.setuptools.packages.find]

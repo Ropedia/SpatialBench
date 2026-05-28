@@ -25,7 +25,7 @@ Configs are grouped by **inference paradigm** so the harness can apply the right
 | Directory | Paradigm | Status |
 |-----------|----------|--------|
 | `benchmark/configs/end2end/` | Feed-forward, all frames at once | **populated** (`vggt`, `vggt_omega`, `da3_{small,base,large,giant}`, `da3nested`, `fastvggt`, `mapanything`, `omnivggt`, `pi3`, `pi3x`, `worldmirror`, `amb3r`) |
-| `benchmark/configs/online/` | Per-frame / chunked streaming | **populated** (`infinitevggt`, `lingbot_map_{window,stream}`, `stream3r_{stream,window}`, `streamvggt`, `page4d`) |
+| `benchmark/configs/online/` | Per-frame / chunked streaming | **populated** (`infinitevggt`, `lingbot_map_{window,stream}`, `r3_{local,long,strided}`, `stream3r_{stream,window}`, `streamvggt`, `page4d`) |
 | `benchmark/configs/chunk/` | Sliding-window chunk reconstruction | **populated** (`vggt_long`, `pi_long`, `da3_streaming`) |
 | `benchmark/configs/ttt/` | Test-time training | **populated** (`scal3r`, `loger`, `loger_star`, `zipmap`, `vgg_ttt`) |
 | `benchmark/configs/prior/` | GT prior injection (intrinsics / depth) | **populated** (`da3_giant_prior`, `mapanything_prior`, `omnivggt_prior`, `pi3x_prior`, `worldmirror_prior`) |
@@ -149,6 +149,7 @@ The adapter registry currently exposes the following models (others on the [pare
 | InfiniteVGGT | `online/infinitevggt_eval.yaml` | `[streaming]` | — | `total_budget` | KV-cache token budget for long sequences |
 | LingbotMap (Window) | `online/lingbot_map_window_eval.yaml` | `[lingbot-map]` | — | `window_size`, `overlap_size`, … | Windowed mode (GCTStreamWindow) |
 | LingbotMap (Stream) | `online/lingbot_map_stream_eval.yaml` | `[lingbot-map]` | — | `num_scale_frames`, `keyframe_interval` | Causal streaming mode (GCTStream) |
+| R3 Local / Long / Strided | `online/r3_{local,long,strided}_eval.yaml` | `[r3]` | Local: — / Long, Strided: ✓ | `mode`, `online_kv_cache_mode`, `online_fallback_enabled`, `metric_scale_enabled` | Adapter name `r3`; configs mirror `R3/demo.py --mode local/long/strided`; vendored source under `benchmark/models/r3/`; checkpoints under `checkpoints/R3/` |
 | Stream3R (Stream) | `online/stream3r_stream_eval.yaml` | `[vggt]` | — | `mode=causal` | STream3R causal aggregator |
 | Stream3R (Window) | `online/stream3r_window_eval.yaml` | `[vggt]` | — | `mode=window` | STream3R sliding-window aggregator |
 | StreamVGGT | `online/streamvggt_eval.yaml` | `[streaming]` | — | — | Real-time streaming VGGT |
@@ -263,6 +264,7 @@ benchmark/
 │   ├── depth_anything_3/
 │   ├── dust3r_root/
 │   ├── mast3r_root/
+│   ├── r3/
 │   ├── vgg_ttt/
 │   ├── zipmap/
 │   └── vggt/
@@ -342,6 +344,7 @@ Datasets with extra modalities (Ropedia confidence masks, ScanNet++ rendered dep
 | Depth Anything 3 | [`benchmark/models/depth_anything_3/`](models/depth_anything_3/) | `depth-anything/DA3-GIANT-1.1` (DA3 adapter auto-detects variant from checkpoint name: `DA3-SMALL` / `DA3-BASE` / `DA3-LARGE-1.1` / `DA3-GIANT-1.1`) |
 | DUSt3R | [`benchmark/models/dust3r_root/`](models/dust3r_root/) | `naver/DUSt3R_ViTLarge_BaseDecoder_512_dpt` |
 | MASt3R | [`benchmark/models/mast3r_root/`](models/mast3r_root/) | `naver/MASt3R_ViTLarge_BaseDecoder_512_catmlpdpt_metric` |
+| R3 | [`benchmark/models/r3/`](models/r3/) | `checkpoints/R3/r3.safetensors`; long/strided presets can use `checkpoints/R3/r3_long.safetensors`; HF repo `KevinXu02/R3` |
 | ZipMap | [`benchmark/models/zipmap/`](models/zipmap/) | `checkpoints/zipmap/checkpoint_aff_inv.pt`; download with `hf download coast01/ZipMap checkpoint_aff_inv.pt --local-dir checkpoints/zipmap` |
 | VGG-TTT | [`benchmark/models/vgg_ttt/`](models/vgg_ttt/) | auto-download `nvidia/vgg-ttt`; or set `checkpoint` to a local Hugging Face snapshot directory |
 
@@ -353,6 +356,15 @@ its benchmark extra with `pip install -e ".[zipmap]"` before running
 VGG-TTT vendors the NVIDIA source under `benchmark/models/vgg_ttt/`; install
 its benchmark extra with `pip install -e ".[vgg_ttt]"` before running
 `benchmark/configs/ttt/vgg_ttt_eval.yaml`.
+R3 vendors its inference source under `benchmark/models/r3/` and is registered
+as adapter `r3`; install `pip install -e ".[r3]"`, then run
+`benchmark/configs/online/r3_local_eval.yaml` for the `R3/demo.py --mode local`
+preset, `benchmark/configs/online/r3_long_eval.yaml` for `--mode long`, or
+`benchmark/configs/online/r3_strided_eval.yaml` for `--mode strided`.
+The local config uses `checkpoints/R3/r3.safetensors`; the long config uses
+`checkpoints/R3/r3_long.safetensors`; the strided config also uses
+`r3_long.safetensors`, sets `online_kv_cache_mode: all`, caps segments at 100
+frames, and enables the DA3-metric scale anchor.
 
 ### Integrating a New Model
 
